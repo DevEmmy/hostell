@@ -4,6 +4,7 @@ import cors from 'cors'
 import corsOptions from './src/config/cors';
 require("dotenv").config()
 import userRouter from "./src/routes/user-routes"
+import "reflect-metadata"
 
 const app = express();
 const port = String(process.env.PORT) || 3030;
