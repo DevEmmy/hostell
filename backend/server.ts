@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import corsOptions from './src/config/cors';
 require("dotenv").config()
+import userRouter from "./src/routes/user-routes"
 
 const app = express();
 const port = String(process.env.PORT) || 3030;
@@ -21,6 +22,8 @@ connection.once('open', ()=>{console.log('Database running Successfully')});
 app.get('/', (req, res) => {
 res.sendFile(__dirname + '/public/index.html');
 });
+
+app.use("/users", userRouter)
       
 // Run Server
 app.listen(port, () => {

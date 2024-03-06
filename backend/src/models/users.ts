@@ -1,4 +1,6 @@
 import mongoose, {Schema} from "mongoose";
+import { UserType } from "../dto/userType.dto";
+
 
 const schema = new Schema({
     firstName: String,
