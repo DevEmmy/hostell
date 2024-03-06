@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import HostelRepository from "../repositories/HostelRepository";
 
 @Service()
-class  Hostel{
+class HostelService{
     constructor(
         private readonly repository : HostelRepository
     ){}
@@ -10,14 +10,18 @@ class  Hostel{
     async getAll(){
         let result = await this.repository.getAll()
         return {
-            payload: result
+            payload: result,
+            message: "",
+            status: 200
         }
     }
 
     async getHostelById(id: string){
         let result = await this.repository.getOneById(id);
         return {
-            payload: result
+            payload: result,
+            message: "Succesful",
+            status: 200
         }
     }
 
@@ -25,7 +29,8 @@ class  Hostel{
         let result = await this.repository.save(data)
         return {
             payload: result,
-            message: "Hostel added successfully"
+            message: "Hostel added successfully",
+            status: 200
         }
     }
 
@@ -33,7 +38,8 @@ class  Hostel{
         let result = await this.repository.delete(id);
         return {
             payload: result,
-            message: "Hostel Deleted Successfully"
+            message: "Hostel Deleted Successfully",
+            status: 200
         }
     }
 
@@ -41,7 +47,8 @@ class  Hostel{
         let result = await this.repository.update(id, data);
         return {
             payload: result,
-            message: "Hostel Updated Successfully"
+            message: "Hostel Updated Successfully",
+            status: 200
         }
     }
 
@@ -51,7 +58,10 @@ class  Hostel{
         result = await this.repository.update(id, result);
         return {
             payload: result,
-            message: "Hostel Availability Updated"
+            message: "Hostel Availability Updated",
+            status: 200
         }
     }
 }
+
+export default HostelService;
