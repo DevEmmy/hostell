@@ -9,11 +9,11 @@ const port = String(process.env.PORT) || 3030;
       
 // Set up your routes and middleware here
 app.use(cors(corsOptions));
-express.urlencoded({limit:"50mb", extended: false})
-express.json({limit:"50mb"})
+app.use(express.urlencoded({limit:"50mb", extended: false}))
+app.use(express.json({limit:"50mb"}))
      
 // Run MongoDB
-mongoose.connect(process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/backend`)
+mongoose.connect(process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/hostell-backend`)
 const connection = mongoose.connection
 connection.once('open', ()=>{console.log('Database running Successfully')});
       
