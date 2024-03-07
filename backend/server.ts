@@ -4,6 +4,7 @@ import cors from 'cors'
 import corsOptions from './src/config/cors';
 require("dotenv").config()
 import userRouter from "./src/routes/user-routes"
+import hostelRoutes from "./src/routes/hostel-routes"
 import "reflect-metadata"
 
 const app = express();
@@ -25,6 +26,7 @@ res.sendFile(__dirname + '/public/index.html');
 });
 
 app.use("/users", userRouter)
+app.use("/hostels", hostelRoutes)
       
 // Run Server
 app.listen(port, () => {
