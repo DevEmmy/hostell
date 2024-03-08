@@ -1,7 +1,11 @@
 import React from "react";
 
-const ButtonIcon = ({ icon }) => {
-  return <div className="cursor-pointer">{icon}</div>;
+const ButtonIcon = ({ icon, click }) => {
+  return (
+    <div type="button" className="cursor-pointer" onClick={click}>
+      {icon}
+    </div>
+  );
 };
 
 export default ButtonIcon;

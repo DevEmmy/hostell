@@ -1,9 +1,49 @@
-import HostelLayout from "./pages/HostelLayout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  HostelLayout,
+  HostelDashboard,
+  AgentProfile,
+  StudentProfile,
+} from "./pages/index";
+import { HostelDetails, NearbyHostel, RecommendedHostel } from "./components";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HostelLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HostelDashboard />,
+      },
+      {
+        path: "/home",
+        element: <HostelDashboard />,
+      },
+      {
+        path: "/explore",
+        element: <NearbyHostel />,
+      },
+      {
+        path: "/popular",
+        element: <RecommendedHostel />,
+      },
+      {
+        path: "/profile",
+        element: <StudentProfile />,
+      },
+    ],
+  },
+  {
+    path: "/hosteldetails",
+    element: <HostelDetails />,
+  },
+]);
 
 function App() {
   return (
     <>
-      <HostelLayout />
+      <RouterProvider router={router} />
     </>
   );
 }

@@ -1,27 +1,28 @@
 import React from "react";
-import {
-  Navbar,
-  SearchLocationInput,
-  RecommendedHostel,
-  NearbyHostel,
-} from "../components";
+import { Outlet } from "react-router-dom";
+import { Footer, Navbar, Sidebar } from "../components";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const HostelLayout = () => {
+  const { activeMenu } = useStateContext();
+
   return (
-    <main className="m-4">
+    <div className={activeMenu ? "fixed" : ""}>
       <div>
         <Navbar />
       </div>
+      {activeMenu && (
+        <div>
+          <Sidebar />
+        </div>
+      )}
+      <main>
+        <Outlet />
+      </main>
       <div>
-        <SearchLocationInput />
+        <Footer />
       </div>
-      <div>
-        <RecommendedHostel />
-      </div>
-      <div>
-        <NearbyHostel />
-      </div>
-    </main>
+    </div>
   );
 };
 

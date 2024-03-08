@@ -23,7 +23,7 @@ const HostelCard = ({ image, location, price }) => {
           </div>
           <div className="flex items-center justify-between gap-1 px-1">
             <p>{price}</p>
-            <button className="capitalize bg-secondary2 text-white font-bold px-4 py-2 text rounded">
+            <button className="capitalize bg-secondary2 text-white font-bold px-4 py-2 text rounded-lg">
               bid now
             </button>
           </div>
