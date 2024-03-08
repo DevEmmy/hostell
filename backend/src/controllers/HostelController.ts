@@ -77,6 +77,28 @@ class HostelController{
         }
     }
 
+    async getPopularHostel(request: Request, response: Response){
+        try{
+            let result : IResult = await this.service.getPopularHostel();
+            success(result, response)
+        }
+        catch(err : any){
+            let result = {message: err.message, status: err.status, payload:null}
+            error(result, response)
+        }
+    }
+
+    async getRecommendedHostels(request: Request, response: Response){
+        try{
+            let result : IResult = await this.service.getRecommendedHostels();
+            success(result, response)
+        }
+        catch(err : any){
+            let result = {message: err.message, status: err.status, payload:null}
+            error(result, response)
+        }
+    }
+
 }
 
 export default HostelController

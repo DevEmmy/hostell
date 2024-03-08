@@ -10,7 +10,8 @@ const schema = new Schema({
     features: [{type: String}],
     available: {type: Boolean, default: true},
     availableRooms: {type: Number, default: 1},
-    createdBy: {type: Schema.Types.ObjectId, ref: "Users"}
+    createdBy: {type: Schema.Types.ObjectId, ref: "Users"},
+    popular: {type: Boolean, default: false}
 },
 {
     timestamps: true

@@ -37,6 +37,15 @@ class HostelRepository{
         return result
     }
 
+    async getRecommendedHostel(){
+        let result = await this.model.find().limit(20);
+        return result
+    }
+
+    async getPopularHostel(){
+        let result = await this.model.find({popular: true})
+        return result;
+    }
     
 }
 

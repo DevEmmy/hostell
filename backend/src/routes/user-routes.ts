@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import Container from "typedi";
 import UserController from "../controllers/UserController";
+import validateAuth from "../middleware/verifyAuth";
 
 const router = Router()
 
@@ -11,6 +12,6 @@ router.post("/sign-in", (req: Request, res: Response)=> userController.signIn(re
 router.post("/forgot-password", (req: Request, res: Response)=> userController.forgotPassword(req, res))
 router.post("/reset-password", (req: Request, res: Response)=> userController.resetPassword(req, res))
 router.get("/:id", (req: Request, res: Response)=> userController.getUserById(req, res))
-router.patch("/:id", (req: Request, res: Response)=> userController.update(req, res))
+router.patch("/:id", validateAuth ,(req: Request, res: Response)=> userController.update(req, res))
 
 export default router

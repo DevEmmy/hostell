@@ -62,6 +62,24 @@ class HostelService{
             status: 200
         }
     }
+
+    async getRecommendedHostels(){
+        let result = await this.repository.getRecommendedHostel()
+        return {
+            payload: result,
+            message: "Succesful",
+            status: 200
+        }
+    }
+
+    async getPopularHostel(){
+        let result = await this.repository.getPopularHostel()
+        return {
+            payload: result,
+            message: "Succesful",
+            status: 200
+        }
+    }
 }
 
 export default HostelService;
