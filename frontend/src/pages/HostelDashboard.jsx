@@ -13,10 +13,10 @@ function HostelDashboard() {
           <SearchLocationInput />
         </div>
         <div>
-          <RecommendedHostel />
+          <RecommendedHostel simplified />
         </div>
         <div>
-          <NearbyHostel />
+          <NearbyHostel simplified />
         </div>
       </div>
     </>

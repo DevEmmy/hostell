@@ -5,17 +5,22 @@ import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import { FaMessage } from "react-icons/fa6";
 import hostel1 from "/hostel1.jpg";
 import Footer from "./Footer";
+import { Link, useNavigate } from "react-router-dom";
 
 function HostelDetails() {
+  const navigate = useNavigate();
   return (
     <section className="w-full h-full">
       <div className="relative">
         <div>
           <img src={hostel1} alt="hostel" />
         </div>
-        <div className="absolute top-2 left-3 bg-white p-3 rounded-full">
+        <Link
+          to={".."}
+          className="absolute top-2 left-3 bg-white p-3 rounded-full"
+        >
           <GoArrowLeft />
-        </div>
+        </Link>
         <p className="absolute top-3 left-2/4 -translate-x-1/2">Details</p>
         <div className="absolute top-2 right-3 p-2 bg-white rounded-full">
           <CiHeart />

@@ -30,12 +30,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <StudentProfile />,
+        element: <AgentProfile />,
       },
     ],
   },
   {
-    path: "/hosteldetails",
+    path: "/hosteldetails/:hostelID",
     element: <HostelDetails />,
   },
 ]);

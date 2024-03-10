@@ -3,19 +3,24 @@ import hostel1 from "/hostel1.jpg";
 import hostel2 from "/hostel2.jpg";
 import HostelCard from "./HostelCard";
 import SearchLocationInput from "./SearchLocationInput";
+import { Link } from "react-router-dom";
 
-const RecommendedHostel = () => {
+const RecommendedHostel = ({ simplified }) => {
   return (
     <section className="m-3">
-      {/* <div>
-        <SearchLocationInput />
-      </div> */}
+      {!simplified && (
+        <div>
+          <SearchLocationInput />
+        </div>
+      )}
+
       <div className="flex items-center justify-between p-2 my-4">
         <h2 className="font-bold">Recommended Hostel</h2>
-        <a className="text-primary2 text-sm capitalize" href="#!">
-          See All
-        </a>
-        {/* <Link to="/">See All</Link> */}
+        {simplified && (
+          <Link className="text-primary2 text-sm capitalize" to="/popular">
+            See All
+          </Link>
+        )}
       </div>
       <div className="flex flex-col items-center justify-between md:flex-row gap-3">
         <HostelCard
