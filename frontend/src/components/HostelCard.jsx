@@ -1,17 +1,27 @@
 import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 const HostelCard = ({ image, location, price }) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/hosteldetails/:hostelID`);
+  };
   return (
     <>
-      <Link
-        to="/hosteldetails/:hostelID"
-        className="w-full md:w-72 mx-auto my-2"
+      <div
+        onClick={() => handleNavigate()}
+        className="w-full md:w-72 mx-auto my-2 pointer-events-none"
       >
         <div className="relative w-full md:h-64 md:w-72">
-          <img className="w-full h-full rounded-lg" src={image} alt="hostel" />
+          <img
+            className="w-full h-full rounded-lg pointer-events-none"
+            src={image}
+            alt="hostel"
+          />
           <small className=" flex items-center gap-1 absolute text-secondary2 bg-white left-2 top-2 rounded-full px-2 py-1 hover:bg-secondary1">
             <FaHouseChimney size={15} />
             <span className="font-bold">House</span>
@@ -32,7 +42,7 @@ const HostelCard = ({ image, location, price }) => {
             </button>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

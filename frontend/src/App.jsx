@@ -4,6 +4,8 @@ import {
   HostelDashboard,
   AgentProfile,
   StudentProfile,
+  Signup,
+  Signin,
 } from "./pages/index";
 import { HostelDetails, NearbyHostel, RecommendedHostel } from "./components";
 
@@ -30,13 +32,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <AgentProfile />,
+        element: <StudentProfile />,
       },
     ],
   },
   {
     path: "/hosteldetails/:hostelID",
     element: <HostelDetails />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
   },
 ]);
 

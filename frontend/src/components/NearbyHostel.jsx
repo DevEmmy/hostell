@@ -23,7 +23,7 @@ const NearbyHostel = ({ simplified }) => {
           </Link>
         )}
       </div>
-      <div className="flex flex-col flex-wrap items-center justify-between md:flex-row gap-2">
+      <div className="flex flex-col md:flex-row gap-2 flex-wrap">
         <HostelCard
           price="₦ 120,000.00"
           location="accord,zoo,funaab"
@@ -58,6 +58,16 @@ const NearbyHostel = ({ simplified }) => {
           price="₦ 120,000.00"
           location="accord,zoo,funaab"
           image={hostel1}
+        />
+        <HostelCard
+          price="₦ 140,000.00"
+          location="accord,zoo,funaab"
+          image={hostel2}
+        />
+        <HostelCard
+          price="₦ 140,000.00"
+          location="accord,zoo,funaab"
+          image={hostel2}
         />
         <HostelCard
           price="₦ 140,000.00"

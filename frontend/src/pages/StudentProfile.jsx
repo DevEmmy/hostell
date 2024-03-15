@@ -2,6 +2,7 @@ import React from "react";
 import { MdEdit } from "react-icons/md";
 import HostelCard from "../components/HostelCard";
 import hostel1 from "/hostel1.jpg";
+import { NotificationCard } from "../components";
 
 function StudentProfile() {
   return (
@@ -32,6 +33,17 @@ function StudentProfile() {
           </div>
           <div className="absolute top-2 right-2 flex gap-1 capitalize items-center bg-secondary2 py-1 px-2 rounded-lg text-white text-sm">
             <MdEdit /> edit profile
+          </div>
+          {/* Notifications */}
+          <div className="m-5">
+            <h3 className="p-2 font-semibold">Notifications</h3>
+            <div className="flex flex-col gap-3">
+              <NotificationCard />
+              <NotificationCard />
+              <NotificationCard />
+              <NotificationCard />
+              <NotificationCard />
+            </div>
           </div>
           <div className=" my-5 p-3">
             <h3 className="font-semibold capitalize">Saved Hostel</h3>

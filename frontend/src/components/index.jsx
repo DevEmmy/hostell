@@ -5,6 +5,7 @@ import NearbyHostel from "./NearbyHostel";
 import Sidebar from "./Sidebar";
 import HostelDetails from "./HostelDetails";
 import Footer from "./Footer";
+import NotificationCard from "./NotificationCard";
 
 export {
   RecommendedHostel,
@@ -14,4 +15,5 @@ export {
   Sidebar,
   HostelDetails,
   Footer,
+  NotificationCard,
 };

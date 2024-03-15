@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import hostel1 from "/hostel1.jpg";
 import hostel2 from "/hostel2.jpg";
 import HostelCard from "./HostelCard";
 import SearchLocationInput from "./SearchLocationInput";
 import { Link } from "react-router-dom";
+import { recommendedHostel } from "../../request";
 
 const RecommendedHostel = ({ simplified }) => {
+  const fetchData = async () => {
+    let result = await recommendedHostel();
+    return result;
+  };
+  useEffect(() => {
+    const data = fetchData();
+    console.log(data);
+  }, []);
+
+  const simplifiedStyles = "flex flex-row gap-3";
+  const normalStyles =
+    "flex flex-col gap-3 md:grid md:grid-cols-3 lg:grid-cols-4";
   return (
     <section className="m-3">
       {!simplified && (
@@ -22,27 +35,48 @@ const RecommendedHostel = ({ simplified }) => {
           </Link>
         )}
       </div>
-      <div className="flex flex-col items-center justify-between md:flex-row gap-3">
-        <HostelCard
-          price="₦ 120,000.00"
-          location="accord,zoo,funaab"
-          image={hostel1}
-        />
-        <HostelCard
-          price="₦ 140,000.00"
-          location="accord,zoo,funaab"
-          image={hostel2}
-        />
-        <HostelCard
-          price="₦ 120,000.00"
-          location="accord,zoo,funaab"
-          image={hostel1}
-        />
-        <HostelCard
-          price="₦ 140,000.00"
-          location="accord,zoo,funaab"
-          image={hostel2}
-        />
+
+      <div className="cursor-grab">
+        <div
+          // className={simplified ? simplifiedStyles : normalStyles}
+          className="flex flex-col flex-wrap md:flex-row gap-2"
+        >
+          <HostelCard
+            price="₦ 120,000.00"
+            location="accord,zoo,funaab"
+            image={hostel1}
+          />
+          <HostelCard
+            price="₦ 140,000.00"
+            location="accord,zoo,funaab"
+            image={hostel2}
+          />
+          <HostelCard
+            price="₦ 120,000.00"
+            location="accord,zoo,funaab"
+            image={hostel1}
+          />
+          <HostelCard
+            price="₦ 140,000.00"
+            location="accord,zoo,funaab"
+            image={hostel2}
+          />
+          <HostelCard
+            price="₦ 140,000.00"
+            location="accord,zoo,funaab"
+            image={hostel2}
+          />
+          <HostelCard
+            price="₦ 140,000.00"
+            location="accord,zoo,funaab"
+            image={hostel2}
+          />
+          <HostelCard
+            price="₦ 140,000.00"
+            location="accord,zoo,funaab"
+            image={hostel2}
+          />
+        </div>
       </div>
     </section>
   );
