@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import HostelService from "../services/Hostel.service";
 import { IResult, error, success } from "../utils/returnResponses";
+import { Service } from "typedi";
 
+@Service()
 class HostelController{
     constructor(private readonly service : HostelService){}
 

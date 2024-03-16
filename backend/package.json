@@ -21,6 +21,8 @@
         "mongoose": "^8.2.0",
         "open": "^10.0.4",
         "reflect-metadata": "^0.2.1",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.0",
         "ts-node-dev": "^2.0.0",
         "typedi": "^0.10.0"
     },
