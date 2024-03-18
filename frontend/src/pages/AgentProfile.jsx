@@ -1,10 +1,12 @@
 import React from "react";
-import { MdEdit } from "react-icons/md";
+import { IoAddCircleSharp } from "react-icons/io5";
 import HostelCard from "../components/HostelCard";
 import hostel1 from "/hostel1.jpg";
-import { NotificationCard } from "../components";
+// import { NotificationCard } from "../components";
 
 function AgentProfile() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.payload)
   return (
     <section className="w-screen">
       <div className="max-w-screen-lg mx-auto">
@@ -17,25 +19,24 @@ function AgentProfile() {
         <div className="relative m-5">
           <div>
             <p className="p-2 text-sm">
-              <strong className="italic"> Firstname:</strong> John
+              <strong className="italic"> Firstname:</strong> {user.payload.firstName}
             </p>
             <p className="p-2 text-sm">
-              <strong className="italic"> Lastname:</strong> Doe
+              <strong className="italic"> Lastname:</strong> {user.payload.lastName}
             </p>
             <p className="p-2 text-sm">
               <strong className="italic"> Email: </strong>
-              ayodejiayodele350@gmail.com
-            </p>
-            <p className="p-2 text-sm">
-              <strong className="italic"> Phone: </strong>
-              +2349043729869
+              {user.payload.email}
             </p>
           </div>
-          <div className="absolute top-2 right-2 flex gap-1 capitalize items-center bg-secondary2 py-1 px-2 rounded-lg text-white text-sm">
-            <MdEdit /> edit profile
-          </div>
+          {user.payload.userType === 'AGENT' && (
+  <div className="absolute top-2 right-2 flex gap-1 capitalize items-center bg-secondary2 py-1 px-2 rounded text-white text-sm font-bold">
+  <IoAddCircleSharp size={25} /> add hostel
+</div>
+          )}
+        
           {/* Notifications */}
-          <div className="m-5">
+          {/* <div className="m-5">
             <h3 className="p-2 font-semibold">Notifications</h3>
             <div className="flex flex-col gap-3">
               <NotificationCard />
@@ -44,9 +45,10 @@ function AgentProfile() {
               <NotificationCard />
               <NotificationCard />
             </div>
-          </div>
+          </div> */}
+
           <div className=" my-5 p-3">
-            <h3 className="font-semibold capitalize">Hostel updates</h3>
+            <h3 className="font-semibold capitalize"> {user.payload.userType === 'AGENT' ? 'Hostel updates' : 'Saved Hostel'}</h3>
             <div className="flex flex-wrap">
               <HostelCard
                 price="₦ 120,000.00"

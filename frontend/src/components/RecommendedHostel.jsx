@@ -12,8 +12,8 @@ const RecommendedHostel = ({ simplified }) => {
     return result;
   };
   useEffect(() => {
-    const data = fetchData();
-    console.log(data);
+    const recommendedHostelData = fetchData();
+    // console.log(recommendedHostelData);
   }, []);
 
   const simplifiedStyles = "flex flex-row gap-3";

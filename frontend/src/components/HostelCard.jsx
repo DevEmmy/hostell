@@ -1,26 +1,25 @@
 import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
-// import { Link } from "react-router-dom";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link, useParams } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
 
 const HostelCard = ({ image, location, price }) => {
-  const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate(`/hosteldetails/:hostelID`);
-  };
+  const {hostelId} = useParams()
   return (
     <>
-      <div
-        onClick={() => handleNavigate()}
-        className="w-full md:w-72 mx-auto my-2 pointer-events-none"
+      <Link
+      to={`/hosteldetails/${hostelId}`}
+        className="w-full md:w-72 mx-auto my-2"
       >
         <div className="relative w-full md:h-64 md:w-72">
-          <img
-            className="w-full h-full rounded-lg pointer-events-none"
-            src={image}
-            alt="hostel"
+          <LazyLoadImage
+          src={image}
+          alt="hostel"
+          className="w-full h-full rounded-lg"
+          width={image.width}
+          height={image.height}
           />
           <small className=" flex items-center gap-1 absolute text-secondary2 bg-white left-2 top-2 rounded-full px-2 py-1 hover:bg-secondary1">
             <FaHouseChimney size={15} />
@@ -42,7 +41,7 @@ const HostelCard = ({ image, location, price }) => {
             </button>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

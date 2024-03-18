@@ -4,6 +4,7 @@ import AgentProfile from "./AgentProfile";
 import StudentProfile from "./StudentProfile";
 import Signup from "./Signup";
 import Signin from "./Signin";
+import Profile from "./Profile";
 
 export {
   HostelDashboard,
@@ -12,4 +13,5 @@ export {
   StudentProfile,
   Signup,
   Signin,
+  Profile
 };
