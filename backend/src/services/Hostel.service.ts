@@ -1,5 +1,6 @@
 import { Service } from "typedi";
 import HostelRepository from "../repositories/HostelRepository";
+import { uploader } from "../utils/uploader";
 
 @Service()
 class HostelService{
@@ -26,6 +27,8 @@ class HostelService{
     }
 
     async createHostel(data: any){
+        data.images = await uploader(data.images)
+
         let result = await this.repository.save(data)
         return {
             payload: result,

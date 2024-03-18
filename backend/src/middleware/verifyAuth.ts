@@ -14,6 +14,7 @@ const validateAuth =  (req:Request, res: Response, next: NextFunction)=>{
         return res.status(401).json({error: "You must Be authorized"})
     }
     const token = authorization.replace("Bearer ", "")
+    
     jwt.verify(token, jwt_secret,  async (err, payload)=>{
         if(err){
             return res.status(401).json({error: "you must be logged in"})

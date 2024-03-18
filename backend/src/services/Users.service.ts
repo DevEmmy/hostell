@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 import { Service } from "typedi";
 import "reflect-metadata"
 import generateOTP from "../utils/generateOTP";
+require('dotenv').config();
 
-
-const jwtSecret: string = String(process.env.JWT_SECRET)
+const jwtSecret: string = process.env.JWT_SECRET || "SNOSD9SDD"
 
 @Service()
 class UserServices{
@@ -19,10 +19,11 @@ class UserServices{
             let hashedPassword = await bcrypt.hash(userInfo.password, 6)
             user.password = hashedPassword
             user = await this.userRepository.save(user)
+            let token = jwt.sign({email:user.email, _id: user._id}, jwtSecret)
             return {
                 message: "Signed Up Successfully",
                 status:201,
-                payload: user
+                payload: {user, token}
             }
         }
         catch(err: any){
@@ -39,8 +40,11 @@ class UserServices{
             // change this any to an Interface
             let dbUser: any = await this.userRepository.findOneByEmail(email)
             let hashedPassword = await bcrypt.compare(password, dbUser.password)
+
+            
             if (hashedPassword){
-                let token = jwt.sign(dbUser, jwtSecret, {expiresIn: "1day"})
+                let token = jwt.sign({email:dbUser.email, _id: dbUser._id}, jwtSecret)
+                
                 return{
                     message: "Signed In Successfully",
                     status: "200",
@@ -49,8 +53,16 @@ class UserServices{
                     }
                 }
             }
+            else{
+                return {
+                    message: "Incorrect Password",
+                    status: 400,
+                    payload: null
+                }
+            }
         }
         catch(err: any){
+            console.log(err)
             return {
                 ...err
             }

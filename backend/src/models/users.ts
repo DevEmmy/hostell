@@ -5,7 +5,7 @@ import { UserType } from "../dto/userType.dto";
 const schema = new Schema({
     firstName: String,
     lastName: String,
-    email: String,
+    email: {type: String, required: true},
     password: String,
     userType: {type: String, default: UserType.BASIC},
     getHostelNotification: {type: String, default: false}
