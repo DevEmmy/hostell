@@ -19,10 +19,11 @@ class UserServices{
             let hashedPassword = await bcrypt.hash(userInfo.password, 6)
             user.password = hashedPassword
             user = await this.userRepository.save(user)
+            let token = jwt.sign({email:user.email, _id: user._id}, jwtSecret)
             return {
                 message: "Signed Up Successfully",
                 status:201,
-                payload: user
+                payload: {user, token}
             }
         }
         catch(err: any){
@@ -43,7 +44,6 @@ class UserServices{
             
             if (hashedPassword){
                 let token = jwt.sign({email:dbUser.email, _id: dbUser._id}, jwtSecret)
-                console.log(token)
                 
                 return{
                     message: "Signed In Successfully",
