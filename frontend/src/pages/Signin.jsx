@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../request";
 
 function Signin() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = () => {
-    login(email, password);
-    email("");
-    password("");
+  const handleSubmit = async() => {
+    const userData = await login(email, password);
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(user)
+    navigate('/hostel')
+    return userData
   };
   return (
     <section>
@@ -19,13 +22,15 @@ function Signin() {
         <div>
           <p>
             No account yet?{" "}
-            <Link className="text-primary2 capitalize font-medium" to="/signup">
+            <Link className="text-primary2 capitalize font-medium" to="/">
               Signup
             </Link>
           </p>
         </div>
       </div>
-      <form className="bg-secondary2 text-white w-full max-w-[500px] mx-auto p-5 h-max rounded">
+      <form
+      onSubmit={(e) => e.preventDefault()}
+       className="bg-secondary2 text-white w-full max-w-[500px] mx-auto p-5 h-max rounded">
         <h2 className="text-center font-semibold text-lg m-5">
           Let's get you signed in
         </h2>
@@ -53,7 +58,7 @@ function Signin() {
           <button
             className="w-full bg-white p-3 rounded text-secondary2 my-2 font-bold"
             type="submit"
-            onSubmit={() => handleSubmit()}
+            onClick={() => handleSubmit()}
           >
             Login
           </button>

@@ -14,7 +14,7 @@ const Navbar = () => {
     setActiveMenu((prev) => !prev);
   };
   const handleProfileClick = () => {
-    navigate("/profile");
+    navigate("/hostel/profile");
   };
 
   return (

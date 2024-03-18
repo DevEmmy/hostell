@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../request";
 
 function Signup() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const navigate = useNavigate();
+  const [firstName, setFirstname] = useState("");
+  const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [student, setStudent] = useState(true);
+  const [userType, setUserType] = useState("");
 
-  const handleSubmit = () => {
-    signup(firstname, lastname, email, password, student);
-    firstname("");
-    lastname("");
-    email("");
-    password("");
+  // const user = JSON.parse(localStorage.getItem('user'))
+
+  const handleSubmit = async () => {
+    const userData = await signup(
+      firstName,
+      lastName,
+      email,
+      password,
+      userType
+    );
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    navigate("/hostel");
+    return userData;
   };
   return (
     <section>
@@ -31,8 +40,13 @@ function Signup() {
           </p>
         </div>
       </div>
-      <form className="bg-secondary2 text-white w-full max-w-[500px] mx-auto p-5 h-max rounded">
-        <h2 className="text-center font-semibold text-lg m-5">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="bg-white text-white w-full max-w-[500px] mx-auto p-5 h-max rounded"
+      >
+        <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed up
         </h2>
         <div className="flex flex-col items-center gap-3">
@@ -42,7 +56,7 @@ function Signup() {
               className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
               type="text"
               placeholder="firstname"
-              value={firstname}
+              value={firstName}
               onChange={(e) => setFirstname(e.target.value)}
             />
           </div>
@@ -52,7 +66,7 @@ function Signup() {
               className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
               type="text"
               placeholder="lastname"
-              value={lastname}
+              value={lastName}
               onChange={(e) => setLastname(e.target.value)}
             />
           </div>
@@ -82,15 +96,20 @@ function Signup() {
               <input
                 className="font-semibold"
                 type="radio"
-                name="agentOrStudent"
-                id="student"
+                name="agent"
+                id="agent"
+                onChange={(e) => {
+                  const agent = e.target.checked;
+                  setUserType(agent ? "AGENT" : "BASIC");
+                }}
               />
-              <label className="capitalize font-medium" htmlFor="student">
-                student
+              <label className="capitalize font-medium" htmlFor="agent">
+                agent
               </label>
             </div>
           </div>
           <button
+            onClick={() => handleSubmit()}
             className="w-full bg-white p-3 rounded text-secondary2 my-2 font-bold"
             type="submit"
           >
