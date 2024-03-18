@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 import { Service } from "typedi";
 import "reflect-metadata"
 import generateOTP from "../utils/generateOTP";
+require('dotenv').config();
 
-
-const jwtSecret: string = String(process.env.JWT_SECRET)
+const jwtSecret: string = process.env.JWT_SECRET || "SNOSD9SDD"
 
 @Service()
 class UserServices{
