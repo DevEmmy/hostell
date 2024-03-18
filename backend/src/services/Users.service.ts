@@ -39,8 +39,12 @@ class UserServices{
             // change this any to an Interface
             let dbUser: any = await this.userRepository.findOneByEmail(email)
             let hashedPassword = await bcrypt.compare(password, dbUser.password)
+
+            
             if (hashedPassword){
-                let token = jwt.sign(dbUser, jwtSecret, {expiresIn: "1day"})
+                let token = jwt.sign({email:dbUser.email, _id: dbUser._id}, jwtSecret)
+                console.log(token)
+                
                 return{
                     message: "Signed In Successfully",
                     status: "200",
@@ -49,8 +53,16 @@ class UserServices{
                     }
                 }
             }
+            else{
+                return {
+                    message: "Incorrect Password",
+                    status: 400,
+                    payload: null
+                }
+            }
         }
         catch(err: any){
+            console.log(err)
             return {
                 ...err
             }

@@ -27,6 +27,7 @@ class UserController {
         try{
             let {email, password} = request.body;
             let result: IResult = await this.userService.signIn(email, password)
+            console.log(result)
             success(result, response)
         }
         catch(err : any){
