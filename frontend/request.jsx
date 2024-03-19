@@ -48,6 +48,6 @@ export const addHostel = async(title,images,location,description,price,features,
     features,
     available,
     availableRooms
-  }, {Authorization: { header: `Bearer ${token}`}})
+  }, { headers: { Authorization: `Bearer ${token}` } })
   return response
 }
