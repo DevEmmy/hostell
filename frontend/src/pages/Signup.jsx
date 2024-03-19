@@ -44,46 +44,46 @@ function Signup() {
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className="bg-white text-white w-full max-w-[500px] mx-auto p-5 h-max rounded"
+        className="bg-zinc-50  w-full max-w-[500px] mx-auto p-5 h-max rounded md:shadow-xl"
       >
         <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed up
         </h2>
         <div className="flex flex-col items-center gap-3">
-          <div className="flex flex-col w-full gap-1">
-            <label className="font-normal capitalize">Firstname</label>
+          <div className="flex flex-col w-full gap-1 my-3">
+            <label className="hidden">Firstname</label>
             <input
-              className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
+              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
               type="text"
               placeholder="firstname"
               value={firstName}
               onChange={(e) => setFirstname(e.target.value)}
             />
           </div>
-          <div className="flex flex-col w-full gap-1">
-            <label className="font-normal capitalize">Lastname</label>
+          <div className="flex flex-col w-full gap-1 my-3">
+            <label className="hidden">Lastname</label>
             <input
-              className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
+              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
               type="text"
               placeholder="lastname"
               value={lastName}
               onChange={(e) => setLastname(e.target.value)}
             />
           </div>
-          <div className="flex flex-col w-full gap-1">
-            <label className="font-normal capitalize">Email</label>
+          <div className="flex flex-col w-full gap-1 my-3">
+            <label className="hidden">Email</label>
             <input
-              className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
+              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
               type="email"
               placeholder="email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="flex flex-col w-full gap-1">
-            <label className="font-normal capitalize">Password</label>
+          <div className="flex flex-col w-full gap-1 my-3">
+            <label className="hidden">Password</label>
             <input
-              className="bg-secondary1 text-gray-700 p-2 rounded focus:outline-none "
+              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
               type="password"
               placeholder="password"
               value={password}
@@ -91,11 +91,10 @@ function Signup() {
             />
           </div>
           <div className="flex items-center gap-5 justify-start w-full">
-            <small>Are you going to be a student or an agent?</small>
             <div className="flex gap-1 items-center bg-white p-2 text-primary2 rounded">
               <input
                 className="font-semibold"
-                type="radio"
+                type="checkbox"
                 name="agent"
                 id="agent"
                 onChange={(e) => {
@@ -103,14 +102,14 @@ function Signup() {
                   setUserType(agent ? "AGENT" : "BASIC");
                 }}
               />
-              <label className="capitalize font-medium" htmlFor="agent">
+              <label className="capitalize font-medium bg-secondary2 text-white py-2 px-4 rounded" htmlFor="agent">
                 agent
               </label>
             </div>
           </div>
           <button
             onClick={() => handleSubmit()}
-            className="w-full bg-white p-3 rounded text-secondary2 my-2 font-bold"
+            className="w-full bg-secondary2 p-3 rounded text-white my-2 font-bold"
             type="submit"
           >
             Signup
