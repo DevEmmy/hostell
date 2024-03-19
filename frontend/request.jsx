@@ -1,5 +1,11 @@
 import axios from "axios";
 
+
+const result = JSON.parse(localStorage.getItem("user"));
+console.log(result)
+  const token = result ? result.payload.token : ''
+  console.log(token)
+
 const axiosConfig = axios.create({
   baseURL: "https://hostell.onrender.com",
 });
@@ -42,6 +48,6 @@ export const addHostel = async(title,images,location,description,price,features,
     features,
     available,
     availableRooms
-  })
+  }, {Authorization: { header: `Bearer ${token}`}})
   return response
 }
