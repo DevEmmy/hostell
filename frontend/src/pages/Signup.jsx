@@ -9,6 +9,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
+  
 
   // const user = JSON.parse(localStorage.getItem('user'))
 
@@ -20,8 +21,8 @@ function Signup() {
       password,
       userType
     );
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // console.log(user);
     navigate("/hostel");
     return userData;
   };

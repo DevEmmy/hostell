@@ -4,19 +4,19 @@ import { Footer, Navbar, Sidebar } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const HostelLayout = () => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, setShowNotification } = useStateContext();
 
   return (
-    <div className={activeMenu ? "fixed" : ""}>
+    <div className={`${activeMenu ? "fixed" : ""} flex flex-col justify-between`}>
       <div>
-        <Navbar />
+        <Navbar setShowNotification={setShowNotification} />
       </div>
       {activeMenu && (
         <div>
           <Sidebar />
         </div>
       )}
-      <main>
+      <main className="flex-1">
         <Outlet />
       </main>
       <div>
