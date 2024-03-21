@@ -1,10 +1,10 @@
 import axios from "axios";
 
 
-const result = JSON.parse(localStorage.getItem("user"));
-// console.log(result)
-  const token = result.payload.token
-  // console.log(token)
+// const result = JSON.parse(localStorage.getItem("user"));
+// // console.log(result)
+//   const token = result.payload.token
+//   // console.log(token)
 
 const axiosConfig = axios.create({
   baseURL: "https://hostell.onrender.com",
@@ -39,6 +39,10 @@ export const popularHostel = async () => {
 };
 
 export const addHostel = async(title,images,location,description,price,features,available,availableRooms) => {
+  const result = JSON.parse(localStorage.getItem("user"));
+// console.log(result)
+  const token = result.payload.token
+  // console.log(token)
   const response = await axiosConfig.post('/hostels/', {
     title,
     images,

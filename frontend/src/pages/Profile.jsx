@@ -3,19 +3,20 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import HostelCard from "../components/HostelCard";
 import hostel1 from "/hostel1.jpg";
 import { useNavigate } from "react-router-dom";
-// import { NotificationCard } from "../components";
 
-// Handle the login renavigation and validation
-// let firstname;
-// let lastname;
-// let email;
+
 
 
 function Profile() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"));
-  // firstname = user.payload.firstName
-  // console.log(user.payload)
+ 
+    // Null checks to ensure user and its nested properties are initialized before accessing them
+    const firstName = user && user.payload && user.payload.user ? user.payload.user.firstName : '';
+    const lastName = user && user.payload && user.payload.user ? user.payload.user.lastName : '';
+    const email = user && user.payload && user.payload.user ? user.payload.user.email : '';
+    const userType = user && user.payload ? user.payload.userType : '';
+  
   return (
     <section className="w-screen">
       <div className="max-w-screen-lg mx-auto">
@@ -28,17 +29,17 @@ function Profile() {
         <div className="relative m-5">
           <div>
             <p className="p-2 text-sm">
-              <strong className="italic"> Firstname:</strong> {user.payload.user.firstName}
+              <strong className="italic"> Firstname:</strong> {firstName}
             </p>
             <p className="p-2 text-sm">
-              <strong className="italic"> Lastname:</strong> {user.payload.user.lastName}
+              <strong className="italic"> Lastname:</strong> {lastName}
             </p>
             <p className="p-2 text-sm">
               <strong className="italic"> Email: </strong>
-              {user.payload.user.email}
+              {email}
             </p>
           </div>
-          {user.payload.user.userType === 'AGENT' && (
+          {userType === 'AGENT' && (
   <div onClick={() => {
     navigate('/hostel/addhostel')
   }} className="absolute top-2 right-2 flex gap-1 capitalize items-center bg-secondary2 py-1 px-2 rounded text-white text-sm font-bold">
@@ -46,20 +47,9 @@ function Profile() {
 </div>
           )}
 
-          {/* Notifications */}
-          {/* <div className="m-5">
-            <h3 className="p-2 font-semibold">Notifications</h3>
-            <div className="flex flex-col gap-3">
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-            </div>
-          </div> */}
 
           <div className=" my-5 p-3">
-            <h3 className="font-semibold capitalize"> {user.payload.userType === 'AGENT' ? 'Hostel updates' : 'Saved Hostel'}</h3>
+            <h3 className="font-semibold capitalize"> {userType === 'AGENT' ? 'Hostel updates' : 'Saved Hostel'}</h3>
             <div className="flex flex-wrap">
               <HostelCard
                 price="₦ 120,000.00"
