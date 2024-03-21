@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../request";
+import { Loader } from "../components";
 
 function Signup() {
   const navigate = useNavigate();
@@ -9,11 +10,11 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
-  
-
-  // const user = JSON.parse(localStorage.getItem('user'))
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleSubmit = async () => {
+    setShowLoader(true);
     const userData = await signup(
       firstName,
       lastName,
@@ -21,11 +22,18 @@ function Signup() {
       password,
       userType
     );
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // console.log(user);
+    setShowLoader(false);
+    // If signup is successful, set success message and clear it after 5 seconds
+    if (userData.status == 200) {
+      setSuccessMessage("Signup successful. Redirecting to login page...");
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000); // 5000 milliseconds = 5 seconds
+    }
     navigate("/hostel");
     return userData;
   };
+
   return (
     <section>
       <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto p-5">
@@ -50,6 +58,9 @@ function Signup() {
         <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed up
         </h2>
+        {successMessage && (
+          <p className="text-green-500 text-center">{successMessage}</p>
+        )}
         <div className="flex flex-col items-center gap-3">
           <div className="flex flex-col w-full gap-1 my-3">
             <label className="hidden">Firstname</label>
@@ -59,6 +70,7 @@ function Signup() {
               placeholder="firstname"
               value={firstName}
               onChange={(e) => setFirstname(e.target.value)}
+              required
             />
           </div>
           <div className="flex flex-col w-full gap-1 my-3">
@@ -69,6 +81,7 @@ function Signup() {
               placeholder="lastname"
               value={lastName}
               onChange={(e) => setLastname(e.target.value)}
+              required
             />
           </div>
           <div className="flex flex-col w-full gap-1 my-3">
@@ -79,6 +92,7 @@ function Signup() {
               placeholder="email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="flex flex-col w-full gap-1 my-3">
@@ -89,6 +103,7 @@ function Signup() {
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="flex items-center gap-5 justify-start w-full">
@@ -103,7 +118,10 @@ function Signup() {
                   setUserType(agent ? "AGENT" : "BASIC");
                 }}
               />
-              <label className="capitalize font-medium bg-secondary2 text-white py-2 px-4 rounded" htmlFor="agent">
+              <label
+                className="capitalize font-medium bg-secondary2 text-white py-2 px-4 rounded"
+                htmlFor="agent"
+              >
                 agent
               </label>
             </div>
@@ -115,6 +133,11 @@ function Signup() {
           >
             Signup
           </button>
+          {showLoader && (
+            <div className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-gray-500 w-full h-full opacity-50 flex items-center justify-center">
+              <Loader />
+            </div>
+          )}
         </div>
       </form>
     </section>

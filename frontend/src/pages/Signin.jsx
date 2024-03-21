@@ -9,24 +9,34 @@ function Signin() {
   const [password, setPassword] = useState("");
 
   const [showLoader, setShowLoader] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  let errorMessage;
   const handleSubmit = async () => {
-    setShowLoader(true)
-    const userData = await login(email, password);
-    if (user.payload === null || user.status === 400) {
-      errorMessage = user.message;
+    setShowLoader(true);
+    try {
+      const userData = await login(email, password);
+      if (userData.status === 200) {
+        setShowLoader(false);
+        navigate("/hostel");
+      } else {
+        setErrorMessage(userData.message);
+        setShowLoader(false);
+        // Clear error message after 5 seconds
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 3000); // 5000 milliseconds = 5 seconds
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setErrorMessage("An error occurred while logging in.");
       setShowLoader(false);
-      return errorMessage;
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000); // 5000 milliseconds = 5 seconds
     }
-    if (user.status === 200) {
-      // console.log(user);
-      setShowLoader(false);
-      navigate("/hostel");
-    }
-    return userData;
   };
+
   return (
     <section>
       <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto p-5 mb-20">
@@ -46,6 +56,11 @@ function Signin() {
         onSubmit={(e) => e.preventDefault()}
         className="bg-zinc-50 w-full max-w-[500px] mx-auto p-5 h-max rounded md:shadow-xl"
       >
+        <div className="h-16">
+          {errorMessage && (
+            <p className="bg-red-300 w-full p-3 text-white">{errorMessage}</p>
+          )}
+        </div>
         <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed in
         </h2>
@@ -58,6 +73,7 @@ function Signin() {
               placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="flex flex-col w-full gap-1 m-3">
@@ -68,12 +84,13 @@ function Signin() {
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <Link className="m-3 capitalize text-primary2" to={"/"}>
               forget password?
             </Link>
           </div>
-          {errorMessage && <div>{`${errorMessage}`} </div>}
+
           <button
             className="w-full bg-secondary2 p-3 rounded text-white my-2 font-bold"
             type="submit"
