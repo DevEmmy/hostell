@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FileBase64 from 'react-file-base64';
 import { addHostel } from "../../request";
+import { IoMdImages } from "react-icons/io";
 
 function uploadHostel() {
   const [files, setFiles] = useState([]);
@@ -30,10 +31,10 @@ function uploadHostel() {
       <form onSubmit={(e) => e.preventDefault()} 
       className="w-full md:max-w-screen-xl md:mx-auto p-2">
         <div className="flex flex-col m-2">
-          <label className="capitalize font-bold m-2">Title:</label>
+          <label className="capitalize text-primary2 font-bold m-2">Title:</label>
           <input
             placeholder="Title"
-            className="outline-none p-2 bg-slate-100 m-2 rounded"
+            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
             type="text"
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -44,11 +45,12 @@ function uploadHostel() {
           </label>
           <div className="flex flex-col w-full">
             {/* Uploading of  the hostel images */}
-            <div className="text-primary2">
+            <button className="text-primary2 flex items-center gap-2">
           <FileBase64
-        multiple={ true }
-        onDone={(f) => setFiles(f)} />
-        </div>
+        multiple={ false }
+        onDone={(f) => setFiles(f)}
+         />
+        </button>
         <div className="flex flex-wrap m-2">
             {files.map((file, i) => {
              return (
@@ -65,7 +67,7 @@ function uploadHostel() {
             Location:
           </label>
           <textarea
-            className="outline-none p-2 bg-slate-100 m-2 rounded"
+            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
             type="text"
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -75,7 +77,7 @@ function uploadHostel() {
             Description
           </label>
           <textarea
-            className="outline-none p-2 bg-slate-100 m-2 rounded"
+            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
             cols="30"
             rows="5"
             onChange={(e) => setDescription(e.target.value)}
@@ -84,7 +86,7 @@ function uploadHostel() {
         <div className="flex flex-col m-2">
           <label className="capitalize font-bold text-primary2 m-2">Price:</label>
           <input
-             className="outline-none p-2 bg-slate-100 m-2 rounded"
+             className="outline-none p-2 border-2 border-primary2 m-2 rounded"
             type="text"
             onChange={(e) => setPrice(e.target.value)}
           />
@@ -94,7 +96,7 @@ function uploadHostel() {
             Features:
           </label>
           <textarea
-             className="outline-none p-2 bg-slate-100 m-2 rounded"
+             className="outline-none p-2 border-2 border-primary2 m-2 rounded"
             type="text"
             onChange={(e) => setFeatures(e.target.value)}
           />
@@ -111,7 +113,7 @@ function uploadHostel() {
               Availble Rooms
             </label>
             <input
-               className="outline-none p-2 bg-slate-100 m-2 rounded"
+               className="outline-none p-2 border-2 border-primary2 m-2 rounded"
               type="number"
               onChange={(e) => setAvailableRooms(e.target.value)}
             />

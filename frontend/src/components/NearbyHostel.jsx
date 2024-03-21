@@ -27,7 +27,7 @@ const NearbyHostel = ({ simplified }) => {
         <h2 className="font-bold">Nearby Hostel</h2>
 
         {simplified && (
-          <Link className="text-primary2 text-sm capitalize" to="/explore">
+          <Link className="text-primary2 text-sm capitalize" to="/hostel/explore">
             See All
           </Link>
         )}

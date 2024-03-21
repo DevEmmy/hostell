@@ -1,5 +1,5 @@
 import React from "react";
-import { IoCloseCircleSharp } from "react-icons/io5";
+import { IoCloseCircleSharp, IoLogOut } from "react-icons/io5";
 import { sidebarLinks } from "../constants";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ function Sidebar() {
   };
 
   return (
-    <aside className="absolute z-10 top-0 left-0 bg-white h-full w-64">
+    <aside className="absolute z-10 top-0 left-0 bg-white h-screen w-64">
       <div className="w-full p-3 mb-5 flex items-center justify-between">
         <h1 className="text-primary2 text-xl font-bold text-left italic tracking-wider">
           Hostell
@@ -35,6 +35,9 @@ function Sidebar() {
           </Link>
         ))}
       </div>
+      <button className="absolute bottom-2 text-center flex items-center gap-2 m-3 font-bold text-lg">
+       <IoLogOut size={25}/> logout
+      </button>
     </aside>
   );
 }

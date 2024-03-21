@@ -7,6 +7,7 @@ import HostelDetails from "./HostelDetails";
 import Footer from "./Footer";
 import NotificationCard from "./NotificationCard";
 import UploadHostel from "./UploadHostel";
+import Loader from './Loader'
 
 export {
   RecommendedHostel,
@@ -17,5 +18,6 @@ export {
   HostelDetails,
   Footer,
   NotificationCard,
-  UploadHostel
+  UploadHostel,
+  Loader
 };

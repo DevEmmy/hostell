@@ -5,7 +5,6 @@ import {
   Signup,
   Signin,
   Profile,
-  AgentProfile,
 } from "./pages/index";
 import { HostelDetails, NearbyHostel, RecommendedHostel, UploadHostel } from "./components";
 
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/hostel/profile",
-        element: <AgentProfile />,
+        element: <Profile />,
       },
 
       {

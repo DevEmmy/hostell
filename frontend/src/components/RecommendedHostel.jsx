@@ -20,7 +20,7 @@ const RecommendedHostel = ({ simplified }) => {
   const normalStyles =
     "flex flex-col gap-3 md:grid md:grid-cols-3 lg:grid-cols-4";
   return (
-    <section className="m-3">
+    <section className="m-3 w-screen p-3 mx-auto">
       {!simplified && (
         <div>
           <SearchLocationInput />
@@ -30,7 +30,7 @@ const RecommendedHostel = ({ simplified }) => {
       <div className="flex items-center justify-between p-2 my-4">
         <h2 className="font-bold">Recommended Hostel</h2>
         {simplified && (
-          <Link className="text-primary2 text-sm capitalize" to="/popular">
+          <Link className="text-primary2 text-sm capitalize" to="/hostel/popular">
             See All
           </Link>
         )}
@@ -40,7 +40,7 @@ const RecommendedHostel = ({ simplified }) => {
         <div
           // className={simplified ? simplifiedStyles : normalStyles}
           className="flex flex-col flex-wrap md:flex-row gap-2"
-        >
+        >     
           <HostelCard
             price="₦ 120,000.00"
             location="accord,zoo,funaab"

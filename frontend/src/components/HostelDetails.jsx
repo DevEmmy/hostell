@@ -8,15 +8,16 @@ import Footer from "./Footer";
 import { Link, useNavigate } from "react-router-dom";
 
 function HostelDetails() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
-    <section className="w-full h-full">
+    <section className="w-full h-full flex flex-col justify-between">
+      <div className="flex-1">
       <div className="relative">
         <div>
           <img src={hostel1} alt="hostel" />
         </div>
         <Link
-          to={".."}
+          to={"/hostel"}
           className="absolute top-2 left-3 bg-white p-3 rounded-full"
         >
           <GoArrowLeft />
@@ -62,8 +63,9 @@ function HostelDetails() {
           <FaMessage size={25} />
         </div>
       </div>
+      </div>
       <div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </section>
   );
