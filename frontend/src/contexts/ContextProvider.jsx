@@ -5,6 +5,7 @@ export const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
 
   return (
     <StateContext.Provider
@@ -12,7 +13,9 @@ export const ContextProvider = ({ children }) => {
         activeMenu,
         setActiveMenu,
         showNotification,
-        setShowNotification
+        setShowNotification,
+        showFilter,
+        setShowFilter
       }}
     >
       {children}

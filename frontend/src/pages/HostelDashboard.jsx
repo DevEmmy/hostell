@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  FilterCard,
   NearbyHostel,
   NotificationCard,
   RecommendedHostel,
@@ -8,7 +9,7 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 
 function HostelDashboard() {
-  const { showNotification } = useStateContext();
+  const { showNotification, showFilter } = useStateContext();
   return (
     <>
       <div className="mx-3 scroll-smooth">
@@ -23,6 +24,13 @@ function HostelDashboard() {
         <div>
           <SearchLocationInput />
         </div>
+        {
+          showFilter && (
+        <div>
+          <FilterCard/>
+        </div>
+          )
+        }
         <div>
           <RecommendedHostel simplified />
         </div>

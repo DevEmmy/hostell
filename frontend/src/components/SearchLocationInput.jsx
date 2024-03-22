@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState} from "react";
 import { FiSearch } from "react-icons/fi";
 import { RiEqualizerLine } from "react-icons/ri";
-import ButtonIcon from "./ButtonIcon";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const SearchLocationInput = () => {
+  const { showFilter, setShowFilter } = useStateContext();
+  const [searchLocation, setSearchLocation] = useState('')
+
+  const handleFilter = () => {
+    setShowFilter((prev) => !prev)
+  }
   return (
-    <form className="flex items-center gap-3 bg-gray-100 p-3 rounded-full">
+    <div className="flex items-center gap-3 bg-gray-100 p-3 rounded-full shadow">
       <label id="searchLocation" className="hidden">
         Search Location
       </label>
@@ -15,9 +21,11 @@ const SearchLocationInput = () => {
         type="text"
         name="searchLocation"
         placeholder="Search Location..."
+        value={searchLocation}
+        onChange={(e) => setSearchLocation(e.target.value)}
       />
-      <ButtonIcon icon={<RiEqualizerLine />} />
-    </form>
+      <button onClick={() => handleFilter()} className={`p-2 ${showFilter ? 'bg-slate-200 rounded-full' : ''}`}><RiEqualizerLine /></button>
+    </div>
   );
 };
 
