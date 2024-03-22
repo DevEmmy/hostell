@@ -15,25 +15,23 @@ function Signin() {
     setShowLoader(true);
     try {
       const userData = await login(email, password);
-      if (userData.status === 200) {
+      if (userData.status === 200 || userData.status === 201) {
         setShowLoader(false);
         navigate("/hostel");
       } else {
         setErrorMessage(userData.message);
         setShowLoader(false);
-        // Clear error message after 5 seconds
         setTimeout(() => {
           setErrorMessage("");
-        }, 3000); // 5000 milliseconds = 5 seconds
+        }, 5000); 
       }
     } catch (error) {
-      console.error("Login failed:", error);
-      setErrorMessage("An error occurred while logging in.");
+      // console.error("Login failed:", error);
+      setErrorMessage(error.message);
       setShowLoader(false);
-      // Clear error message after 5 seconds
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000); // 5000 milliseconds = 5 seconds
+      }, 5000); 
     }
   };
 
@@ -56,14 +54,14 @@ function Signin() {
         onSubmit={(e) => e.preventDefault()}
         className="bg-zinc-50 w-full max-w-[500px] mx-auto p-5 h-max rounded md:shadow-xl"
       >
-        <div className="h-16">
-          {errorMessage && (
-            <p className="bg-red-300 w-full p-3 text-white">{errorMessage}</p>
-          )}
-        </div>
         <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed in
         </h2>
+        <div className="h-16">
+          {errorMessage && (
+            <p className="bg-red-300 w-full p-3 text-white rounded-lg">{errorMessage}</p>
+          )}
+        </div>
         <div className="flex flex-col items-center gap-3">
           <div className="flex flex-col w-full gap-1 m-3">
             <label className="hidden">Email</label>

@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import NotificationCard from "./NotificationCard";
 import UploadHostel from "./UploadHostel";
 import Loader from './Loader'
+import FilterCard from "./FilterCard";
 
 export {
   RecommendedHostel,
@@ -19,5 +20,6 @@ export {
   Footer,
   NotificationCard,
   UploadHostel,
-  Loader
+  Loader,
+  FilterCard
 };

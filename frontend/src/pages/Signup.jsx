@@ -9,29 +9,37 @@ function Signup() {
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [userType, setUserType] = useState("BASIC");
   const [showLoader, setShowLoader] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async () => {
-    setShowLoader(true);
-    const userData = await signup(
-      firstName,
-      lastName,
-      email,
-      password,
-      userType
-    );
-    setShowLoader(false);
-    // If signup is successful, set success message and clear it after 5 seconds
-    if (userData.status == 200) {
-      setSuccessMessage("Signup successful. Redirecting to login page...");
+    try{
+      setShowLoader(true);
+      const userData = await signup(
+        firstName,
+        lastName,
+        email,
+        password,
+        userType
+      );
+      if (userData.status === 200 || userData.status === 201) {
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 5000); 
+        navigate("/hostel");
+      }else{
+        setShowLoader(false)
+        setErrorMessage(userData.message);
+      }
+    }catch (error) {
+      // console.error("Login failed:", error);
+      setErrorMessage(error.message);
+      setShowLoader(false);
       setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000); // 5000 milliseconds = 5 seconds
+        setErrorMessage("");
+      }, 5000); 
     }
-    navigate("/hostel");
-    return userData;
   };
 
   return (
@@ -58,9 +66,11 @@ function Signup() {
         <h2 className="text-center text-primary2 font-semibold text-lg m-5">
           Let's get you signed up
         </h2>
-        {successMessage && (
-          <p className="text-green-500 text-center">{successMessage}</p>
-        )}
+        <div className="h-16">
+          {errorMessage && (
+            <p className="bg-red-300 w-full p-3 text-white rounded-lg">{errorMessage}</p>
+          )}
+        </div>
         <div className="flex flex-col items-center gap-3">
           <div className="flex flex-col w-full gap-1 my-3">
             <label className="hidden">Firstname</label>
