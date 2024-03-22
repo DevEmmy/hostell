@@ -9,7 +9,7 @@ function NotificationCard() {
     <div>
       <div className="relative h-10 w-full">
       <button
-      className="text-right absolute right-5 top-1 bg-red-500 text-white rounded-full p-1 m-1"
+      className="text-right absolute right-2 top-1 bg-red-500 text-white rounded-full p-1 m-1"
        onClick={() => {
         setShowNotification(false)
       }}>

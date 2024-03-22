@@ -1,16 +1,24 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Footer, Navbar, Sidebar } from "../components";
+import { Footer, Navbar, Sidebar, NotificationCard } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const HostelLayout = () => {
-  const { activeMenu, setShowNotification } = useStateContext();
+  const { activeMenu, showNotification, setShowNotification } =
+    useStateContext();
 
   return (
-    <div className={`${activeMenu ? "fixed" : ""} flex flex-col justify-between`}>
+    <div
+      className={`${activeMenu ? "fixed" : ""} flex flex-col justify-between`}
+    >
       <div>
         <Navbar setShowNotification={setShowNotification} />
       </div>
+      {showNotification && (
+        <div className="fixed top-12 z-10 w-full h-fit bg-secondary1">
+          <NotificationCard />
+        </div>
+      )}
       {activeMenu && (
         <div>
           <Sidebar />

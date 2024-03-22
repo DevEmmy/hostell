@@ -2,14 +2,19 @@ import React from "react";
 import { IoCloseCircleSharp, IoLogOut } from "react-icons/io5";
 import { sidebarLinks } from "../constants";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate()
   const { setActiveMenu } = useStateContext();
 
   const handleMenuClick = () => {
     setActiveMenu((prev) => !prev);
   };
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    navigate('/signin')
+  }
 
   return (
     <aside className="absolute z-10 top-0 left-0 bg-white h-screen w-64">
@@ -35,7 +40,7 @@ function Sidebar() {
           </Link>
         ))}
       </div>
-      <button className="absolute bottom-2 text-center flex items-center gap-2 m-3 font-bold text-lg">
+      <button onClick={handleLogout} className="absolute bottom-2 text-center flex items-center gap-2 m-3 font-bold text-lg">
        <IoLogOut size={25}/> logout
       </button>
     </aside>

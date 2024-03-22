@@ -2,25 +2,16 @@ import React from "react";
 import {
   FilterCard,
   NearbyHostel,
-  NotificationCard,
   RecommendedHostel,
   SearchLocationInput,
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
 function HostelDashboard() {
-  const { showNotification, showFilter } = useStateContext();
+  const { showFilter } = useStateContext();
   return (
     <>
-      <div className="mx-3 scroll-smooth">
-        {
-          showNotification && (
-            <div className="fixed z-10 w-full h-fit bg-secondary1">
-            <NotificationCard/>
-          </div>
-          )
-        }
-       
+      <div className="mx-3 scroll-smooth">     
         <div>
           <SearchLocationInput />
         </div>
