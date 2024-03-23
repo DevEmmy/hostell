@@ -6,7 +6,7 @@ import "reflect-metadata"
 import generateOTP from "../utils/generateOTP";
 require('dotenv').config();
 
-const jwtSecret: string = process.env.JWT_SECRET || "SNOSD9SDD"
+const jwtSecret: string = String(process.env.JWT_SECRET);
 
 @Service()
 class UserServices{
