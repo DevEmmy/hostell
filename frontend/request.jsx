@@ -34,7 +34,10 @@ export const recommendedHostel = async () => {
 };
 
 export const popularHostel = async () => {
-  const response = await axiosConfig.get("/hostels/type/popular");
+  const result = JSON.parse(localStorage.getItem("user"));
+  // console.log(result)
+    const token = result.payload.token
+  const response = await axiosConfig.get("/hostels/type/popular",{ headers: { Authorization: `Bearer ${token}` } });
   return response.data;
 };
 

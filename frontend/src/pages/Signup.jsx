@@ -9,7 +9,7 @@ function Signup() {
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("BASIC");
+  const [userType, setUserType] = useState("");
   const [showLoader, setShowLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,6 +23,7 @@ function Signup() {
         password,
         userType
       );
+      console.log(userData)
       if (userData.status === 200 || userData.status === 201) {
         setTimeout(() => {
           setShowLoader(false);
@@ -138,16 +139,11 @@ function Signup() {
           </div>
           <button
             onClick={() => handleSubmit()}
-            className="w-full bg-secondary2 p-3 rounded text-white my-2 font-bold"
+            className="w-full bg-secondary2 p-3 rounded text-white text-center flex items-center justify-center my-2 font-bold"
             type="submit"
           >
-            Signup
+            {showLoader ? <Loader/> : 'Signup'}
           </button>
-          {showLoader && (
-            <div className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-gray-500 w-full h-full opacity-50 flex items-center justify-center">
-              <Loader />
-            </div>
-          )}
         </div>
       </form>
     </section>
