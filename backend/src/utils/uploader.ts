@@ -19,7 +19,7 @@ export const uploaderListOfMedia = async (arr: any) => {
     let newArr = [];
 
     for (let i = 0; i < arr.length; i++) {
-        newArr.push(await uploader(arr[i].base64));
+        newArr.push(await uploader(arr[i]));
     }
     return newArr;
 }
