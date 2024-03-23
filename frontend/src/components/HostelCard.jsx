@@ -5,8 +5,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useParams } from "react-router-dom";
 
 
-const HostelCard = ({ image, location, price }) => {
-  const {hostelId} = useParams()
+const HostelCard = ({ image, location, price, hostelId }) => {
+  // const {hostelId} = useParams()
   return (
     <>
       <Link

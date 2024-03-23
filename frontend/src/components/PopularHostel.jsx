@@ -34,14 +34,15 @@ const PopularHostel = ({ simplified }) => {
         )}
       </div>
       <div className="flex flex-col md:flex-row gap-2 flex-wrap">
-        {hostelArray.map((hostel, index) => (
+        {hostelArray.length > 0 ? hostelArray.map((hostel, index) => (
           <HostelCard
             key={index}
+            hostelId={hostel.id}
             price={hostel.price}
             location={hostel.location}
             image={hostel.images.length > 0 ? hostel.images[0] : ""}
           />
-        ))}
+        )) : 'No  hostel available'}
       </div>
     </section>
   );
