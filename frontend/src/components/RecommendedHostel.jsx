@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
-import hostel1 from "/hostel1.jpg";
-import hostel2 from "/hostel2.jpg";
+import React, { useEffect, useState } from "react";
 import HostelCard from "./HostelCard";
-import SearchLocationInput from "./SearchLocationInput";
 import { Link } from "react-router-dom";
 import { recommendedHostel } from "../../request";
 
 const RecommendedHostel = ({ simplified }) => {
-  const fetchData = async () => {
-    let result = await recommendedHostel();
-    return result;
-  };
+  const [hostelArray, setHostelArray] = useState([])
   useEffect(() => {
-    const recommendedHostelData = fetchData();
-    // console.log(recommendedHostelData);
+    const fetchData = async () => {
+      try {
+        const result = await recommendedHostel();
+        const hostelResult = result.payload;
+        setHostelArray(hostelResult);
+        console.log(hostelResult);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const simplifiedStyles = "flex flex-row gap-3";
@@ -21,12 +25,6 @@ const RecommendedHostel = ({ simplified }) => {
     "flex flex-col gap-3 md:grid md:grid-cols-3 lg:grid-cols-4";
   return (
     <section className="m-3 w-screen p-3 mx-auto">
-      {!simplified && (
-        <div>
-          <SearchLocationInput />
-        </div>
-      )}
-
       <div className="flex items-center justify-between p-2 my-4">
         <h2 className="font-bold">Recommended Hostel</h2>
         {simplified && (
@@ -40,8 +38,16 @@ const RecommendedHostel = ({ simplified }) => {
         <div
           // className={simplified ? simplifiedStyles : normalStyles}
           className="flex flex-col flex-wrap md:flex-row gap-2"
-        >     
-          <HostelCard
+        > 
+             {hostelArray.map((hostel, index) => (
+            <HostelCard
+              key={index}
+              price={hostel.price}
+              location={hostel.location}
+              image={hostel.images.length > 0 ? hostel.images[0] : ""}
+            />
+          ))}   
+          {/* <HostelCard
             price="₦ 120,000.00"
             location="accord,zoo,funaab"
             image={hostel1}
@@ -75,7 +81,7 @@ const RecommendedHostel = ({ simplified }) => {
             price="₦ 140,000.00"
             location="accord,zoo,funaab"
             image={hostel2}
-          />
+          /> */}
         </div>
       </div>
     </section>

@@ -11,7 +11,6 @@ function Profile() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"));
  
-    // Null checks to ensure user and its nested properties are initialized before accessing them
     const firstName = user && user.payload && user.payload.user ? user.payload.user.firstName : '';
     const lastName = user && user.payload && user.payload.user ? user.payload.user.lastName : '';
     const email = user && user.payload && user.payload.user ? user.payload.user.email : '';
