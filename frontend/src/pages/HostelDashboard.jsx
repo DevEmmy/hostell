@@ -1,7 +1,7 @@
 import React from "react";
 import {
   FilterCard,
-  NearbyHostel,
+  PopularHostel,
   RecommendedHostel,
   SearchLocationInput,
 } from "../components";
@@ -11,22 +11,20 @@ function HostelDashboard() {
   const { showFilter } = useStateContext();
   return (
     <>
-      <div className="mx-3 scroll-smooth">     
+      <div className="mx-3 scroll-smooth">
         <div>
           <SearchLocationInput />
         </div>
-        {
-          showFilter && (
-        <div>
-          <FilterCard/>
-        </div>
-          )
-        }
+        {showFilter && (
+          <div>
+            <FilterCard />
+          </div>
+        )}
         <div>
           <RecommendedHostel simplified />
         </div>
         <div>
-          <NearbyHostel simplified />
+          <PopularHostel simplified />
         </div>
       </div>
     </>
