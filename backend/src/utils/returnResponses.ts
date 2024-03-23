@@ -8,7 +8,7 @@ export interface IResult{
 }
 
 export const success = (result: IResult, response: Response)=>{
-    response.status(200 || result.status).json(result)
+    response.status(result.status || 200).json(result)
 }
 
 export const error = (result: IResult, response: Response)=>{

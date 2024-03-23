@@ -39,6 +39,13 @@ class UserServices{
             let user = {email, password};
             // change this any to an Interface
             let dbUser: any = await this.userRepository.findOneByEmail(email)
+            if(!dbUser){
+                return {
+                    message:"User not found",
+                    status: 400,
+                    payload: null
+                }
+            }
             let hashedPassword = await bcrypt.compare(password, dbUser.password)
 
             

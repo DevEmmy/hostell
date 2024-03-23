@@ -21,6 +21,6 @@ router.patch("/switch-availability/:id", validateAuth, (req: Request, res: Respo
 
 router.get("/type/recommended", (req: Request, res: Response)=> hostelController.getRecommendedHostels(req, res))
 
-router.get("/type/popular", (req: Request, res: Response)=> hostelController.getPopularHostel(req, res))
+router.get("/type/popular", validateAuth ,(req: Request, res: Response)=> hostelController.getPopularHostel(req, res))
 
 export default router

@@ -33,6 +33,7 @@ class HostelController{
     async create(request: Request, response: Response){
         try{
             let body = request.body;
+            body.createdBy = request.body.user
             let result : IResult = await this.service.createHostel(body);
             success(result, response)
         }
