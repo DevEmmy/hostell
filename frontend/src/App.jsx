@@ -2,52 +2,57 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   HostelLayout,
   HostelDashboard,
-  AgentProfile,
-  StudentProfile,
   Signup,
   Signin,
+  Profile,
 } from "./pages/index";
-import { HostelDetails, NearbyHostel, RecommendedHostel } from "./components";
+import { HostelDetails, NearbyHostel, RecommendedHostel, UploadHostel } from "./components";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HostelLayout />,
-    children: [
-      {
-        path: "/",
-        element: <HostelDashboard />,
-      },
-      {
-        path: "/home",
-        element: <HostelDashboard />,
-      },
-      {
-        path: "/explore",
-        element: <NearbyHostel />,
-      },
-      {
-        path: "/popular",
-        element: <RecommendedHostel />,
-      },
-      {
-        path: "/profile",
-        element: <StudentProfile />,
-      },
-    ],
-  },
-  {
-    path: "/hosteldetails/:hostelID",
-    element: <HostelDetails />,
-  },
-  {
-    path: "/signup",
     element: <Signup />,
   },
   {
     path: "/signin",
     element: <Signin />,
   },
+  {
+    path: "/hostel",
+    element: <HostelLayout />,
+    children: [
+      {
+        path: "/hostel",
+        element: <HostelDashboard />,
+      },
+      {
+        path: "/hostel/home",
+        element: <HostelDashboard />,
+      },
+      {
+        path: "/hostel/explore",
+        element: <NearbyHostel />,
+      },
+      {
+        path: "/hostel/popular",
+        element: <RecommendedHostel />,
+      },
+      {
+        path: "/hostel/profile",
+        element: <Profile />,
+      },
+
+      {
+        path: "/hostel/addhostel",
+        element: <UploadHostel />
+      },
+    ],
+  },
+  {
+    path: "/hosteldetails/:hostelId",
+    element: <HostelDetails />,
+  },
+
 ]);
 
 function App() {

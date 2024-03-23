@@ -1,21 +1,31 @@
 import axios from "axios";
 
+
+// const result = JSON.parse(localStorage.getItem("user"));
+// // console.log(result)
+//   const token = result.payload.token
+//   // console.log(token)
+
 const axiosConfig = axios.create({
-  baseURL: "http://192.168.0.152:3030",
+  baseURL: "https://hostell.onrender.com",
 });
 
-export const login = (email, password) => {
-  axiosConfig.post("/users/sign-in", { email, password });
+export const login = async(email, password) => {
+  const response = await axiosConfig.post("/users/sign-in", { email, password });
+  localStorage.setItem('user', JSON.stringify(response.data))
+  return response.data
 };
 
-export const signup = (firstname, lastname, email, password, student) => {
-  axiosConfig.post("/users/sign-up", {
-    firstname,
-    lastname,
+export const signup = async(firstName, lastName, email, password, userType) => {
+   const response = await axiosConfig.post("/users/sign-up", {
+    firstName,
+    lastName,
     email,
     password,
-    student,
-  });
+    userType
+  }, {});
+  localStorage.setItem('user', JSON.stringify(response.data))
+  return response.data
 };
 
 export const recommendedHostel = async () => {
@@ -23,6 +33,25 @@ export const recommendedHostel = async () => {
   return response.data;
 };
 
-export const popularHostel = () => {
-  axiosConfig.get("/hostels/popular");
+export const popularHostel = async () => {
+  const response = await axiosConfig.get("/hostels/type/popular");
+  return response.data;
 };
+
+export const addHostel = async(title,images,location,description,price,features,available,availableRooms) => {
+  const result = JSON.parse(localStorage.getItem("user"));
+// console.log(result)
+  const token = result.payload.token
+  // console.log(token)
+  const response = await axiosConfig.post('/hostels/', {
+    title,
+    images,
+    location,
+    description,
+    price,
+    features,
+    available,
+    availableRooms
+  }, { headers: { Authorization: `Bearer ${token}` } })
+  return response
+}

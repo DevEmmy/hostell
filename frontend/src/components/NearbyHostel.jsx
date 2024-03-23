@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import hostel1 from "/hostel1.jpg";
 import hostel2 from "/hostel2.jpg";
 import HostelCard from "./HostelCard";
 import SearchLocationInput from "./SearchLocationInput";
 import { Link } from "react-router-dom";
+import { popularHostel } from "../../request";
 
 const NearbyHostel = ({ simplified }) => {
+  const fetchData = async() => {
+    const result = await popularHostel()
+    return result
+  }
+  useEffect(() => {
+    const popularHostelData = fetchData();
+    // console.log(popularHostelData);
+  }, [])
   return (
     <section className="m-3">
       {!simplified && (
@@ -18,7 +27,7 @@ const NearbyHostel = ({ simplified }) => {
         <h2 className="font-bold">Nearby Hostel</h2>
 
         {simplified && (
-          <Link className="text-primary2 text-sm capitalize" to="/explore">
+          <Link className="text-primary2 text-sm capitalize" to="/hostel/explore">
             See All
           </Link>
         )}

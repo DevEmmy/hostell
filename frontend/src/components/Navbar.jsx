@@ -6,7 +6,7 @@ import ButtonIcon from "./ButtonIcon";
 import { useStateContext } from "../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({setShowNotification}) => {
   const navigate = useNavigate();
   const { setActiveMenu } = useStateContext();
 
@@ -14,7 +14,7 @@ const Navbar = () => {
     setActiveMenu((prev) => !prev);
   };
   const handleProfileClick = () => {
-    navigate("/profile");
+    navigate("/hostel/profile");
   };
 
   return (
@@ -29,7 +29,9 @@ const Navbar = () => {
         <button className="text-secondary2" onClick={handleProfileClick}>
           <ButtonIcon icon={<FaUserCircle size={25} />} />
         </button>
-        <button>
+        <button onClick={() => {
+          setShowNotification(true)
+        }}>
           <ButtonIcon icon={<IoMdNotificationsOutline size={25} />} />
         </button>
       </div>
