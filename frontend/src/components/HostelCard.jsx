@@ -13,11 +13,11 @@ const HostelCard = ({ image, location, price }) => {
       to={`/hosteldetails/${hostelId}`}
         className="w-full md:w-72 mx-auto my-2"
       >
-        <div className="relative w-full md:h-64 md:w-72">
+        <div className="relative w-full md:h-64 h-60 md:w-72">
           <LazyLoadImage
           src={image}
           alt="hostel"
-          className="w-full h-full rounded-lg"
+          className="w-full h-full rounded-lg object-cover"
           width={image.width}
           height={image.height}
           />

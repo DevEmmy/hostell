@@ -1,7 +1,7 @@
 import RecommendedHostel from "./RecommendedHostel";
 import SearchLocationInput from "./SearchLocationInput";
 import Navbar from "./Navbar";
-import NearbyHostel from "./NearbyHostel";
+import PopularHostel from "./PopularHostel";
 import Sidebar from "./Sidebar";
 import HostelDetails from "./HostelDetails";
 import Footer from "./Footer";
@@ -14,7 +14,7 @@ export {
   RecommendedHostel,
   SearchLocationInput,
   Navbar,
-  NearbyHostel,
+  PopularHostel,
   Sidebar,
   HostelDetails,
   Footer,

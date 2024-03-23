@@ -6,7 +6,7 @@ import {
   Signin,
   Profile,
 } from "./pages/index";
-import { HostelDetails, NearbyHostel, RecommendedHostel, UploadHostel } from "./components";
+import { HostelDetails, PopularHostel, RecommendedHostel, UploadHostel } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/hostel/explore",
-        element: <NearbyHostel />,
+        element: <PopularHostel />,
       },
       {
         path: "/hostel/popular",
