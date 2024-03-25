@@ -11,9 +11,9 @@ const RecommendedHostel = ({ simplified }) => {
       try {
         const result = await recommendedHostel();
         const hostelResult = result.payload;
-        console.log(hostelResult)
+        // console.log(hostelResult)
         setHostelArray(hostelResult);
-        console.log(hostelResult);
+        // console.log(hostelResult);
       } catch (error) {
         console.log(error);
       }

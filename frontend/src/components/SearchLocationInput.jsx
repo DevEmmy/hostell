@@ -4,8 +4,7 @@ import { RiEqualizerLine } from "react-icons/ri";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const SearchLocationInput = () => {
-  const { showFilter, setShowFilter } = useStateContext();
-  const [searchLocation, setSearchLocation] = useState('')
+  const { showFilter, setShowFilter, searchLocation, setSearchLocation } = useStateContext();
 
   const handleFilter = () => {
     setShowFilter((prev) => !prev)
