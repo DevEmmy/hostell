@@ -6,19 +6,24 @@ import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import hostel1 from "/hostel1.jpg";
 import { Link, useParams } from "react-router-dom";
 import { hostelDetails } from "../../request";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function HostelDetails() {
   const { hostelid } = useParams();
 
   const [hosteldetails, setHosteldetails] = useState({});
 
+
+
   useEffect(() => {
     const fetchHostelDetails = async () => {
       try {
         const result = await hostelDetails(hostelid);
         const hostelResult = result.payload;
-        console.log(hostelResult);
+        // console.log(hostelResult);
         setHosteldetails(hostelResult);
+        setImages(hosteldetails.images)
+        // console.log(images)
         console.log(hostelResult);
       } catch (error) {
         console.log(error);
@@ -30,10 +35,15 @@ function HostelDetails() {
 
   return (
     <section className="w-full h-full flex flex-col justify-between">
-      <div className="flex-1">
+      <div className="flex-1 mb-24">
         <div className="relative">
-          <div>
-            <img src={hosteldetails.images} alt="hostel" />
+          <div className="h-80">
+            {/* <img src={hosteldetails.images} alt="hostel" /> */}
+            <LazyLoadImage
+          src={hosteldetails.images ? hosteldetails.images[0] : hostel1}
+          alt="hostel"
+          className="w-full h-full rounded-lg object-cover"
+          />
           </div>
           <Link
             to={"/hostel"}
@@ -85,7 +95,6 @@ function HostelDetails() {
           </small>
         </div>
       </div>
-      <div></div>
     </section>
   );
 }

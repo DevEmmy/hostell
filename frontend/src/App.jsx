@@ -46,11 +46,15 @@ const router = createBrowserRouter([
         path: "/hostel/addhostel",
         element: <UploadHostel />
       },
-      {
-        path: "/hostel/:hostelid",
-        element: <HostelDetails />,
-      },
+      // {
+      //   path: "/hostel/:hostelid",
+      //   element: <HostelDetails />,
+      // },
     ],
+  },
+  {
+    path: "/:hostelid",
+    element: <HostelDetails />,
   },
 
 ]);

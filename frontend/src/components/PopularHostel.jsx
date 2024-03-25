@@ -12,7 +12,7 @@ const PopularHostel = ({ simplified }) => {
         const result = await popularHostel();
         const hostelResult = result.payload;
         setHostelArray(hostelResult);
-        console.log(hostelResult);
+        // console.log(hostelResult);
       } catch (error) {
         console.log(error);
       }
