@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HostelCard from "./HostelCard";
 import { Link } from "react-router-dom";
 import { recommendedHostel } from "../../request";
+import { Loader } from "../components";
 
 const RecommendedHostel = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([])
@@ -10,6 +11,7 @@ const RecommendedHostel = ({ simplified }) => {
       try {
         const result = await recommendedHostel();
         const hostelResult = result.payload;
+        console.log(hostelResult)
         setHostelArray(hostelResult);
         console.log(hostelResult);
       } catch (error) {
@@ -20,9 +22,10 @@ const RecommendedHostel = ({ simplified }) => {
     fetchData();
   }, []);
 
-  const simplifiedStyles = "flex flex-row gap-3";
-  const normalStyles =
-    "flex flex-col gap-3 md:grid md:grid-cols-3 lg:grid-cols-4";
+  // const simplifiedStyles = "flex flex-row gap-3";
+  // const normalStyles =
+  //   "flex flex-col gap-3 md:grid md:grid-cols-3 lg:grid-cols-4";
+  
   return (
     <section className="m-3 w-screen p-3 mx-auto">
       <div className="flex items-center justify-between p-2 my-4">
@@ -39,49 +42,19 @@ const RecommendedHostel = ({ simplified }) => {
           // className={simplified ? simplifiedStyles : normalStyles}
           className="flex flex-col flex-wrap md:flex-row gap-2"
         > 
-             {hostelArray.map((hostel, index) => (
-            <HostelCard
-              key={index}
-              price={hostel.price}
-              location={hostel.location}
-              image={hostel.images.length > 0 ? hostel.images[0] : ""}
-            />
-          ))}   
-          {/* <HostelCard
-            price="₦ 120,000.00"
-            location="accord,zoo,funaab"
-            image={hostel1}
-          />
+       {hostelArray.length > 0 ? hostelArray.map((hostel, index) => (
           <HostelCard
-            price="₦ 140,000.00"
-            location="accord,zoo,funaab"
-            image={hostel2}
+            key={index}
+            hostelid={hostel._id}
+            price={hostel.price}
+            location={hostel.location}
+            image={hostel.images.length > 0 ? hostel.images[0] : ""}
           />
-          <HostelCard
-            price="₦ 120,000.00"
-            location="accord,zoo,funaab"
-            image={hostel1}
-          />
-          <HostelCard
-            price="₦ 140,000.00"
-            location="accord,zoo,funaab"
-            image={hostel2}
-          />
-          <HostelCard
-            price="₦ 140,000.00"
-            location="accord,zoo,funaab"
-            image={hostel2}
-          />
-          <HostelCard
-            price="₦ 140,000.00"
-            location="accord,zoo,funaab"
-            image={hostel2}
-          />
-          <HostelCard
-            price="₦ 140,000.00"
-            location="accord,zoo,funaab"
-            image={hostel2}
-          /> */}
+        )) : (
+          <div className="flex items-center justify-center">
+            <Loader/>
+          </div>
+        )} 
         </div>
       </div>
     </section>

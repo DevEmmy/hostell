@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HostelCard from "./HostelCard";
 import { Link } from "react-router-dom";
 import { popularHostel } from "../../request";
+import { Loader } from "../components";
 
 const PopularHostel = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([]);
@@ -37,12 +38,15 @@ const PopularHostel = ({ simplified }) => {
         {hostelArray.length > 0 ? hostelArray.map((hostel, index) => (
           <HostelCard
             key={index}
-            hostelId={hostel.id}
             price={hostel.price}
             location={hostel.location}
             image={hostel.images.length > 0 ? hostel.images[0] : ""}
           />
-        )) : 'No  hostel available'}
+        )) : (
+          <div className="flex items-center justify-center">
+            <Loader/>
+          </div>
+        )}
       </div>
     </section>
   );
