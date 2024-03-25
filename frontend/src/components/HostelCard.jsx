@@ -2,15 +2,16 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
-const HostelCard = ({ image, location, price, hostelId }) => {
-  // const {hostelId} = useParams()
+
+const HostelCard = ({ image, location, price, hostelid }) => {
+
   return (
     <>
       <Link
-      to={`/hosteldetails/${hostelId}`}
+      to={`/hostel/${hostelid}`}
         className="w-full md:w-72 mx-auto my-2"
       >
         <div className="relative w-full md:h-64 h-60 md:w-72">
@@ -35,7 +36,7 @@ const HostelCard = ({ image, location, price, hostelId }) => {
             <small className="capitalize">{location}</small>
           </div>
           <div className="flex items-center justify-between gap-1 px-1">
-            <p>{price}</p>
+            <p>₦ {price}</p>
             <button className="capitalize bg-secondary2 text-white font-bold px-4 py-2 text rounded-lg">
               bid now
             </button>
