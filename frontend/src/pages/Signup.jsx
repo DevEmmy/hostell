@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../request";
 import { Loader } from "../components";
+import { MdOutlineMail, MdLockOutline } from "react-icons/md";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 function Signup() {
   const navigate = useNavigate();
@@ -13,8 +15,18 @@ function Signup() {
   const [showLoader, setShowLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleSubmit = async () => {
-    try{
+    if (!email || !password || !firstName || !lastName) {
+      setErrorMessage("Please fill the empty form.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+      return;
+    }
+
+    try {
       setShowLoader(true);
       const userData = await signup(
         firstName,
@@ -23,106 +35,110 @@ function Signup() {
         password,
         userType
       );
-      console.log(userData)
+      console.log(userData);
       if (userData.status === 200 || userData.status === 201) {
         setTimeout(() => {
           setShowLoader(false);
-        }, 5000); 
+        }, 5000);
         navigate("/hostel");
-      }else{
-        setShowLoader(false)
+      } else {
+        setShowLoader(false);
         setErrorMessage(userData.message);
       }
-    }catch (error) {
+    } catch (error) {
       // console.error("Login failed:", error);
       setErrorMessage(error.message);
       setShowLoader(false);
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000); 
+      }, 5000);
     }
   };
 
   return (
-    <section>
-      <div className="flex items-center justify-between w-full max-w-screen-lg mx-auto p-5">
-        <h1 className="text-primary2 text-xl font-bold text-center italic tracking-wider">
-          Hostell
-        </h1>
-        <div>
-          <p>
-            Already have an account?{" "}
-            <Link className="text-primary2 capitalize font-medium" to="/signin">
-              login
-            </Link>
-          </p>
-        </div>
+    <section className="flex h-screen w-full">
+      <div className="w-1/2 h-screen hidden md:block">
+        <img
+          src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=600"
+          className="object-cover h-screen"
+          alt=""
+        />
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        className="bg-zinc-50  w-full max-w-[500px] mx-auto p-5 h-max rounded md:shadow-xl"
-      >
-        <h2 className="text-center text-primary2 font-semibold text-lg m-5">
-          Let's get you signed up
-        </h2>
-        <div className="h-16">
+
+      <div className="w-full md:w-1/2 md:p-5">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="bg-white flex flex-col my-5 px-5 w-full h-max md:p-5"
+        >
           {errorMessage && (
-            <p className="bg-red-300 w-full p-3 text-white rounded-lg">{errorMessage}</p>
+            <p className="bg-red-500 w-full p-3 text-white rounded-lg">
+              {errorMessage}
+            </p>
           )}
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex flex-col w-full gap-1 my-3">
-            <label className="hidden">Firstname</label>
-            <input
-              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
-              type="text"
-              placeholder="firstname"
-              value={firstName}
-              onChange={(e) => setFirstname(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-col w-full gap-1 my-3">
-            <label className="hidden">Lastname</label>
-            <input
-              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
-              type="text"
-              placeholder="lastname"
-              value={lastName}
-              onChange={(e) => setLastname(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-col w-full gap-1 my-3">
-            <label className="hidden">Email</label>
-            <input
-              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
-              type="email"
-              placeholder="email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-col w-full gap-1 my-3">
-            <label className="hidden">Password</label>
-            <input
-              className="bg-white rounded-lg border-2 border-secondary2 text-gray-700 p-2 rounded focus:outline-none "
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex items-center gap-5 justify-start w-full">
-            <div className="flex gap-1 items-center bg-white p-2 text-primary2 rounded">
+          <h2 className="text-primary2 font-semibold text-3xl mb-5">Signup</h2>
+          <div>
+            <div className="flex flex-col">
+              <label className="my-2 capitalize">firstname</label>
               <input
-                className="font-semibold"
-                type="checkbox"
-                name="agent"
+                type="text"
+                placeholder="firstName"
+                className="border-2 border-gray-300 p-2 rounded-2xl focus:outline-none w-full"
+                value={firstName}
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="my-2 capitalize">lastname</label>
+              <input
+                type="text"
+                placeholder="lastname"
+                className="border-2 border-gray-300 p-2 rounded-2xl focus:outline-none w-full"
+                value={lastName}
+                onChange={(e) => setLastname(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="my-2 capitalize">email address</label>
+              <div className="border-2 border-gray-300 py-2 px-3 rounded-2xl flex gap-2 items-center">
+                <MdOutlineMail />
+                <input
+                  type="email"
+                  placeholder="email"
+                  className=" focus:outline-none w-full"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <label className="my-2 capitalize">password</label>
+              <div className="border-2 border-gray-300 py-2 px-3 rounded-2xl flex gap-2 items-center">
+                <MdLockOutline />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="passsword"
+                  className=" focus:outline-none flex-1"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                {showPassword ? (
+                  <IoIosEyeOff onClick={() => setShowPassword(false)} />
+                ) : (
+                  <IoIosEye onClick={() => setShowPassword(true)} />
+                )}
+              </div>
+            </div>
+            <div className="flex items-center m-2">
+              <input
+                className="font-semibold text-xl"
+                type="radio"
+                name="userType"
                 id="agent"
                 onChange={(e) => {
                   const agent = e.target.checked;
@@ -130,22 +146,28 @@ function Signup() {
                 }}
               />
               <label
-                className="capitalize font-medium bg-secondary2 text-white py-2 px-4 rounded"
+                className="capitalize font-medium text-gray-900 py-2 px-4 rounded"
                 htmlFor="agent"
               >
-                agent
+                Agent
               </label>
             </div>
+            <button
+              onClick={() => handleSubmit()}
+              className="w-full bg-primary2 p-3 rounded-2xl text-white text-center flex items-center justify-center my-2 font-semibold"
+              type="submit"
+            >
+              {showLoader ? <Loader /> : "Signup"}
+            </button>
           </div>
-          <button
-            onClick={() => handleSubmit()}
-            className="w-full bg-secondary2 p-3 rounded text-white text-center flex items-center justify-center my-2 font-bold"
-            type="submit"
-          >
-            {showLoader ? <Loader/> : 'Signup'}
-          </button>
-        </div>
-      </form>
+          <p className="mt-3">
+            Already have an account?{" "}
+            <Link className="text-primary2 capitalize font-medium" to="/signin">
+              Login
+            </Link>
+          </p>
+        </form>
+      </div>
     </section>
   );
 }
