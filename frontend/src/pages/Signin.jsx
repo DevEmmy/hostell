@@ -4,6 +4,7 @@ import { login } from "../../request";
 import { Loader } from "../components";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import hall from '/hall.jpg'
 
 function Signin() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function Signin() {
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
         <img
-          src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zdGVsfGVufDB8fDB8fHww"
+          src={hall}
           className="object-cover h-screen"
           alt=""
         />
