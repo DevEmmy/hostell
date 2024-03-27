@@ -4,6 +4,7 @@ import { signup } from "../../request";
 import { Loader } from "../components";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import hall from '/hall.jpg'
 
 function Signup() {
   const navigate = useNavigate();
@@ -59,7 +60,8 @@ function Signup() {
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
         <img
-          src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=600"
+          // src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=600"
+          src={hall}
           className="object-cover h-screen"
           alt=""
         />

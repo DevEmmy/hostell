@@ -15,7 +15,7 @@ const HostelLayout = () => {
         <Navbar setShowNotification={setShowNotification} />
       </div>
       {showNotification && (
-        <div className="fixed top-12 z-10 w-full h-fit bg-secondary1">
+        <div className="fixed top-12 z-10 w-full h-fit bg-white shadow-xl p-2">
           <NotificationCard />
         </div>
       )}

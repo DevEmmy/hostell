@@ -6,16 +6,18 @@ import { Loader } from "../components";
 
 const RecommendedHostel = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await recommendedHostel();
         const hostelResult = result.payload;
-        // console.log(hostelResult)
-        setHostelArray(hostelResult);
-        // console.log(hostelResult);
+        const sortedHostelArray = hostelResult.reverse();
+        setHostelArray(sortedHostelArray);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     };
 
@@ -42,19 +44,26 @@ const RecommendedHostel = ({ simplified }) => {
           // className={simplified ? simplifiedStyles : normalStyles}
           className="flex flex-col flex-wrap md:flex-row gap-2"
         > 
-       {hostelArray.length > 0 ? hostelArray.map((hostel, index) => (
-          <HostelCard
-            key={index}
-            hostelid={hostel._id}
-            price={hostel.price}
-            location={hostel.location}
-            image={hostel.images.length > 0 ? hostel.images[0] : ""}
-          />
-        )) : (
-          <div className="flex items-center justify-center">
-            <Loader/>
-          </div>
-        )} 
+        {isLoading ? (
+        <div className="flex items-center justify-center">
+          <Loader />
+        </div>
+      ) : (
+        <div className="flex flex-col md:flex-row gap-2 flex-wrap">
+          {hostelArray.length > 0 ? (
+            hostelArray.map((hostel, index) => (
+              <HostelCard
+                key={index}
+                price={hostel.price}
+                location={hostel.location}
+                image={hostel.images.length > 0 ? hostel.images[0] : ""}
+              />
+            ))
+          ) : (
+            <p>No hostels available</p>
+          )}
+        </div>
+      )}
         </div>
       </div>
     </section>
