@@ -26,7 +26,7 @@ const PopularHostel = ({ simplified }) => {
   return (
     <section className="m-3">
       <div className="flex items-center justify-between p-2 my-4">
-        <h2 className="font-bold">Nearby Hostel</h2>
+        <h2 className="font-bold">Popular Hostel</h2>
 
         {simplified && (
           <Link
