@@ -62,7 +62,7 @@ function Signin() {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="bg-white flex flex-col my-5 px-5 w-full h-max md:p-5"
+          className="bg-white flex flex-col my-5 px-5 w-4/5 h-max md:p-5"
         >
           {errorMessage && (
             <p className="bg-red-300 w-full p-3 text-white rounded-lg">
