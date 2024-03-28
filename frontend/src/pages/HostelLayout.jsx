@@ -27,9 +27,9 @@ const HostelLayout = () => {
       <main className="flex-1">
         <Outlet />
       </main>
-      <div>
+      {/* <div>
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 };

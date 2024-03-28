@@ -3,6 +3,7 @@ import HostelCard from "./HostelCard";
 import { Link } from "react-router-dom";
 import { popularHostel } from "../../request";
 import { Loader } from "../components";
+import {SearchLocationInput} from "../components";
 
 const PopularHostel = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([]);
@@ -25,13 +26,16 @@ const PopularHostel = ({ simplified }) => {
   }, []);
   return (
     <section className="m-3">
+       {!simplified &&  <div>
+          <SearchLocationInput />
+        </div>}
       <div className="flex items-center justify-between p-2 my-4">
         <h2 className="font-bold">Popular Hostel</h2>
 
         {simplified && (
           <Link
             className="text-primary2 text-sm capitalize"
-            to="/hostel/explore"
+            to="/hostel/popular"
           >
             See All
           </Link>
