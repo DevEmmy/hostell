@@ -23,9 +23,9 @@ function HostelDashboard() {
         <div>
           <RecommendedHostel simplified />
         </div>
-        <div>
+        {/* <div>
           <PopularHostel simplified />
-        </div>
+        </div> */}
       </div>
     </>
   );

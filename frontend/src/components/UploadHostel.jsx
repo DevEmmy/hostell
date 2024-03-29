@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import FileBase64 from 'react-file-base64';
 import { addHostel } from "../../request";
-import { IoMdImages } from "react-icons/io";
+import { Loader } from "../components";
+import { useNavigate } from "react-router-dom";
 
 function uploadHostel() {
+  const navigate = useNavigate()
   const [files, setFiles] = useState([]);
   const [title, setTitle] = useState('')
   const [images, setImages] = useState([])
@@ -13,6 +15,8 @@ function uploadHostel() {
   const [features, setFeatures] = useState('')
   const [available, setAvailable] = useState(false)
   const [availableRooms, setAvailableRooms] = useState('')
+  const [showLoader, setShowLoader] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const base64Images = files.map(file => file.base64);
@@ -20,10 +24,22 @@ function uploadHostel() {
   }, [files])
 
   const handleSubmit = async() =>  {
-  const response = await addHostel(title, images, location,description, price, features, available, availableRooms
-    )
-    console.log(response);
-    return response
+    try{
+      setShowLoader(true)
+      const response = await addHostel(title, images, location,description, price, features, available, availableRooms
+        )
+        console.log(response);
+        if(response.status === 200){
+          navigate('/hostel/profile')
+        }
+    }
+    catch(error){
+      setErrorMessage(error.message);
+      setShowLoader(false);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
   }
 
   return (
@@ -47,7 +63,7 @@ function uploadHostel() {
             {/* Uploading of  the hostel images */}
             <button className="text-primary2 flex items-center gap-2">
           <FileBase64
-        multiple={ false }
+        multiple={ true }
         onDone={(f) => setFiles(f)}
          />
         </button>
@@ -119,8 +135,12 @@ function uploadHostel() {
             />
           </div>
         <div>
-          <button onClick={handleSubmit} className=" w-full bg-primary2 p-2 text-white rounded capitalize font-bold my-2">
-            add hostel
+        <button
+            onClick={() => handleSubmit()}
+            className="w-full bg-primary2 p-3 rounded text-white text-center flex items-center justify-center my-2 font-bold"
+            type="submit"
+          >
+            {showLoader ? <Loader/> : 'Upload Hostel'}
           </button>
         </div>
       </form>

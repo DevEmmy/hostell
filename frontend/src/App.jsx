@@ -31,11 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/hostel/explore",
-        element: <PopularHostel />,
+        element: <RecommendedHostel />,
       },
       {
         path: "/hostel/popular",
-        element: <RecommendedHostel />,
+        element: <PopularHostel />,
       },
       {
         path: "/hostel/profile",
@@ -46,10 +46,14 @@ const router = createBrowserRouter([
         path: "/hostel/addhostel",
         element: <UploadHostel />
       },
+      // {
+      //   path: "/hostel/:hostelid",
+      //   element: <HostelDetails />,
+      // },
     ],
   },
   {
-    path: "/hosteldetails/:hostelId",
+    path: "/:hostelid",
     element: <HostelDetails />,
   },
 

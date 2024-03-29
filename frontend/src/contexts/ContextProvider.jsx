@@ -6,6 +6,7 @@ export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [searchLocation, setSearchLocation] = useState('')
 
   return (
     <StateContext.Provider
@@ -15,7 +16,9 @@ export const ContextProvider = ({ children }) => {
         showNotification,
         setShowNotification,
         showFilter,
-        setShowFilter
+        setShowFilter,
+        searchLocation,
+        setSearchLocation
       }}
     >
       {children}

@@ -14,7 +14,7 @@ function Profile() {
     const firstName = user && user.payload && user.payload.user ? user.payload.user.firstName : '';
     const lastName = user && user.payload && user.payload.user ? user.payload.user.lastName : '';
     const email = user && user.payload && user.payload.user ? user.payload.user.email : '';
-    const userType = user && user.payload ? user.payload.userType : '';
+    const userType = user && user.payload ? user.payload.user.userType : '';
   
   return (
     <section className="w-screen">
@@ -38,7 +38,7 @@ function Profile() {
               {email}
             </p>
           </div>
-          {userType === 'AGENT' && (
+          {userType === "AGENT" && (
   <div onClick={() => {
     navigate('/hostel/addhostel')
   }} className="absolute top-2 right-2 flex gap-1 capitalize items-center bg-secondary2 py-1 px-2 rounded text-white text-sm font-bold">
@@ -48,7 +48,7 @@ function Profile() {
 
 
           <div className=" my-5 p-3">
-            <h3 className="font-semibold capitalize"> {userType === 'AGENT' ? 'Hostel updates' : 'Saved Hostel'}</h3>
+            <h3 className="font-semibold capitalize"> {userType === "AGENT" ? 'Hostel updates' : 'Saved Hostel'}</h3>
             <div className="flex flex-wrap">
               <HostelCard
                 price="₦ 120,000.00"

@@ -26,6 +26,15 @@ const FilterCard = () => {
                 </div>
               </div>
             </div>
+            <div className='my-2'>
+            <p className='font-medium text-lg italic capitalize'>location</p> 
+            <select className='p-2 my-2'>
+              <option value="Harmony">Harmony</option>
+              <option value="Accord">Accord</option>
+              <option value="Labuta">Labuta</option>
+              <option value="Zoo">Zoo</option>
+            </select> 
+            </div>
         </div>
     </div>
   )
