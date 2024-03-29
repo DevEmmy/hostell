@@ -46,6 +46,11 @@ function uploadHostel() {
     <section className="w-screen">
       <form onSubmit={(e) => e.preventDefault()} 
       className="w-full md:max-w-screen-xl md:mx-auto p-2">
+          {errorMessage && (
+            <p className="bg-red-300 w-full p-3 text-white rounded-lg">
+              {errorMessage}
+            </p>
+          )}
         <div className="flex flex-col m-2">
           <label className="capitalize text-primary2 font-bold m-2">Title:</label>
           <input
@@ -66,6 +71,7 @@ function uploadHostel() {
         multiple={ true }
         onDone={(f) => setFiles(f)}
          />
+         <small>select hostel images</small>
         </button>
         <div className="flex flex-wrap m-2">
             {files.map((file, i) => {

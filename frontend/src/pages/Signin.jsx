@@ -4,7 +4,7 @@ import { login } from "../../request";
 import { Loader } from "../components";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import hall from '/hall.jpg'
+import hall from "/hall.jpg";
 
 function Signin() {
   const navigate = useNavigate();
@@ -50,11 +50,7 @@ function Signin() {
   return (
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
-        <img
-          src={hall}
-          className="object-cover h-screen"
-          alt=""
-        />
+        <img src={hall} className="object-cover h-screen" alt="" />
       </div>
 
       <div className="w-full md:w-1/2 md:p-5 md:flex items-center justify-center mt-20 md:mt-0">
@@ -62,7 +58,7 @@ function Signin() {
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="bg-white flex flex-col my-5 px-5 w-4/5 h-max md:p-5"
+          className="bg-white flex flex-col my-5 px-5 w-full md:w-4/5 h-max md:p-5"
         >
           {errorMessage && (
             <p className="bg-red-300 w-full p-3 text-white rounded-lg">

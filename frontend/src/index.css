@@ -13,3 +13,7 @@
   font-family: "Jost", sans-serif;
 }
 
+input[type="file"]{
+  opacity: 0;
+  position: absolute;
+}

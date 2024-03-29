@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { recommendedHostel } from "../../request";
 import { Loader } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
-import {SearchLocationInput} from "../components";
+import { SearchLocationInput, FilterCard } from "../components";
 
 const RecommendedHostel = ({ simplified }) => {
-  const { searchLocation } = useStateContext();
+  const { searchLocation, priceFilter, showFilter } = useStateContext();
   const [hostelArray, setHostelArray] = useState([]);
   const [filteredHostels, setFilteredHostels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,18 +30,37 @@ const RecommendedHostel = ({ simplified }) => {
 
   useEffect(() => {
     filterHostels();
-  }, [searchLocation, hostelArray]);
+  }, [searchLocation, hostelArray, priceFilter]); // Include priceFilter in the dependency array
 
   const filterHostels = () => {
+    let filteredHostels = hostelArray;
+
+    // Filter based on location
     const searchTerm = searchLocation.trim().toLowerCase();
-    if (searchTerm === "") {
-      setFilteredHostels(hostelArray);
-    } else {
-      const filteredHostels = hostelArray.filter((hostel) =>
+    if (searchTerm !== "") {
+      filteredHostels = filteredHostels.filter((hostel) =>
         hostel.location.toLowerCase().includes(searchTerm)
       );
-      setFilteredHostels(filteredHostels);
     }
+
+    // Filter based on price
+    for (const priceRange in priceFilter) {
+      if (priceFilter[priceRange]) {
+        filteredHostels = filteredHostels.filter((hostel) =>
+          isPriceInRange(hostel.price, priceRange)
+        );
+      }
+    }
+
+    setFilteredHostels(filteredHostels);
+  };
+
+  // Function to check if a price is within a given range
+  const isPriceInRange = (price, range) => {
+    const [min, max] = range
+      .split(" - ")
+      .map((value) => parseInt(value.replace(/\D/g, "")));
+    return price >= min && price <= max;
   };
 
   // const simplifiedStyles = "flex flex-row gap-3";
@@ -50,9 +69,16 @@ const RecommendedHostel = ({ simplified }) => {
 
   return (
     <section className="m-3 w-screen p-3 mx-auto">
-      {!simplified &&  <div>
+      {!simplified && (
+        <div>
           <SearchLocationInput />
-        </div>}
+        </div>
+      )}
+      {!simplified && showFilter && (
+        <div>
+          <FilterCard />
+        </div>
+      )}
       <div className="flex items-center justify-between p-2 my-4">
         <h2 className="font-bold">Recommended Hostel</h2>
         {simplified && (
@@ -76,7 +102,7 @@ const RecommendedHostel = ({ simplified }) => {
             </div>
           ) : (
             <div className="flex flex-col md:flex-row gap-2 flex-wrap">
-                {filteredHostels.length > 0 ? (
+              {filteredHostels.length > 0 ? (
                 filteredHostels.map((hostel, index) => (
                   <HostelCard
                     key={index}

@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
   const [showNotification, setShowNotification] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [searchLocation, setSearchLocation] = useState('')
+  const [priceFilter, setPriceFilter] = useState([])
 
   return (
     <StateContext.Provider
@@ -18,7 +19,9 @@ export const ContextProvider = ({ children }) => {
         showFilter,
         setShowFilter,
         searchLocation,
-        setSearchLocation
+        setSearchLocation,
+        priceFilter,
+        setPriceFilter
       }}
     >
       {children}
