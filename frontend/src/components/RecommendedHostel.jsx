@@ -107,6 +107,7 @@ const RecommendedHostel = ({ simplified }) => {
                   <HostelCard
                     key={index}
                     price={hostel.price}
+                    hostelid={hostel._id}
                     location={hostel.location}
                     image={hostel.images.length > 0 ? hostel.images[0] : ""}
                   />

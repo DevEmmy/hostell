@@ -31,7 +31,7 @@ const PopularHostel = ({ simplified }) => {
 
   useEffect(() => {
     filterHostels();
-  }, [searchLocation, hostelArray, priceFilter]); // Include priceFilter in the dependency array
+  }, [searchLocation, hostelArray, priceFilter]);
 
   const filterHostels = () => {
     let filteredHostels = hostelArray;

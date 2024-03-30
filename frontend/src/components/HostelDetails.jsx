@@ -20,7 +20,7 @@ function HostelDetails() {
       try {
         const result = await hostelDetails(hostelid);
         const hostelResult = result.payload;
-        // console.log(hostelResult);
+        console.log(hostelResult);
         setHosteldetails(hostelResult);
         setImages(hosteldetails.images)
         // console.log(images)
