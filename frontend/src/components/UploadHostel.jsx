@@ -3,6 +3,7 @@ import FileBase64 from 'react-file-base64';
 import { addHostel } from "../../request";
 import { Loader } from "../components";
 import { useNavigate } from "react-router-dom";
+import { IoMdImages } from "react-icons/io";
 
 function uploadHostel() {
   const navigate = useNavigate()
@@ -17,6 +18,10 @@ function uploadHostel() {
   const [availableRooms, setAvailableRooms] = useState('')
   const [showLoader, setShowLoader] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handleToggleAvailable = () => {
+    setAvailable(prev => !prev);
+  };
 
   useEffect(() => {
     const base64Images = files.map(file => file.base64);
@@ -43,7 +48,7 @@ function uploadHostel() {
   }
 
   return (
-    <section className="w-screen">
+    <section className="w-screen container mx-auto max-w-screen-md">
       <form onSubmit={(e) => e.preventDefault()} 
       className="w-full md:max-w-screen-xl md:mx-auto p-2">
           {errorMessage && (
@@ -52,25 +57,26 @@ function uploadHostel() {
             </p>
           )}
         <div className="flex flex-col m-2">
-          <label className="capitalize text-primary2 font-bold m-2">Title:</label>
+          {/* <label className="capitalize  font-bold m-2">Title</label> */}
           <input
             placeholder="Title"
-            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+            className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
             type="text"
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-3 m-2">
+        <div className="flex flex-col gap-3 m-2 p-2">
           <label className="capitalize font-bold text-primary2">
             upload pictures
           </label>
           <div className="flex flex-col w-full">
             {/* Uploading of  the hostel images */}
-            <button className="text-primary2 flex items-center gap-2">
+            <button className="text-primary2 flex items-center gap-2 cursor-pointer">
           <FileBase64
         multiple={ true }
         onDone={(f) => setFiles(f)}
          />
+         <IoMdImages/>
          <small>select hostel images</small>
         </button>
         <div className="flex flex-wrap m-2">
@@ -85,58 +91,62 @@ function uploadHostel() {
           </div>
         </div>
         <div className="flex flex-col gap-3 m-2">
-          <label className="capitalize font-bold text-primary2 m-2">
-            Location:
-          </label>
+          {/* <label className="capitalize font-bold  m-2">
+            Location
+          </label> */}
           <textarea
-            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+            className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
             type="text"
+            placeholder="Location"
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-3 m-2">
-          <label className="capitalize font-bold text-primary2 m-2">
+          {/* <label className="capitalize font-bold  m-2">
             Description
-          </label>
+          </label> */}
           <textarea
-            className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+            className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
             cols="30"
             rows="5"
+            placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="flex flex-col m-2">
-          <label className="capitalize font-bold text-primary2 m-2">Price:</label>
+          {/* <label className="capitalize font-bold m-2">Price</label> */}
           <input
-             className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+             className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
             type="text"
+            placeholder="Price"
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-3 m-2">
-          <label className="capitalize font-bold text-primary2 m-2">
-            Features:
-          </label>
+          {/* <label className="capitalize font-bold m-2">
+            Features
+          </label> */}
           <textarea
-             className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+             className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
             type="text"
+            placeholder="Features"
             onChange={(e) => setFeatures(e.target.value)}
           />
         </div>
-          <button onClick={() => {
-            setAvailable((prev) => !prev)
-          }} className={`p-3 m-3 ${available ? 'text-white bg-primary2' : 'bg-gray-200 text-black'} text-white bg-primary2 capitalize rounded w-fit`}>
-            {/* <input type="radio" onChange={(e) => setAvailable(e.target.checked)} />
-            <label>Available</label> */}
-            available
-          </button>
+        <button
+          onClick={handleToggleAvailable}
+          className={`p-3 m-3 ${available ? 'text-white bg-primary2 px-6' : 'bg-gray-200 text-black'} capitalize rounded w-fit`}
+        >
+          {available ? 'Available' : 'Not Available'}
+        </button>
           <div className="flex flex-col m-2">
-            <label className="capitalize font-bold text-primary2 m-2">
+            {/* <label className="capitalize font-bold m-2">
               Availble Rooms
-            </label>
+            </label> */}
             <input
-               className="outline-none p-2 border-2 border-primary2 m-2 rounded"
+               className="outline-none p-2 border-2 border-gray-400 m-2 rounded"
               type="number"
+              placeholder="No. available rooms"
               onChange={(e) => setAvailableRooms(e.target.value)}
             />
           </div>
