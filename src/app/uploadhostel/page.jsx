@@ -1,10 +1,10 @@
-import Signup from '@/AuthComponents/Signup'
 import React from 'react'
+import UploadHostel from '@/HostelComponents/UploadHostel'
 
 const page = () => {
   return (
     <>
-      <Signup/>
+        <UploadHostel/>
     </>
   )
 }
