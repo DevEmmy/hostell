@@ -13,17 +13,17 @@ function Sidebar({ showSidebar, setShowSidebar }) {
   const sidebarLinks = [
     {
       name: "home",
-      route: "/hostel",
+      route: "/",
       icon: <IoMdHome />,
     },
     {
       name: "explore",
-      route: "/hostel/recommended",
+      route: "/recommended",
       icon: <MdExplore />,
     },
     {
       name: "popular",
-      route: "/hostel/popular",
+      route: "/popular",
       icon: <MdFilterAlt />,
     },
     {
@@ -40,6 +40,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
   //   };
     const handleLogout = () => {
       localStorage.removeItem('user')
+      handleClose()
       router.push('/login')
     }
 
