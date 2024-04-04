@@ -1,21 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { FiMenu } from "react-icons/fi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 
 const Nav = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const [showSidebar, setShowSidebar] = useState(false);
 
   const handleMenuClick = () => {
     setShowSidebar((prev) => !prev);
   };
-    const handleProfileClick = () => {
-      router.push("/profile");
-    };
+    // const handleProfileClick = () => {
+    //   router.push("/profile");
+    // };
 
   return (
     <>
@@ -29,9 +29,9 @@ const Nav = () => {
           </h1>
         </div>
         <div className="flex gap-2 items-center ">
-          <button onClick={handleProfileClick}>
+          {/* <button onClick={handleProfileClick}>
             <FaUserCircle size={25} />
-          </button>
+          </button> */}
           <button>
             <IoMdNotificationsOutline size={25} />
           </button>

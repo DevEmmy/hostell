@@ -11,7 +11,7 @@ const HostelCard = ({ image, location, price, hostelid }) => {
   return (
     <>
       <Link
-      href={`/hostel/${hostelid}`}
+      href={`/${hostelid}`}
         className="w-full md:w-72 mx-auto my-2"
       >
         <div className="relative w-full md:h-64 h-60 md:w-72">

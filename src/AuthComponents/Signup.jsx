@@ -44,7 +44,7 @@ function Signup() {
           setTimeout(() => {
             setShowLoader(false);
           }, 5000);
-          router.push('/hostel')
+          router.replace('/')
         } else {
           setShowLoader(false);
           setErrorMessage(userData.message);
@@ -153,7 +153,7 @@ function Signup() {
             </div>
             <button
               onClick={() => handleSubmit()}
-              className="w-full bg-primary2 p-4 rounded-2xl text-white text-center flex items-center justify-center my-2 font-semibold"
+              className="w-full bg-primary2 p-3 rounded-2xl text-white text-center flex items-center justify-center my-2 font-semibold"
               type="submit"
             >
               {showLoader ? <Loader /> : "Signup"}
