@@ -80,9 +80,7 @@ const InboxDisplay = () => {
 
       <div
         // style={{ position: "fixed", bottom: focus ? "500px" : "0" }}
-        className={`sender grid grid-cols-[1fr_8fr_1fr] ${
-          focus ? "static" : "fixed"
-        }  bottom-0 left-0 bg-white shadow-lg right-0 w-full px-2 py-2 items-center gap-2 border-t border-t-gray-300`}
+        className={`sender grid grid-cols-[1fr_8fr_1fr] fixed bottom-0 left-0 bg-white shadow-lg right-0 w-full px-2 py-2 items-center gap-2 border-t border-t-gray-300`}
       >
         <div className="flex items-center justify-center">
           <HiPhoto />
