@@ -1,13 +1,16 @@
+"use client";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { signup } from "../../request";
-import { Loader } from "../components";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signup } from "@/request/request";
+import Loader from "@/BasicComponents/Loader";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import hall from '/hall.jpg'
+import hall from "../../public/hall.jpg";
 
 function Signup() {
-  const navigate = useNavigate();
+  const router = useRouter()
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -18,53 +21,47 @@ function Signup() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async () => {
-    if (!email || !password || !firstName || !lastName) {
-      setErrorMessage("Please fill the empty form.");
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
-      return;
-    }
-
-    try {
-      setShowLoader(true);
-      const userData = await signup(
-        firstName,
-        lastName,
-        email,
-        password,
-        userType
-      );
-      console.log(userData);
-      if (userData.status === 200 || userData.status === 201) {
+    const handleSubmit = async () => {
+      if (!email || !password || !firstName || !lastName) {
+        setErrorMessage("Please fill the empty form.");
         setTimeout(() => {
-          setShowLoader(false);
+          setErrorMessage("");
         }, 5000);
-        navigate("/hostel");
-      } else {
-        setShowLoader(false);
-        setErrorMessage(userData.message);
+        return;
       }
-    } catch (error) {
-      // console.error("Login failed:", error);
-      setErrorMessage(error.message);
-      setShowLoader(false);
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
-    }
-  };
+
+      try {
+        setShowLoader(true);
+        const userData = await signup(
+          firstName,
+          lastName,
+          email,
+          password,
+          userType
+        );
+        console.log(userData);
+        if (userData.status === 200 || userData.status === 201) {
+          setTimeout(() => {
+            setShowLoader(false);
+          }, 5000);
+          router.replace('/')
+        } else {
+          setShowLoader(false);
+          setErrorMessage(userData.message);
+        }
+      } catch (error) {
+        setErrorMessage(error.message);
+        setShowLoader(false);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      }
+    };
 
   return (
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
-        <img
-          // src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=600"
-          src={hall}
-          className="object-cover h-screen"
-          alt=""
-        />
+        <Image src={hall} className="object-cover h-screen" alt="hostel" priority={true}  />
       </div>
 
       <div className="w-full md:w-1/2 md:p-5">
@@ -164,7 +161,10 @@ function Signup() {
           </div>
           <p className="mt-3">
             Already have an account?{" "}
-            <Link className="text-primary2 capitalize font-medium" to="/signin">
+            <Link
+              className="text-primary2 capitalize font-medium"
+              href={"/login"}
+            >
               Login
             </Link>
           </p>

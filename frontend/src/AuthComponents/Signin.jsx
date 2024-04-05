@@ -1,13 +1,16 @@
+"use client";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../request";
-import { Loader } from "../components";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { login } from "@/request/request";
+import Loader from "@/BasicComponents/Loader";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import hall from "/hall.jpg";
+import hall from "../../public/hall.jpg";
 
 function Signin() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +32,7 @@ function Signin() {
       const userData = await login(email, password);
       if (userData.status === 200 || userData.status === 201) {
         setShowLoader(false);
-        navigate("/hostel");
+        router.replace("/");
       } else {
         setErrorMessage(userData.message);
         setShowLoader(false);
@@ -38,7 +41,6 @@ function Signin() {
         }, 5000);
       }
     } catch (error) {
-      // console.error("Login failed:", error);
       setErrorMessage(error.message);
       setShowLoader(false);
       setTimeout(() => {
@@ -50,7 +52,12 @@ function Signin() {
   return (
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
-        <img src={hall} className="object-cover h-screen" alt="" />
+        <Image
+          src={hall}
+          alt="hostel"
+          className="object-cover h-screen"
+          priority={true}
+        />
       </div>
 
       <div className="w-full md:w-1/2 md:p-5 md:flex items-center justify-center mt-20 md:mt-0">
@@ -101,9 +108,14 @@ function Signin() {
                 )}
               </div>
             </div>
+            <div className="p-2 text-primary2">
+              <Link href={"/forgotpassword"}>
+                <small>forgot password?</small>
+              </Link>
+            </div>
             <button
               onClick={() => handleSubmit()}
-              className="w-full bg-primary2 p-3 rounded-2xl text-white text-center flex items-center justify-center my-5 font-semibold capitalize"
+              className="w-full bg-primary2 p-4 rounded-2xl text-white text-center flex items-center justify-center my-5 font-semibold capitalize"
               type="submit"
             >
               {showLoader ? <Loader /> : "signin"}
@@ -111,7 +123,7 @@ function Signin() {
           </div>
           <p className="mt-3">
             Already have an account?{" "}
-            <Link className="text-primary2 capitalize font-medium" to="/">
+            <Link className="text-primary2 capitalize font-medium" href={"/signup"}>
               signup
             </Link>
           </p>
