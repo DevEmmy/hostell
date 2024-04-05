@@ -1,10 +1,10 @@
-import HostelDetails from '@/HostelComponents/HostelDetails'
+import InboxDisplay from '@/MessageComponents/InboxDisplay'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      <HostelDetails/>
+        <InboxDisplay/>
     </div>
   )
 }

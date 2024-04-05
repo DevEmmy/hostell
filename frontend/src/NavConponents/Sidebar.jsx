@@ -3,7 +3,7 @@ import React from "react";
 import { IoCloseCircleSharp, IoLogOut } from "react-icons/io5";
 import { MdExplore } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import { MdFilterAlt } from "react-icons/md";
+import { MdFilterAlt, MdMessage } from "react-icons/md";
 import { IoMdHome } from "react-icons/io";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,6 +25,11 @@ function Sidebar({ showSidebar, setShowSidebar }) {
       name: "popular",
       route: "/popular",
       icon: <MdFilterAlt />,
+    },
+    {
+      name: "messages",
+      route: "/messages",
+      icon: <MdMessage />,
     },
     {
       name: "profile",

@@ -8,7 +8,7 @@ import { useStateContext } from "@/Contexts/ContextProvider";
 // import { SearchLocationInput, FilterCard } from "../components";
 
 const Recommended = ({ simplified }) => {
-  const { searchInput } = useStateContext();
+  const { searchInput, priceFilter } = useStateContext();
   const [hostelArray, setHostelArray] = useState([]);
   const [filteredHostels, setFilteredHostels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,10 +17,11 @@ const Recommended = ({ simplified }) => {
       setIsLoading(true);
       try {
         const result = await recommendedHostel();
-        const hostelResult = result.payload;
-        const sortedHostelArray = hostelResult.reverse();
+        const hostelResult = await result.payload;
+        console.log(hostelResult)
+        // const sortedHostelArray = await hostelResult.reverse();
         // console.log(hostelArray)
-        setHostelArray(sortedHostelArray);
+        setHostelArray(hostelResult);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -33,42 +34,42 @@ const Recommended = ({ simplified }) => {
 
   useEffect(() => {
     filterHostels();
-  }, [searchInput]);
+  }, [searchInput, hostelArray, priceFilter]);
 
   const filterHostels = () => {
-    let filteredHostels = hostelArray;
+    let filterHostels = hostelArray;
 
     // Filter based on location
     const searchTerm = searchInput.trim().toLowerCase();
     if (searchTerm !== "") {
-      filteredHostels = filteredHostels.filter((hostel) =>
+      filterHostels = filterHostels.filter((hostel) =>
         hostel.location.toLowerCase().includes(searchTerm)
       );
     }
 
-    // if(priceFilter == []){
-    //   setFilteredHostels(hostelArray)
-    // }
+    if(priceFilter.length === 0){
+      setFilteredHostels(hostelArray)
+    }
 
     // Filter based on price
-    // for (const priceRange in priceFilter) {
-    //   if (priceFilter[priceRange]) {
-    //     filteredHostels = filteredHostels.filter((hostel) =>
-    //       isPriceInRange(hostel.price, priceRange)
-    //     );
-    //   }
-    // }
+    for (const priceRange in priceFilter) {
+      if (priceFilter[priceRange]) {
+        filterHostels = filterHostels.filter((hostel) =>
+          isPriceInRange(hostel.price, priceRange)
+        );
+      }
+    }
 
     setFilteredHostels(filteredHostels);
   };
 
   // Function to check if a price is within a given range
-  // const isPriceInRange = (price, range) => {
-  //   const [min, max] = range
-  //     .split(" - ")
-  //     .map((value) => parseInt(value.replace(/\D/g, "")));
-  //   return price >= min && price <= max;
-  // };
+  const isPriceInRange = (price, range) => {
+    const [min, max] = range
+      .split(" - ")
+      .map((value) => parseInt(value.replace(/\D/g, "")));
+    return price >= min && price <= max;
+  };
 
   // const simplifiedStyles = "flex flex-row gap-3";
   // const normalStyles =
@@ -109,8 +110,8 @@ const Recommended = ({ simplified }) => {
             </div>
           ) : (
             <div className="flex flex-col md:flex-row gap-2 flex-wrap">
-              {filteredHostels.length > 0 ? (
-                filteredHostels.map((hostel, index) => (
+              {hostelArray.length > 0 ? (
+                hostelArray.map((hostel, index) => (
                   <HostelCard
                     key={index}
                     price={hostel.price}
