@@ -48,8 +48,8 @@ const InboxDisplay = () => {
     <section className="relative">
       <Return />
       <div className="flex flex-col items-center justify-center border-b-2 border-gray-300 p-2">
-        <div className="h-24 w-24">
-          <Image src={userImg} alt="profile pic" className="object-cover" />
+        <div className="h-24 w-24 bg-primary2 rounded-full">
+          <Image src={userImg} alt="profile pic" className="object-cover w-full h-full overflow-hidden" />
         </div>
         <div>
           <h2 className=" capitalize font-semibold text-xl">john doe</h2>
@@ -82,7 +82,7 @@ const InboxDisplay = () => {
         // style={{ position: "fixed", bottom: focus ? "500px" : "0" }}
         className={`sender grid grid-cols-[1fr_8fr_1fr] fixed bottom-0 left-0 bg-white shadow-lg right-0 w-full px-2 py-2 items-center gap-2 border-t border-t-gray-300`}
       >
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center text-primary2">
           <HiPhoto />
         </div>
         <input
@@ -92,8 +92,8 @@ const InboxDisplay = () => {
           placeholder="message..."
           ref={messageInput}
         />
-        <div className="p-3 flex items-center justify-center bg-gray-50 border border-gray-300 rounded-full">
-          <HiPaperAirplane />
+        <div className="p-3 flex items-center justify-center bg-gray-50 border border-gray-300 rounded-full text-primary2">
+          <HiPaperAirplane size={20} />
         </div>
       </div>
     </section>
