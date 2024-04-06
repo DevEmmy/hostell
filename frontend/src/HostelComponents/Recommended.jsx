@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import HostelCard from "./HostelCard";
 import Link from "next/link";
 import { recommendedHostel } from "@/request/request";
-import Loader from "@/BasicComponents/Loader";
+import Spinner from "@/BasicComponents/Spinner";
 import { useStateContext } from "@/Contexts/ContextProvider";
 // import { SearchLocationInput, FilterCard } from "../components";
 
@@ -36,32 +36,67 @@ const Recommended = ({ simplified }) => {
     filterHostels();
   }, [searchInput, hostelArray, priceFilter]);
 
+
   const filterHostels = () => {
-    let filterHostels = hostelArray;
-
-    // Filter based on location
+    let filteredHostels = [...hostelArray];
     const searchTerm = searchInput.trim().toLowerCase();
-    if (searchTerm !== "") {
-      filterHostels = filterHostels.filter((hostel) =>
-        hostel.location.toLowerCase().includes(searchTerm)
-      );
+  
+    if (searchTerm === '') {
+      setFilteredHostels(hostelArray);
+      return;
     }
-
-    if(priceFilter.length === 0){
-      setFilteredHostels(hostelArray)
-    }
-
-    // Filter based on price
+  
+    filteredHostels = filteredHostels.filter((hostel) =>
+      hostel.location.toLowerCase().includes(searchTerm)
+    );
+  
     for (const priceRange in priceFilter) {
       if (priceFilter[priceRange]) {
-        filterHostels = filterHostels.filter((hostel) =>
+        filteredHostels = filteredHostels.filter((hostel) =>
           isPriceInRange(hostel.price, priceRange)
         );
       }
     }
-
+  
     setFilteredHostels(filteredHostels);
   };
+
+  // const filterHostels = () => {
+  //   let filterHostels = [...hostelArray]
+  //   const searchTerm = searchInput.trim().toLowerCase();
+  //   if(searchTerm == ''){
+  //     setFilteredHostels(hostelArray)
+  //   }
+  //   if(searchTerm !== ''){
+  //     filterHostels = filteredHostels.filter((hostel) => hostel.location.toLowerCase().includes(searchTerm))
+
+  //     setFilteredHostels(filterHostels)
+  //   }
+  //   // let filterHostels = hostelArray;
+
+  //   // // Filter based on location
+  //   // const searchTerm = searchInput.trim().toLowerCase();
+  //   // if (searchTerm !== "") {
+  //   //   filterHostels = filterHostels.filter((hostel) =>
+  //   //     hostel.location.toLowerCase().includes(searchTerm)
+  //   //   );
+  //   // }
+
+  //   // if(priceFilter.length === 0){
+  //   //   setFilteredHostels(hostelArray)
+  //   // }
+
+  //   // // Filter based on price
+  //   for (const priceRange in priceFilter) {
+  //     if (priceFilter[priceRange]) {
+  //       filterHostels = filterHostels?.filter((hostel) =>
+  //         isPriceInRange(hostel.price, priceRange)
+  //       );
+  //     }
+  //     // setFilteredHostels(filterHostels);
+  //   }
+
+  // };
 
   // Function to check if a price is within a given range
   const isPriceInRange = (price, range) => {
@@ -106,12 +141,12 @@ const Recommended = ({ simplified }) => {
         >
           {isLoading ? (
             <div className="flex items-center justify-center">
-              <Loader />
+              <Spinner />
             </div>
           ) : (
             <div className="flex flex-col md:flex-row gap-2 flex-wrap">
-              {hostelArray.length > 0 ? (
-                hostelArray.map((hostel, index) => (
+              {filteredHostels.length > 0 ? (
+                filteredHostels.map((hostel, index) => (
                   <HostelCard
                     key={index}
                     price={hostel.price}

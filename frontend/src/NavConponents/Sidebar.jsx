@@ -57,7 +57,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
     <aside
       className={`absolute z-10 top-0 ${
         showSidebar ? "translate-x-0" : "-translate-x-full"
-      } bg-white h-screen w-64 transition-all duration-1000`}
+      } bg-white h-full w-64 transition-all duration-1000`}
     >
       <div className="w-full p-3 mb-5 flex items-center justify-between">
         <h1 className="text-primary2 text-xl font-bold text-left italic tracking-wider">
@@ -80,7 +80,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
           </Link>
         ))}
       </div>
-      <button onClick={handleLogout} className="absolute bottom-2 text-center flex items-center gap-2 m-3 font-bold text-lg">
+      <button onClick={handleLogout} className="absolute bottom-5 text-center flex items-center gap-2 m-3 font-bold text-lg">
         <IoLogOut size={25} /> logout
       </button>
     </aside>
