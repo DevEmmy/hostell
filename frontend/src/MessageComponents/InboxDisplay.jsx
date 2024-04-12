@@ -1,33 +1,16 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Return from "./Return";
 import userImg from "../../public/user.png";
 import Image from "next/image";
 import { HiPaperAirplane, HiPhoto } from "react-icons/hi2";
-import { Stick } from "next/font/google";
+import { io } from "socket.io-client";
+// import { Stick } from "next/font/google";
 
 const InboxDisplay = () => {
-  const messageInput = useRef();
-  const [focus, setFocus] = useState(false);
-  // const handleFocus = () => {
-  //   const messageFocus = messageInput.current.focus()
-  //   setFocus(messageFocus)
-  // }
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerHeight < 500) {
-        setFocus(true);
-      } else {
-        setFocus(false);
-      }
-    };
+  const [message, setMessage] = useState('')
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+ 
 
   const messages = [
     {
@@ -90,7 +73,7 @@ const InboxDisplay = () => {
           type="text"
           className="bg-transparent focus:outline-none w-full p-2 border border-gray-300 rounded-full"
           placeholder="message..."
-          ref={messageInput}
+          onChange={(e) => setMessage(e.target.value)}
         />
         <div className="p-3 flex items-center justify-center bg-gray-50 border border-gray-300 rounded-full text-primary2">
           <HiPaperAirplane size={20} />
