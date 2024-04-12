@@ -18,7 +18,7 @@ const Recommended = ({ simplified }) => {
       try {
         const result = await recommendedHostel();
         const hostelResult = await result.payload;
-        console.log(hostelResult)
+        // console.log(hostelResult)
         // const sortedHostelArray = await hostelResult.reverse();
         // console.log(hostelArray)
         setHostelArray(hostelResult);
@@ -41,7 +41,7 @@ const Recommended = ({ simplified }) => {
     let filteredHostels = [...hostelArray];
     const searchTerm = searchInput.trim().toLowerCase();
   
-    if (searchTerm === '') {
+    if (searchTerm === '' || priceFilter == []) {
       setFilteredHostels(hostelArray);
       return;
     }
@@ -61,42 +61,7 @@ const Recommended = ({ simplified }) => {
     setFilteredHostels(filteredHostels);
   };
 
-  // const filterHostels = () => {
-  //   let filterHostels = [...hostelArray]
-  //   const searchTerm = searchInput.trim().toLowerCase();
-  //   if(searchTerm == ''){
-  //     setFilteredHostels(hostelArray)
-  //   }
-  //   if(searchTerm !== ''){
-  //     filterHostels = filteredHostels.filter((hostel) => hostel.location.toLowerCase().includes(searchTerm))
 
-  //     setFilteredHostels(filterHostels)
-  //   }
-  //   // let filterHostels = hostelArray;
-
-  //   // // Filter based on location
-  //   // const searchTerm = searchInput.trim().toLowerCase();
-  //   // if (searchTerm !== "") {
-  //   //   filterHostels = filterHostels.filter((hostel) =>
-  //   //     hostel.location.toLowerCase().includes(searchTerm)
-  //   //   );
-  //   // }
-
-  //   // if(priceFilter.length === 0){
-  //   //   setFilteredHostels(hostelArray)
-  //   // }
-
-  //   // // Filter based on price
-  //   for (const priceRange in priceFilter) {
-  //     if (priceFilter[priceRange]) {
-  //       filterHostels = filterHostels?.filter((hostel) =>
-  //         isPriceInRange(hostel.price, priceRange)
-  //       );
-  //     }
-  //     // setFilteredHostels(filterHostels);
-  //   }
-
-  // };
 
   // Function to check if a price is within a given range
   const isPriceInRange = (price, range) => {
@@ -140,7 +105,7 @@ const Recommended = ({ simplified }) => {
           className="flex flex-col flex-wrap md:flex-row gap-2"
         >
           {isLoading ? (
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center w-full">
               <Spinner />
             </div>
           ) : (
