@@ -33,7 +33,7 @@ function UploadHostel() {
         ...prevMediaList.slice(0, index),
         ...prevMediaList.slice(index + 1),
       ];
-      console.log(updatedMediaList)
+      // console.log(updatedMediaList)
       return updatedMediaList;
     });
   };
