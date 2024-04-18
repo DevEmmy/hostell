@@ -7,14 +7,14 @@ const EditProfile = () => {
     <>
       <Return />
 
-      <section className="container mx-auto p-5">
+      <section className="container md:mx-auto md:p-5 p-2 w-screen">
         <h3 className="m-3 text-center capitalize text-primary2 text-xl font-medium">
           Edit your profile
         </h3>
         <form className="w-full">
           <div className="my5">
             <input
-              className="border-2 border-gray-400 py-2 px-3 rounded m-2 w-full"
+              className="border border-primary2 py-2 px-3 rounded my-2 w-full"
               type="text"
               placeholder="firstname"
               required
@@ -22,13 +22,13 @@ const EditProfile = () => {
           </div>
           <div className="my-5">
             <input
-              className="border-2 border-gray-400 py-2 px-3 rounded m-2 w-full"
+              className="border border-primary2 py-2 px-3 rounded my-2 w-full"
               type="text"
               placeholder="lastname"
               required
             />
           </div>
-          <div className="border-2 border-gray-400 py-2 px-3 rounded flex gap-2 items-center m-2 my-5 w-full">
+          <div className="border border-primary2 py-2 px-3 rounded flex gap-2 items-center my-2 my-5 w-full">
             <MdOutlineMail />
             <input
               type="text"
@@ -41,7 +41,7 @@ const EditProfile = () => {
             />
           </div>
           <button
-            className="w-full bg-primary2 p-3 rounded text-white text-center flex items-center justify-center mx-2 my-8 font-semibold capitalize"
+            className="w-full bg-primary2 p-3 rounded text-white text-center flex items-center justify-center my-8 font-semibold capitalize"
             type="submit"
           >
             submit

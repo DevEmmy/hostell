@@ -130,7 +130,6 @@ const InboxDisplay = () => {
           <FileBase64 multiple={true} onDone={(f) => setFiles(f)} />
         </div>
         <input
-          onClick={() => setFocus(true)}
           type="text"
           className="bg-transparent focus:outline-none w-full p-2 border border-gray-300 rounded-full"
           placeholder="message..."
