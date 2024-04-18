@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { MdEdit } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -72,9 +72,9 @@ function Profile() {
               onClick={() => {
                 router.push("/uploadhostel");
               }}
-              className="fixed bottom-5 right-5 flex gap-1 capitalize items-center bg-primary2 p-5 rounded-full text-white text-sm font-bold"
+              className="fixed bottom-5 right-5 flex gap-1 capitalize items-center bg-primary2 p-3 rounded-full text-white text-sm"
             >
-              <FaPlus size={25} />
+              <FiPlus size={30} />
             </div>
           )}
 

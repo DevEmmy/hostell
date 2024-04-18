@@ -54,6 +54,9 @@ function Sidebar({ showSidebar, setShowSidebar }) {
   };
 
   return (
+    <div onClick={() => {
+      setShowSidebar(false)
+    }} className={`${showSidebar ? 'bg__overlay' : ''}`}>
     <aside
       className={`absolute z-10 top-0 ${
         showSidebar ? "translate-x-0" : "-translate-x-full"
@@ -73,17 +76,18 @@ function Sidebar({ showSidebar, setShowSidebar }) {
             key={i}
             onClick={handleClose}
             href={link.route}
-            className="flex items-center justify-start py-3 gap-2 capitalize font-semibold hover:text-gray-700"
+            className="flex items-center justify-start py-3 gap-2 capitalize font-medium hover:text-gray-700"
           >
             <span>{link.icon}</span>
             {link.name}
           </Link>
         ))}
       </div>
-      <button onClick={handleLogout} className="absolute bottom-5 text-center flex items-center gap-2 m-3 font-bold text-lg">
+      <button onClick={handleLogout} className="absolute bottom-5 text-center flex items-center gap-2 m-3 font-medium text-lg">
         <IoLogOut size={25} /> logout
       </button>
     </aside>
+    </div>
   );
 }
 

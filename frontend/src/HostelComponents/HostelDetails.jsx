@@ -4,9 +4,11 @@ import { CiHeart } from "react-icons/ci";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import { FaMessage } from "react-icons/fa6";
+import { FaMessage } from "react-icons/fa6";
 import hostel1 from '../../public/hall.jpg'
+import userImg from "../../public/user.png";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { hostelDetails } from "@/request/request";
@@ -15,7 +17,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 function HostelDetails() {
   const params = useParams()
   const {hostelid} = params
-  // const router = useRouter();
+  const router = useRouter();
   // const { hostelid } = router.query  || {};
   console.log(hostelid)
 
@@ -122,6 +124,23 @@ function HostelDetails() {
           <small className="my-2 text-gray-600 capitalize">
             {hosteldetails.availableRooms}
           </small>
+        </div>
+        <div className="m-3 flex items-center gap-2">
+        <div className="h-12 w-12 bg-primary2 rounded-full">
+        <Image
+          src={userImg}
+          alt="user"
+          className="object-cover w-full h-full overflow-hidden"
+          priority
+          onClick={() => {
+            router.push('/profile/userprofile')
+          }}
+        />
+      </div>
+        <Link href={'/profile/userprofile'} className="capitalize flex-1 text-lg">john doe</Link>
+      <button className="text-primary2">
+        <FaMessage size={35}/>
+      </button>
         </div>
       </div>
     </section>

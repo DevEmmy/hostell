@@ -118,7 +118,7 @@ function Signin() {
               className="w-full bg-primary2 p-4 rounded-2xl text-white text-center flex items-center justify-center my-5 font-semibold capitalize"
               type="submit"
             >
-              {showLoader ? <Loader /> : "signin"}
+              {showLoader ? <Loader /> : "login"}
             </button>
           </div>
           <p className="mt-3">

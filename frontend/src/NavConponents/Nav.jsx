@@ -37,9 +37,9 @@ const Nav = () => {
           </button>
         </div>
       </nav>
-    
 
       <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
+
     
     
     </>
