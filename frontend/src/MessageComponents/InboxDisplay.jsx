@@ -11,25 +11,22 @@ import FileBase64 from "react-file-base64";
 
 // const socket = io("https://hostell.onrender.com");
 
-
-
 const InboxDisplay = () => {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
-  const [msgData, setMsgData] = useState({})
+  const [msgData, setMsgData] = useState({});
 
   // Rename this to message after connecting to the server
   // const incomingMessage = () => {
   //   socket.on("connect", () => {
   //     console.log(socket.connected); // true
   //   });
-    
+
   //   socket.on("disconnect", () => {
   //     console.log(socket.connected); // false
   //   });
   // }
-
 
   useEffect(() => {
     const base64Images = files.map((file) => file.base64);
@@ -47,7 +44,6 @@ const InboxDisplay = () => {
       return updatedMediaList;
     });
   };
- 
 
   const messages = [
     {
@@ -65,11 +61,16 @@ const InboxDisplay = () => {
   ];
 
   return (
-    <section className="relative">
+    <section className="relative h-screen">
       <Return />
       <div className="flex flex-col items-center justify-center border-b-2 border-gray-300 p-2">
         <div className="h-24 w-24 bg-primary2 rounded-full">
-          <Image src={userImg} alt="profile pic" className="object-cover w-full h-full overflow-hidden" priority={true} />
+          <Image
+            src={userImg}
+            alt="profile pic"
+            className="object-cover w-full h-full overflow-hidden"
+            priority={true}
+          />
         </div>
         <div>
           <h2 className=" capitalize font-semibold text-xl">john doe</h2>
@@ -97,48 +98,48 @@ const InboxDisplay = () => {
           );
         })}
       </div>
+      <div>
         <div>
-          <div>
-        {files.length > 0 && (
-                <div className="flex gap-3 overflow-scroll py-4">
-                  {files.map((file, i) => {
-                    return (
-                      <div key={i} className="relative">
-                        <button
-                          className="absolute -top-3 -right-2 p-1 rounded-full bg-red-500 text-white"
-                          onClick={() => removeItem(i)}
-                        >
-                          <HiX />
-                        </button>
+          {files.length > 0 && (
+            <div className="flex gap-3 overflow-scroll py-4">
+              {files.map((file, i) => {
+                return (
+                  <div key={i} className="relative">
+                    <button
+                      className="absolute -top-3 -right-2 p-1 rounded-full bg-red-500 text-white"
+                      onClick={() => removeItem(i)}
+                    >
+                      <HiX />
+                    </button>
 
-                        <img
-                          className="min-w-[150px] h-[150px] rounded-lg object-cover"
-                          src={file.base64}
-                          onChange={() => setImages(file.base64)}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+                    <img
+                      className="min-w-[150px] h-[150px] rounded-lg object-cover"
+                      src={file.base64}
+                      onChange={() => setImages(file.base64)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      <div
-        className={`sender grid grid-cols-[1fr_8fr_1fr] fixed bottom-0 left-0 right-0 bg-white shadow-lg w-full px-2 py-2 items-center gap-2 border-t border-t-gray-300`}
-      >
-        <div className="flex items-center justify-center text-primary2">
-          <HiPhoto />
-          <FileBase64 multiple={true} onDone={(f) => setFiles(f)} />
+        <div
+          className={`grid grid-cols-[1fr_8fr_1fr] absolute bottom-0 left-0 right-0 bg-white shadow-lg w-full px-2 py-2 items-center gap-2 border-t border-t-gray-300`}
+        >
+          <div className="flex items-center justify-center text-primary2 cursor-pointer">
+            <HiPhoto className="cursor-pointer" />
+            <FileBase64 multiple={true} onDone={(f) => setFiles(f)} />
+          </div>
+          <input
+            type="text"
+            className="bg-transparent focus:outline-none w-full p-2 border border-gray-300 rounded-full"
+            placeholder="message..."
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div className="p-3 flex items-center justify-center bg-gray-50 border border-gray-300 rounded-full text-primary2">
+            <HiPaperAirplane size={20} />
+          </div>
         </div>
-        <input
-          type="text"
-          className="bg-transparent focus:outline-none w-full p-2 border border-gray-300 rounded-full"
-          placeholder="message..."
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <div className="p-3 flex items-center justify-center bg-gray-50 border border-gray-300 rounded-full text-primary2">
-          <HiPaperAirplane size={20} />
-        </div>
-      </div>
       </div>
     </section>
   );
