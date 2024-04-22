@@ -27,7 +27,7 @@ const HostelCard = ({ image, location, price, hostelid }) => {
             <span className="font-bold">House</span>
           </small>
           <small className="absolute bg-white right-2 top-2 rounded-full p-1 hover:bg-secondary1">
-            <CiHeart size={20} />
+            <CiHeart size={30} />
           </small>
         </div>
         <div className="p-1">
