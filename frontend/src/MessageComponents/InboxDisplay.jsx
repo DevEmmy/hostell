@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Return from "./Return";
 import userImg from "../../public/user.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { HiPaperAirplane, HiPhoto } from "react-icons/hi2";
 import { HiX } from "react-icons/hi";
 // import { io } from "socket.io-client";
@@ -12,6 +13,7 @@ import FileBase64 from "react-file-base64";
 // const socket = io("https://hostell.onrender.com");
 
 const InboxDisplay = () => {
+  const router = useRouter();
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
@@ -70,10 +72,15 @@ const InboxDisplay = () => {
             alt="profile pic"
             className="object-cover w-full h-full overflow-hidden"
             priority={true}
+            onClick={() => {
+              router.push('/profile/userprofile')
+            }}
           />
         </div>
         <div>
-          <h2 className=" capitalize font-semibold text-xl">john doe</h2>
+          <h2  onClick={() => {
+            router.push('/profile/userprofile')
+          }} className=" capitalize font-semibold text-xl">john doe</h2>
         </div>
       </div>
       <div>
