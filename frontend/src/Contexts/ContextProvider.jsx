@@ -7,6 +7,7 @@ export const ContextProvider =({children}) => {
     const [searchInput, setSearchInput] = useState('')
     const [priceFilter, setPriceFilter] = useState([])
     const [showFilter, setShowFilter] = useState(false);
+    const [bookmark, setBookmark] = useState(false)
     
 
     return (
@@ -17,7 +18,9 @@ export const ContextProvider =({children}) => {
             priceFilter,
             setPriceFilter,
             showFilter,
-            setShowFilter
+            setShowFilter,
+            bookmark,
+            setBookmark
         }}
         >
             {children}
