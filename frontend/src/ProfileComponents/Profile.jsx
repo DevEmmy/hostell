@@ -13,10 +13,10 @@ function Profile() {
   const router = useRouter();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const firstName = user.payload.user.firstName;
-  const lastName = user.payload.user.lastName;
-  const email = user.payload.user.email;
-  const userType = user.payload.user.userType;
+  // const firstName = user.payload.user.firstName;
+  // const lastName = user.payload.user.lastName;
+  // const email = user.payload.user.email;
+  // const userType = user.payload.user.userType;
   // const firstName =
   //   user && user.payload && user.payload.user
   //     ? user.payload.user.firstName
@@ -49,9 +49,9 @@ function Profile() {
           </div>
           <div className="text-center">
             <h2 className="font-semibold m-2">
-              {firstName} {lastName}
+              {user.firstName} {user.lastName}
             </h2>
-            <p className="text-gray-700">{email}</p>
+            <p className="text-gray-700">{user.email}</p>
           </div>
         </div>
         <div className="relative m-5">
@@ -67,7 +67,7 @@ function Profile() {
               {email}
             </p>
           </div> */}
-          {userType === "AGENT" && (
+          {user.userType === "AGENT" && (
             <div
               onClick={() => {
                 router.push("/uploadhostel");
