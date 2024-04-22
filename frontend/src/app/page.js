@@ -6,13 +6,6 @@ import SearchInput from "@/NavConponents/SearchInput";
 import { useRouter } from "next/navigation";
 
 const page = () => {
-  const router = useRouter();
-  useLayoutEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-      router.replace("/login");
-    }
-  }, []);
 
   return (
     <div>
