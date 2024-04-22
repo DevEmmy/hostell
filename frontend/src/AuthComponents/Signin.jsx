@@ -8,6 +8,7 @@ import Loader from "@/BasicComponents/Loader";
 import { MdOutlineMail, MdLockOutline } from "react-icons/md";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import hall from "../../public/hall.jpg";
+import { Toaster } from "react-hot-toast";
 
 function Signin() {
   const router = useRouter();
@@ -16,9 +17,9 @@ function Signin() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {  
     if (!email || !password) {
       setErrorMessage("Email and password cannot be empty.");
       setTimeout(() => {
@@ -29,17 +30,13 @@ function Signin() {
 
     setShowLoader(true);
     try {
-      const userData = await login(email, password);
-      if (userData.status === 200 || userData.status === 201) {
-        setShowLoader(false);
-        router.replace("/");
-      } else {
-        setErrorMessage(userData.message);
-        setShowLoader(false);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 5000);
+      const {response, status} = await login(email, password);
+      if(status < 400){
+        router.push("/")
       }
+      // setShowLoader(false);
+
+
     } catch (error) {
       setErrorMessage(error.message);
       setShowLoader(false);

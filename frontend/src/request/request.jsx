@@ -1,3 +1,4 @@
+import { errorToast, successToast } from "@/Toaster/basicToast";
 import axios from "axios";
 
 // const result = JSON.parse(localStorage.getItem("user"));
@@ -10,12 +11,24 @@ const axiosConfig = axios.create({
 });
 
 export const login = async (email, password) => {
-  const response = await axiosConfig.post("/users/sign-in", {
-    email,
-    password,
-  });
-  
-  return response.data;
+  try {
+    let response = await axiosConfig.post("/users/sign-in", {
+      email,
+      password,
+    });
+    let status = response.status
+    response = response.data;
+    console.log(response)
+    successToast(response.message)
+    localStorage.setItem("token", response.payload.token)
+    localStorage.setItem("user", JSON.stringify(response.payload.dbUser))
+
+    return {response, status }
+  }
+  catch (err) {
+    errorToast(err.message)
+    return null
+  }
 };
 
 export const signup = async (
