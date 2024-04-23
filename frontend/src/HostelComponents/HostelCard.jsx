@@ -60,7 +60,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             <FaLocationDot size={20} />
             <p className="capitalize text-lg">{location}</p>
           </div>
-          <button className=" capitalize bg-secondary2 text-white w-full p-3 text-xl rounded-lg">
+          <button className=" capitalize bg-primary1 text-black w-full p-3 text-xl rounded-lg">
             bid now
           </button>
         </div>
