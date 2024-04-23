@@ -20,7 +20,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
     <>
       <div
         // href={`/${hostelid}`}
-        className="w-full md:w-72 mx-auto my-2 border p-2 rounded-lg"
+        className="w-full md:w-72 mx-auto my-2 border p-2 rounded-2xl"
       >
         <div className="m-2 flex gap-2 items-center">
           <Image
@@ -35,7 +35,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
           <LazyLoadImage
             src={image}
             alt="hostel"
-            className="w-full h-full rounded-lg object-cover"
+            className="w-full h-full rounded-2xl object-cover"
             width={image.width}
             height={image.height}
             onClick={() => {
@@ -54,13 +54,13 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
           </small>
         </div>
         <div className="p-1">
-          <h4 className="text-xl font-medium my-2">{title}</h4>
-          <p className="text-xl">₦ {price}</p>
+          <h4 className="text-[22px] font-medium my-2">{title}</h4>
+          <p className="text-[16px] text-gray-500">₦ {price}</p>
           <div className="flex gap-1 items-center my-2">
             <FaLocationDot size={20} />
             <p className="capitalize text-lg">{location}</p>
           </div>
-          <button className=" capitalize bg-primary1 text-black w-full p-3 text-xl rounded-lg">
+          <button className=" capitalize bg-primary2 text-white w-full p-3 text-xl rounded-lg">
             bid now
           </button>
         </div>
