@@ -31,7 +31,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
           />
           <h3 className="capitalize font-medium text-lg">John doe</h3>
         </div>
-        <div className="relative w-full h-48 my-3">
+        <div className="relative w-full h-[300px] my-3">
           <LazyLoadImage
             src={image}
             alt="hostel"
@@ -56,12 +56,14 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
         <div className="p-1">
           <h4 className="text-[22px] font-medium my-2">{title}</h4>
           <p className="text-[16px] text-gray-500">₦ {price}</p>
-          <div className="flex gap-1 items-center my-2">
-            <FaLocationDot size={20} />
-            <p className="capitalize text-lg">{location}</p>
+          <div className="flex gap-1 text-[16px] items-center my-2">
+            <FaLocationDot />
+            <p className="capitalize">{location}</p>
           </div>
-          <button className=" capitalize bg-primary2 text-white w-full p-3 text-xl rounded-lg">
-            bid now
+          <button onClick={() => {
+            router.push(`/${hostelid}`);
+          }} className=" capitalize bg-primary2 text-white w-full p-3 text-xl rounded-lg">
+            enquire now
           </button>
         </div>
       </div>

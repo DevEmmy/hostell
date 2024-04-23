@@ -11,7 +11,7 @@ const EachHostelReturn = () => {
             <RiArrowLeftLine onClick={()=> router.back()} />
         </div>
 
-        <div className='flex  gap-10'>
+        <div className='flex gap-10'>
             <RiHeart2Line />
             <RiShare2Fill />
         </div>
