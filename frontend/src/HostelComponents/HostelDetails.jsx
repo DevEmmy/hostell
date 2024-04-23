@@ -34,6 +34,7 @@ function HostelDetails() {
       try {
         const result = await hostelDetails(hostelid);
         const hostelResult = result.payload;
+        console.log(hostelResult)
         setHosteldetails(hostelResult);
       } catch (error) {
         console.log(error);
@@ -137,18 +138,22 @@ function HostelDetails() {
       </section> */}
 
       <div className="mx-xPadding mt-20">
-        <img src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg" alt="" className="border border-white shadow-lg h-[300px] object-cover rounded-2xl" />
+        <img 
+        src={hosteldetails.images}
+        // src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg" 
+        alt="" className="border border-white shadow-lg h-[300px] object-cover rounded-2xl" />
 
         <div className="flex flex-col gap-3 mt-10">
           <p className="text-[24px] font-[600]">
-            Grace Hostel.
+            {/* Grace Hostel. */}
+            {hosteldetails.title}
           </p>
           <div className="flex gap-2 items-center text-gray-500">
             <FaLocationDot />
-            <p>Opposite BSF, Harmony.</p>
+            <p>{hosteldetails.location}</p>
           </div>
           <p className="text-[16px] font-[600]">
-            ₦200,000
+            {hosteldetails.price}
           </p>
         </div>
 
@@ -157,11 +162,11 @@ function HostelDetails() {
             Description
           </p>
           <p className="text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus neque voluptatibus nesciunt eos voluptates qui ratione ipsam necessitatibus cum ducimus praesentium harum consequuntur aut doloremque soluta, inventore voluptas quis exercitationem!
+            {hosteldetails.description}
           </p>
 
           <p className="font-[500]">
-            Available Rooms: 3
+            Available Rooms: {hosteldetails.availableRooms}
           </p>
         </div>
 
@@ -176,7 +181,9 @@ function HostelDetails() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-5 mt-3">
-            <div className="btn">View Profile</div>
+            <div className="btn" onClick={() => {
+              router.push('/profile/userprofile')
+            }}>View Profile</div>
             <div className="btn">Send Message</div>
           </div>
         </div>
