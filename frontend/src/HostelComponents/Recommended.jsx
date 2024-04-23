@@ -5,6 +5,7 @@ import Link from "next/link";
 import { recommendedHostel } from "@/request/request";
 import Spinner from "@/BasicComponents/Spinner";
 import { useStateContext } from "@/Contexts/ContextProvider";
+import { useGetAllHostels } from "@/store/hostels";
 // import { SearchLocationInput, FilterCard } from "../components";
 
 const Recommended = ({ simplified }) => {
@@ -12,6 +13,7 @@ const Recommended = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([]);
   const [filteredHostels, setFilteredHostels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -31,7 +33,7 @@ const Recommended = ({ simplified }) => {
 
     fetchData();
   }, []);
-
+  const {allHostels} = useGetAllHostels()
   useEffect(() => {
     filterHostels();
   }, [searchInput, hostelArray, priceFilter]);

@@ -6,8 +6,11 @@ import axios from "axios";
 //   const token = result.payload.token
 //   // console.log(token)
 
-const axiosConfig = axios.create({
+export const axiosConfig = axios.create({
   baseURL: "https://hostell.onrender.com",
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
 });
 
 export const login = async (email, password) => {
