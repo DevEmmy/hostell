@@ -18,7 +18,7 @@ const Recommended = ({ simplified }) => {
       try {
         const result = await recommendedHostel();
         const hostelResult = await result.payload;
-        // console.log(hostelResult)
+        console.log(hostelResult)
         // const sortedHostelArray = await hostelResult.reverse();
         // console.log(hostelArray)
         setHostelArray(hostelResult);
@@ -109,7 +109,7 @@ const Recommended = ({ simplified }) => {
               <Spinner />
             </div>
           ) : (
-            <div className="flex flex-col md:flex-row gap-2 flex-wrap">
+            <div className="flex flex-col md:flex-row gap-4 flex-wrap">
               {filteredHostels.length > 0 ? (
                 filteredHostels.map((hostel, index) => (
                   <HostelCard
@@ -117,6 +117,7 @@ const Recommended = ({ simplified }) => {
                     price={hostel.price}
                     hostelid={hostel._id}
                     location={hostel.location}
+                    title={hostel.title}
                     image={hostel.images.length > 0 ? hostel.images[0] : ""}
                   />
                 ))
