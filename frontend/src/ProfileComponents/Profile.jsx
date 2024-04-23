@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import userImg from "../../public/user.png";
+import { RiCalendar2Line, RiMailLine } from "react-icons/ri";
 // import HostelCard from "../components/HostelCard";
 // import hostel1 from "/hostel1.jpg";
 
@@ -39,20 +40,23 @@ function Profile() {
               priority={true}
             />
           </div>
-          <div>
+          <div className="flex gap-3 flex-col">
+            <div className="text-center">
+              <h2 className="font-semibold">
+                {user.firstName} {user.lastName}
+              </h2>
+              <p className="text-gray-500 flex gap-2 items-center justify-center"><RiMailLine /> {user.email}</p>
+              <p className="text-gray-500 flex gap-2 items-center justify-center"> <RiCalendar2Line /> Joined 2024</p>
+            </div>
+
             <Link
-              className="p-2 flex items-center gap-2 bg-primary2 text-white rounded capitalize"
+              className="p-3 flex items-center gap-2 bg-primary2 text-white justify-center rounded-lg capitalize w-fit m-auto"
               href={"/profile/editprofile"}
             >
               <MdEdit /> edit profile
             </Link>
           </div>
-          <div className="text-center">
-            <h2 className="font-semibold m-2">
-              {user.firstName} {user.lastName}
-            </h2>
-            <p className="text-gray-700">{user.email}</p>
-          </div>
+
         </div>
         <div className="relative m-5">
           {/* <div>
@@ -99,6 +103,12 @@ function Profile() {
             </div>
           </div> */}
         </div>
+      </div>
+
+      <div className="mx-xPadding my-10">
+        <p className="text-[20px] font-[600]">Uploaded Hostels</p>
+
+
       </div>
     </section>
   );

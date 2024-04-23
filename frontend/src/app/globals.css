@@ -30,3 +30,11 @@ input[type="file"]{
 .btn{
   @apply w-full bg-primary2 p-3 rounded-lg text-center
 }
+
+.options{
+  @apply flex gap-3 items-center justify-center
+}
+
+.options > div{
+ @apply border-2 border-primary2 text-[24px] rounded-full p-3 text-primary2
+}

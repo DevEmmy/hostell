@@ -7,7 +7,7 @@ const EditProfile = () => {
     <>
       <Return />
 
-      <section className="container md:mx-auto md:p-5 p-2 w-screen">
+      <section className=" mx-xPadding">
         <h3 className="m-3 text-center capitalize text-primary2 text-xl font-medium">
           Edit your profile
         </h3>
