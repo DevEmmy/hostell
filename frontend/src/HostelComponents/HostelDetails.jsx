@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { CiHeart } from "react-icons/ci";
+import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { FaChevronLeft, FaChevronRight, FaLocationArrow } from "react-icons/fa";
@@ -13,9 +13,11 @@ import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { hostelDetails } from "@/request/request";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useStateContext } from "@/Contexts/ContextProvider";
 import EachHostelReturn from "./EachHostelReturn";
 
 function HostelDetails() {
+  const { bookmark, setBookmark } = useStateContext();
   const params = useParams()
   const { hostelid } = params
   const router = useRouter();
