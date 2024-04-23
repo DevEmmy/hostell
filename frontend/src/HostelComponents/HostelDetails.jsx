@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { CiHeart } from "react-icons/ci";
+import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -13,13 +13,17 @@ import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { hostelDetails } from "@/request/request";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useStateContext } from "@/Contexts/ContextProvider";
 
 function HostelDetails() {
+  const { bookmark, setBookmark } = useStateContext();
   const params = useParams()
   const {hostelid} = params
   const router = useRouter();
-  // const { hostelid } = router.query  || {};
-  console.log(hostelid)
+  
+  const handleBookmarkHostel = () => {
+    setBookmark((prev) => !prev);
+  };
 
   const [hosteldetails, setHosteldetails] = useState({});
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -82,8 +86,10 @@ function HostelDetails() {
           >
             <GoArrowLeft />
           </Link>
-          <div className="absolute top-2 right-3 p-2 bg-white rounded-full">
-            <CiHeart />
+          <div onClick={handleBookmarkHostel} className="absolute top-2 right-3 p-2 bg-white rounded-full text-primary2">
+          {
+              bookmark ? <IoHeartSharp  size={30} /> : <IoHeartOutline size={30} />
+            }
           </div>
         </div>
         <div>
