@@ -26,3 +26,7 @@ input[type="file"]{
   top: 0;
   left: 0;
 }
+
+.btn{
+  @apply w-full bg-primary2 p-3 rounded-lg text-center
+}

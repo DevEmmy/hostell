@@ -6,11 +6,14 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        primary1: "#27D940",
-        primary2: "#064A75",
-        secondary1: "#D8F3FF",
-        secondary2: "#5F7998"
+        primary1: "#D8F3FF",
+        primary2: "#27D940",
+        secondary1: "#27D940",
+        secondary2: "#27D940"
       },
+      spacing:{
+        xPadding: "5.17%"
+      }
     },
   },
   plugins: [],
