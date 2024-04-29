@@ -83,7 +83,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
           </Link>
         ))}
       </div>
-      <button onClick={handleLogout} className="absolute bottom-5 text-center flex items-center gap-2 m-3 font-medium text-lg">
+      <button onClick={handleLogout} className="absolute bottom-20 text-center flex items-center gap-2 m-3 font-medium text-lg">
         <IoLogOut size={25} /> logout
       </button>
     </aside>

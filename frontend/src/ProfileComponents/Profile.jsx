@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,13 @@ import { RiCalendar2Line, RiMailLine } from "react-icons/ri";
 
 function Profile() {
   const router = useRouter();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState()
+
+
+  useEffect(()=>{
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, [])
+  
 
   // const firstName = user.payload.user.firstName;
   // const lastName = user.payload.user.lastName;
