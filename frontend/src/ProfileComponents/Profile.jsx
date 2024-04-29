@@ -4,13 +4,12 @@ import { MdEdit } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import userImg from "../../public/user.png";
 import { RiCalendar2Line, RiMailLine } from "react-icons/ri";
-// import HostelCard from "../components/HostelCard";
-// import hostel1 from "/hostel1.jpg";
+import { useGetUser } from "@/store/user";
+
 
 function Profile() {
+  // const {user} = useGetUser()
   const router = useRouter();
   const [user, setUser] = useState()
 
@@ -20,38 +19,23 @@ function Profile() {
   }, [])
   
 
-  // const firstName = user.payload.user.firstName;
-  // const lastName = user.payload.user.lastName;
-  // const email = user.payload.user.email;
-  // const userType = user.payload.user.userType;
-  // const firstName =
-  //   user && user.payload && user.payload.user
-  //     ? user.payload.user.firstName
-  //     : "";
-  // const lastName =
-  //   user && user.payload && user.payload.user ? user.payload.user.lastName : "";
-  // const email =
-  //   user && user.payload && user.payload.user ? user.payload.user.email : "";
-  // const userType = user && user.payload ? user.payload.user.userType : "";
-
   return (
     <section className="w-screen">
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col items-center gap-5 m-5">
           <div className="w-36 h-36 rounded-full bg-secondary1 flex items-center justify-center overflow-hidden">
-            <Image
-              src={userImg}
+            <img
+              src='./user.png'
               alt="user"
               className="object-cover w-full h-full"
-              priority={true}
             />
           </div>
           <div className="flex gap-3 flex-col">
             <div className="text-center">
               <h2 className="font-semibold">
-                {user.firstName} {user.lastName}
+                {user?.firstName} {user?.lastName}
               </h2>
-              <p className="text-gray-500 flex gap-2 items-center justify-center"><RiMailLine /> {user.email}</p>
+              <p className="text-gray-500 flex gap-2 items-center justify-center"><RiMailLine /> {user?.email}</p>
               <p className="text-gray-500 flex gap-2 items-center justify-center"> <RiCalendar2Line /> Joined 2024</p>
             </div>
 
@@ -65,19 +49,7 @@ function Profile() {
 
         </div>
         <div className="relative m-5">
-          {/* <div>
-            <p className="p-2 text-sm">
-              <strong className="italic"> Firstname:</strong> {firstName}
-            </p>
-            <p className="p-2 text-sm">
-              <strong className="italic"> Lastname:</strong> {lastName}
-            </p>
-            <p className="p-2 text-sm">
-              <strong className="italic"> Email: </strong>
-              {email}
-            </p>
-          </div> */}
-          {user.userType === "AGENT" && (
+          {user?.userType === "AGENT" && (
             <div
               onClick={() => {
                 router.push("/uploadhostel");
@@ -87,27 +59,6 @@ function Profile() {
               <FiPlus size={30} />
             </div>
           )}
-
-          {/* <div className=" my-5 p-3">
-            <h3 className="font-semibold capitalize"> {userType === "AGENT" ? 'Hostel updates' : 'Saved Hostel'}</h3>
-            <div className="flex flex-wrap">
-              <HostelCard
-                price="₦ 120,000.00"
-                location="accord,zoo,funaab"
-                image={hostel1}
-              />
-              <HostelCard
-                price="₦ 120,000.00"
-                location="accord,zoo,funaab"
-                image={hostel1}
-              />
-              <HostelCard
-                price="₦ 120,000.00"
-                location="accord,zoo,funaab"
-                image={hostel1}
-              />
-            </div>
-          </div> */}
         </div>
       </div>
 

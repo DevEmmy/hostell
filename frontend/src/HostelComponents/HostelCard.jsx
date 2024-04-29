@@ -1,20 +1,24 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
-import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import {  RiHeart2Line, RiHeart2Fill } from 'react-icons/ri'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import userImg from "../../public/user.png";
 import { useRouter } from "next/navigation";
-import { useStateContext } from "@/Contexts/ContextProvider";
+// import { useStateContext } from "@/Contexts/ContextProvider";
 import Image from "next/image";
 
 const HostelCard = ({ image, location, price, hostelid, title }) => {
   const router = useRouter();
-  const { bookmark, setBookmark } = useStateContext();
+  // const { bookmark, setBookmark } = useStateContext();
+  const [bookmark, setBookmark] = useState(false);
 
   const handleBookmarkHostel = () => {
     setBookmark((prev) => !prev);
   };
+  const handleUserProfile = () => {
+    router.push('profile/userprofile')
+  }
 
   return (
     <>
@@ -28,8 +32,9 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             alt="user"
             className="w-14 h-14 object-cover bg-secondary1 rounded-full"
             priority
+            onClick={handleUserProfile}
           />
-          <h3 className="capitalize font-medium text-lg">John doe</h3>
+          <h3 onClick={handleUserProfile} className="capitalize font-medium text-lg">John doe</h3>
         </div>
         <div className="relative w-full h-[300px] my-3">
           <LazyLoadImage
@@ -47,9 +52,9 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             className="text-primary2 absolute bg-white right-2 top-2 rounded-full p-1"
           >
             {bookmark ? (
-              <IoHeartSharp size={30} />
+              <RiHeart2Fill size={30} />
             ) : (
-              <IoHeartOutline size={30} />
+              <RiHeart2Line size={30} />
             )}
           </small>
         </div>
@@ -60,9 +65,12 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             <FaLocationDot />
             <p className="capitalize">{location}</p>
           </div>
-          <button onClick={() => {
-            router.push(`/${hostelid}`);
-          }} className=" capitalize bg-primary2 text-white w-full p-3 text-xl rounded-lg">
+          <button
+            onClick={() => {
+              router.push(`/${hostelid}`);
+            }}
+            className=" capitalize bg-primary2 text-white w-full p-3 text-xl rounded-lg"
+          >
             enquire now
           </button>
         </div>

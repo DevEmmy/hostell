@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
+import { useGetUser } from "@/store/user";
 import { MdEdit } from "react-icons/md";
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import userImg from "../../public/user.png";
 import CustomReturn from "./CustomReturn";
 import { RiCalendar2Line, RiMailLine, RiPhoneLine, RiWhatsappLine } from "react-icons/ri";
-import { FiPlus } from "react-icons/fi";
+// import { FiPlus } from "react-icons/fi";
 
 const UserProfile = () => {
+  // const {user} = useGetUser(id)
   return (
     <section className="w-screen">
       <CustomReturn />
@@ -39,42 +41,6 @@ const UserProfile = () => {
           
         </div>
 
-      </div>
-      <div className="relative m-5">
-        {/* <div>
-          <p className="p-2 text-sm">
-            <strong className="italic"> Firstname:</strong> {firstName}
-          </p>
-          <p className="p-2 text-sm">
-            <strong className="italic"> Lastname:</strong> {lastName}
-          </p>
-          <p className="p-2 text-sm">
-            <strong className="italic"> Email: </strong>
-            {email}
-          </p>
-        </div> */}
-        
-
-        {/* <div className=" my-5 p-3">
-          <h3 className="font-semibold capitalize"> {userType === "AGENT" ? 'Hostel updates' : 'Saved Hostel'}</h3>
-          <div className="flex flex-wrap">
-            <HostelCard
-              price="₦ 120,000.00"
-              location="accord,zoo,funaab"
-              image={hostel1}
-            />
-            <HostelCard
-              price="₦ 120,000.00"
-              location="accord,zoo,funaab"
-              image={hostel1}
-            />
-            <HostelCard
-              price="₦ 120,000.00"
-              location="accord,zoo,funaab"
-              image={hostel1}
-            />
-          </div>
-        </div> */}
       </div>
     </div>
 
