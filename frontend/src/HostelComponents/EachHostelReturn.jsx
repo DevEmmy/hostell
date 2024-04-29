@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from 'next/navigation'
 import React, {useState} from 'react'
-import { RiArrowLeftLine, RiHeart2Line, RiShare2Fill } from 'react-icons/ri'
+import { RiArrowLeftLine, RiHeart2Line, RiShare2Fill, RiHeart2Fill } from 'react-icons/ri'
 
 const EachHostelReturn = () => {
   const [bookmark, setBookmark] = useState(false)
@@ -18,7 +18,11 @@ const EachHostelReturn = () => {
         </div>
 
         <div className='flex gap-10'>
-            <RiHeart2Line />
+        {bookmark ? (
+              <RiHeart2Fill onClick={handleBookmarkHostel} />
+            ) : (
+              <RiHeart2Line onClick={handleBookmarkHostel} />
+            )}
             <RiShare2Fill />
         </div>
     </div>

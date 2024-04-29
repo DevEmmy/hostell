@@ -56,6 +56,22 @@ export const signup = async (
   return response.data;
 };
 
+export const forgotPassword = async (email) => {
+  try {
+    let response = await axiosConfig.post('/users/forgot-password', {
+      email
+    })
+    let status = response.status
+    response = response.data;
+    console.log(response)
+    successToast(response.message)
+
+    return {response, status}
+  } catch (error) {
+    errorToast(error.message)
+    return null
+  }
+}
 export const recommendedHostel = async () => {
   const response = await axiosConfig.get("/hostels/type/recommended");
   return response.data;

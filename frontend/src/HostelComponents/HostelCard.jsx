@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
-import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import {  RiHeart2Line, RiHeart2Fill } from 'react-icons/ri'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import userImg from "../../public/user.png";
 import { useRouter } from "next/navigation";
@@ -52,9 +52,9 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             className="text-primary2 absolute bg-white right-2 top-2 rounded-full p-1"
           >
             {bookmark ? (
-              <IoHeartSharp size={30} />
+              <RiHeart2Fill size={30} />
             ) : (
-              <IoHeartOutline size={30} />
+              <RiHeart2Line size={30} />
             )}
           </small>
         </div>
