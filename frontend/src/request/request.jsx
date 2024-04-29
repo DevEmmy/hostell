@@ -9,7 +9,7 @@ import axios from "axios";
 export const axiosConfig = axios.create({
   baseURL: "https://hostell.onrender.com",
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`
+    // Authorization: `Bearer ${localStorage.getItem("token")}`
   }
 });
 

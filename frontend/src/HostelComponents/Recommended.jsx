@@ -37,8 +37,9 @@ const Recommended = ({ simplified }) => {
     };
 
     fetchData();
+
   }, [allHostels]);
-  
+
   useEffect(() => {
     filterHostels();
   }, [searchInput, hostelArray, priceFilter]);
