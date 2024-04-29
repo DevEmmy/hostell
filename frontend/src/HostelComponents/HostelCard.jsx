@@ -17,7 +17,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
     setBookmark((prev) => !prev);
   };
   const handleUserProfile = () => {
-    router.push('profile/userprofile')
+    router.push(`profile/${hostelid}`)
   }
 
   return (
