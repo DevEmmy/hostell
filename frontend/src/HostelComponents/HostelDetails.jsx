@@ -13,17 +13,18 @@ import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { hostelDetails } from "@/request/request";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useStateContext } from "@/Contexts/ContextProvider";
 import EachHostelReturn from "./EachHostelReturn";
+import { useGetHostelDetails } from "@/store/hosteldetails";
 
 function HostelDetails() {
-  const { bookmark, setBookmark } = useStateContext();
   const params = useParams()
   const { hostelid } = params
   const router = useRouter();
+  const {hostelDetails} = useGetHostelDetails(hostelid)
 
   const [hosteldetails, setHosteldetails] = useState({});
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // const [bookmark, setBookmark] = useState(false)
 
   if (!hostelid) {
     return <p>Loading...</p>; // or handle this case appropriately
@@ -32,8 +33,8 @@ function HostelDetails() {
   useEffect(() => {
     const fetchHostelDetails = async () => {
       try {
-        const result = await hostelDetails(hostelid);
-        const hostelResult = result.payload;
+        // const result = await hostelDetails(hostelid);
+        const hostelResult = hostelDetails;
         console.log(hostelResult)
         setHosteldetails(hostelResult);
       } catch (error) {
@@ -42,7 +43,7 @@ function HostelDetails() {
     };
 
     fetchHostelDetails();
-  }, []);
+  }, [hostelDetails]);
 
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -55,6 +56,10 @@ function HostelDetails() {
       prevIndex === hosteldetails.images.length - 1 ? 0 : prevIndex + 1
     );
   };
+
+  // const handleBookmarkHostel = () => {
+  //   setBookmark((prev) => !prev);
+  // };
 
   return (
     <>
@@ -139,21 +144,25 @@ function HostelDetails() {
 
       <div className="mx-xPadding mt-20">
         <img 
-        src={hosteldetails.images}
+        src={
+          hosteldetails?.images
+            ? hosteldetails.images[currentImageIndex]
+            : hostel1
+        }
         // src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg" 
         alt="" className="border border-white shadow-lg h-[300px] object-cover rounded-2xl" />
 
         <div className="flex flex-col gap-3 mt-10">
           <p className="text-[24px] font-[600]">
             {/* Grace Hostel. */}
-            {hosteldetails.title}
+            {hosteldetails?.title}
           </p>
           <div className="flex gap-2 items-center text-gray-500">
             <FaLocationDot />
-            <p>{hosteldetails.location}</p>
+            <p>{hosteldetails?.location}</p>
           </div>
           <p className="text-[16px] font-[600]">
-            {hosteldetails.price}
+            {hosteldetails?.price}
           </p>
         </div>
 
@@ -162,11 +171,11 @@ function HostelDetails() {
             Description
           </p>
           <p className="text-gray-500">
-            {hosteldetails.description}
+            {hosteldetails?.description}
           </p>
 
           <p className="font-[500]">
-            Available Rooms: {hosteldetails.availableRooms}
+            Available Rooms: {hosteldetails?.availableRooms}
           </p>
         </div>
 

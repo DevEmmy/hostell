@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import HostelCard from "./HostelCard";
-import Link from "next/link";
+// import Link from "next/link";
 import { recommendedHostel } from "@/request/request";
 import Spinner from "@/BasicComponents/Spinner";
 import { useStateContext } from "@/Contexts/ContextProvider";
@@ -12,35 +12,40 @@ const Recommended = ({ simplified }) => {
   const { searchInput, priceFilter } = useStateContext();
   const [hostelArray, setHostelArray] = useState([]);
   const [filteredHostels, setFilteredHostels] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+  // const [isLoading, setIsLoading] = useState(true);
+  
+  const {allHostels, isLoading} = useGetAllHostels()
+  // console.log(allHostels)
+  
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       try {
-        const result = await recommendedHostel();
-        const hostelResult = await result.payload;
+        // const result = await allHostels
+        // const hostelResult = await result.payload;
+        const hostelResult = await allHostels;
+        // console.log(allHostels)
         console.log(hostelResult)
         // const sortedHostelArray = await hostelResult.reverse();
         // console.log(hostelArray)
         setHostelArray(hostelResult);
-        setIsLoading(false);
+        // setIsLoading(false);
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
-  const {allHostels} = useGetAllHostels()
+  }, [allHostels]);
+  
   useEffect(() => {
     filterHostels();
   }, [searchInput, hostelArray, priceFilter]);
 
 
   const filterHostels = () => {
-    let filteredHostels = [...hostelArray];
+    let filteredHostels = hostelArray;
     const searchTerm = searchInput.trim().toLowerCase();
   
     if (searchTerm === '' || priceFilter == []) {
@@ -112,7 +117,7 @@ const Recommended = ({ simplified }) => {
             </div>
           ) : (
             <div className="flex flex-col md:flex-row gap-4 flex-wrap">
-              {filteredHostels.length > 0 ? (
+              {filteredHostels?.length > 0 ? (
                 filteredHostels.map((hostel, index) => (
                   <HostelCard
                     key={index}
