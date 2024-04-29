@@ -1,16 +1,23 @@
 "use client";
-import React from "react";
+import React, {useState} from "react";
 import { useGetUser } from "@/store/user";
+import { useGetAllHostels } from "@/store/hostels";
 import { MdEdit } from "react-icons/md";
-// import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import userImg from "../../public/user.png";
 import CustomReturn from "./CustomReturn";
+import HostelCard from "@/HostelComponents/HostelCard";
 import { RiCalendar2Line, RiMailLine, RiPhoneLine, RiWhatsappLine } from "react-icons/ri";
-// import { FiPlus } from "react-icons/fi";
+
 
 const UserProfile = () => {
-  // const {user} = useGetUser(id)
+  const params = useParams();
+  const { hostelid } = params;
+  const {user} = useGetUser(hostelid)
+  console.log(user)
+  const { allHostels } = useGetAllHostels()
+  const [hostels, setHostels] = useState(allHostels)
   return (
     <section className="w-screen">
       <CustomReturn />
@@ -47,7 +54,16 @@ const UserProfile = () => {
     <div className="mx-xPadding my-10">
       <p className="text-[20px] font-[600]">Uploaded Hostels</p>
 
-
+      {hostels.length  > 0 ? hostels.map((hostel, i) => (
+        <HostelCard
+        key={i}
+        price={hostel.price}
+        hostelid={hostel._id}
+        location={hostel.location}
+        title={hostel.title}
+        image={hostel.images.length > 0 ? hostel.images[0] : ""}
+      />
+      )) : 'No hostels available'}
     </div>
   </section>
   )
