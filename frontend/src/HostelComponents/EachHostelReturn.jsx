@@ -12,7 +12,7 @@ const EachHostelReturn = () => {
     };
 
   return (
-    <div className='fixed px-xPadding py-5 flex justify-between top-0 left-0 bg-white border-b border-b-gray-400 w-full text-[24px] items-center'>
+    <div className='fixed px-xPadding py-5 flex justify-between top-0 left-0 right-0 bg-white border-b border-b-gray-400 w-full text-[24px] items-center z-10'>
         <div>
             <RiArrowLeftLine onClick={()=> router.back()} />
         </div>

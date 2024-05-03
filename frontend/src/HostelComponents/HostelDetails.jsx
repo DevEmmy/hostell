@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaChevronLeft, FaChevronRight, FaLocationArrow } from "react-icons/fa";
-import hostel1 from "../../public/hall.jpg";
+// import hostel1 from "../../public/hall.jpg";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import EachHostelReturn from "./EachHostelReturn";
@@ -27,7 +27,7 @@ function HostelDetails() {
       try {
         // const result = await hostelDetails(hostelid);
         const hostelResult = hostelDetails;
-        console.log(hostelResult);
+        // console.log(hostelResult);
         setHosteldetails(hostelResult);
       } catch (error) {
         console.log(error);
@@ -48,10 +48,6 @@ function HostelDetails() {
       prevIndex === hosteldetails.images.length - 1 ? 0 : prevIndex + 1
     );
   };
-
-  // const handleBookmarkHostel = () => {
-  //   setBookmark((prev) => !prev);
-  // };
 
   return (
     <>
