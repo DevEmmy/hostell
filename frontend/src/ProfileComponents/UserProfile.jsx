@@ -1,8 +1,8 @@
 "use client";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useGetUser } from "@/store/user";
 import { useGetAllHostels } from "@/store/hostels";
-import { MdEdit } from "react-icons/md";
+// import { MdEdit } from "react-icons/md";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import userImg from "../../public/user.png";
@@ -17,7 +17,11 @@ const UserProfile = () => {
   const {user} = useGetUser(hostelid)
   console.log(user)
   const { allHostels } = useGetAllHostels()
-  const [hostels, setHostels] = useState(allHostels)
+  const [hostels, setHostels] = useState()
+
+    useEffect(() => {
+      setHostels(allHostels)
+    }, [allHostels])
   return (
     <section className="w-screen">
       <CustomReturn />
@@ -54,7 +58,7 @@ const UserProfile = () => {
     <div className="mx-xPadding my-10">
       <p className="text-[20px] font-[600]">Uploaded Hostels</p>
 
-      {hostels.length  > 0 ? hostels.map((hostel, i) => (
+      {hostels?.length  > 0 ? hostels.map((hostel, i) => (
         <HostelCard
         key={i}
         price={hostel.price}
