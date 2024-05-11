@@ -1,24 +1,49 @@
 "use client";
-import React, { useState } from "react";
-import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
+import React, { useState, useEffect } from "react";
+import { FaLocationDot } from "react-icons/fa6";
 import {  RiHeart2Line, RiHeart2Fill } from 'react-icons/ri'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import userImg from "../../public/user.png";
 import { useRouter } from "next/navigation";
-// import { useStateContext } from "@/Contexts/ContextProvider";
+import { useStateContext } from "@/Contexts/ContextProvider";
 import Image from "next/image";
 
 const HostelCard = ({ image, location, price, hostelid, title }) => {
   const router = useRouter();
-  // const { bookmark, setBookmark } = useStateContext();
+  const { savedBookmark, setSavedBookmark } = useStateContext();
   const [bookmark, setBookmark] = useState(false);
-
-  const handleBookmarkHostel = () => {
-    setBookmark((prev) => !prev);
-  };
+ 
+  
+  // console.log(savedBookmark)
   const handleUserProfile = () => {
     router.push(`profile/${hostelid}`)
   }
+
+
+  useEffect(() => {
+    const savedBookmarkString = localStorage.getItem("savedBookmark");
+    if (savedBookmarkString) {
+      const savedBookmarkArray = JSON.parse(savedBookmarkString);
+      if (savedBookmarkArray.includes(hostelid)) {
+        setBookmark(true);
+      }
+    }
+  }, []);
+
+  const handleBookmarkHostel = () => {
+    const newBookmarkState = !bookmark;
+    setBookmark(newBookmarkState);
+
+    if (newBookmarkState) {
+      const updatedBookmark = [...savedBookmark, hostelid];
+      setSavedBookmark(updatedBookmark);
+      localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
+    } else {
+      const updatedBookmark = savedBookmark.filter(id => id !== hostelid);
+      setSavedBookmark(updatedBookmark);
+      localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
+    }
+  };
 
   return (
     <>
