@@ -1,24 +1,52 @@
 "use client";
-import React, { useState } from "react";
-import { FaHouseChimney, FaLocationDot } from "react-icons/fa6";
+import React, { useState, useEffect } from "react";
+import { FaLocationDot } from "react-icons/fa6";
 import {  RiHeart2Line, RiHeart2Fill } from 'react-icons/ri'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import userImg from "../../public/user.png";
 import { useRouter } from "next/navigation";
-// import { useStateContext } from "@/Contexts/ContextProvider";
+import { useStateContext } from "@/Contexts/ContextProvider";
 import Image from "next/image";
+import { useGetUser } from "@/store/user";
 
-const HostelCard = ({ image, location, price, hostelid, title }) => {
+const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   const router = useRouter();
-  // const { bookmark, setBookmark } = useStateContext();
+  const { savedBookmark, setSavedBookmark } = useStateContext();
   const [bookmark, setBookmark] = useState(false);
-
-  const handleBookmarkHostel = () => {
-    setBookmark((prev) => !prev);
-  };
+ 
+  const {user} = useGetUser(agentId)
+  // console.log(user)
+  
+  // console.log(savedBookmark)
   const handleUserProfile = () => {
     router.push(`profile/${hostelid}`)
   }
+
+
+  useEffect(() => {
+    const savedBookmarkString = localStorage.getItem("savedBookmark");
+    if (savedBookmarkString) {
+      const savedBookmarkArray = JSON.parse(savedBookmarkString);
+      if (savedBookmarkArray.includes(hostelid)) {
+        setBookmark(true);
+      }
+    }
+  }, []);
+
+  const handleBookmarkHostel = () => {
+    const newBookmarkState = !bookmark;
+    setBookmark(newBookmarkState);
+
+    if (newBookmarkState) {
+      const updatedBookmark = [...savedBookmark, hostelid];
+      setSavedBookmark(updatedBookmark);
+      localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
+    } else {
+      const updatedBookmark = savedBookmark.filter(id => id !== hostelid);
+      setSavedBookmark(updatedBookmark);
+      localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
+    }
+  };
 
   return (
     <>
@@ -34,7 +62,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             priority
             onClick={handleUserProfile}
           />
-          <h3 onClick={handleUserProfile} className="capitalize font-medium text-lg">John doe</h3>
+          <h3 onClick={handleUserProfile} className="capitalize font-medium text-lg">{user?.firstName} {user?.lastName}</h3>
         </div>
         <div className="relative w-full h-[300px] my-3">
           <LazyLoadImage

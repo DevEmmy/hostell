@@ -13,11 +13,19 @@ import { RiCalendar2Line, RiMailLine, RiPhoneLine, RiWhatsappLine } from "react-
 
 const UserProfile = () => {
   const params = useParams();
-  const { hostelid } = params;
-  const {user} = useGetUser(hostelid)
-  console.log(user)
+  const { userId } = params;
+  const {user} = useGetUser(userId)
+  // console.log(user)
+  
   const { allHostels } = useGetAllHostels()
   const [hostels, setHostels] = useState()
+  const [dateJoined, setDateJoined] = useState()
+
+  useEffect(() => {
+    const date = new Date(user?.createdAt)
+    setDateJoined(+date.getFullYear())
+    // const dateJoined = date.getFullYear()
+  }, [])
 
     useEffect(() => {
       setHostels(allHostels)
@@ -38,10 +46,10 @@ const UserProfile = () => {
         <div className="flex gap-3 flex-col">
           <div className="text-center">
             <h2 className="font-semibold">
-              Emmanuel Olaosebikan
+            {user?.firstName} {user?.lastName}
             </h2>
-            <p className="text-gray-500 flex gap-2 items-center justify-center"><RiMailLine /> eolaosebikan60@gmail.com</p>
-            <p className="text-gray-500 flex gap-2 items-center justify-center"> <RiCalendar2Line /> Joined 2024</p>
+            <p className="text-gray-500 flex gap-2 items-center justify-center"><RiMailLine /> {user?.email}</p>
+            <p className="text-gray-500 flex gap-2 items-center justify-center"> <RiCalendar2Line /> Joined {dateJoined}</p>
           </div>
 
           <div className="options">

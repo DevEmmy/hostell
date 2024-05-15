@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import EachHostelReturn from "./EachHostelReturn";
 import { useGetHostelDetails } from "@/store/hosteldetails";
+import { useGetUser } from "@/store/user";
 
 function HostelDetails() {
   const params = useParams();
@@ -48,6 +49,18 @@ function HostelDetails() {
       prevIndex === hosteldetails.images.length - 1 ? 0 : prevIndex + 1
     );
   };
+
+
+
+  const agentId =  hostelDetails?.createdBy
+
+  const {user} = useGetUser(agentId)
+  // console.log(user)
+
+
+
+  
+
 
   return (
     <>
@@ -100,15 +113,15 @@ function HostelDetails() {
               className="rounded-full border-2 border-primary2 w-[80px] object-cover h-[80px]"
             />
             <div>
-              <p className="text-[18px] font-[500]">Emmanuel Olaosebikan</p>
-              <p className="text-gray-500 text-[14px]">eolaosebkan60@gmail</p>
+              <p className="text-[18px] font-[500]">{user?.firstName} {user?.lastName}</p>
+              <p className="text-gray-500 text-[14px]">{user?.email}</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-5 mt-3">
             <div
               className="btn"
               onClick={() => {
-                router.push("/profile/userprofile");
+                router.push(`/profile/${agentId}`);
               }}
             >
               View Profile

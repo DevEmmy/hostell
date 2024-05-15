@@ -4,7 +4,7 @@ import { ContextProvider } from "@/Contexts/ContextProvider";
 import ToastProvider from "@/Providers/ToastProvider";
 import AuthProvider from "@/Providers/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Hostell",
@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ToastProvider>
           <ContextProvider>
             <AuthProvider>{children}</AuthProvider>
