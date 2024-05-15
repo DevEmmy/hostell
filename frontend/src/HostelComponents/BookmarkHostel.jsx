@@ -6,23 +6,50 @@ import { useStateContext } from "@/Contexts/ContextProvider";
 const BookmarkHostel = () => {
   const { bookmarkDetails, setBookmarkDetails } = useStateContext();
   const savedBookmarkArray = JSON.parse(localStorage.getItem("savedBookmark"));
-  // const [bookmarkDetails, setBookmarkDetails] = useState([])
+  const [hostelID, setHostelID] = useState([])
 
-  const fetchBookmarked = async() => {
+//  console.log(savedBookmarkArray)
+
+//  useEffect(() => {
+//   for(let i = 0; i <= savedBookmarkArray.length; i++){
+//     const { hostelDetails} = useGetHostelDetails(i)
+//     console.log(hostelDetails)
+//   }
+//  }, [])
+
+  // const fetchBookmarked = async() => {
     
-        savedBookmarkArray.forEach( async (hostelid) => {
-          const {hostelDetails} = useGetHostelDetails(hostelid)
-          const result = await hostelDetails
-          setBookmarkDetails((prev) => [...prev, result])
-          console.log(bookmarkDetails)
-        })
-  }
+  //       savedBookmarkArray.forEach( async (hostelid) => {
+  //         const {hostelDetails} = useGetHostelDetails(hostelid)
+  //         const result = await hostelDetails
+  //         setBookmarkDetails((prev) => [...prev, result])
+  //         console.log(bookmarkDetails)
+  //       })
+  // }
 
-  fetchBookmarked()
+  // fetchBookmarked()
+
+  
+  
+  // useEffect(() => {
+  //   const fetchBookmarked = async () => {
+  //     savedBookmarkArray.forEach(async (hostelid) => {
+  //       try {
+          // const { hostelDetails } =  useGetHostelDetails(hostelid);
+          // setHostelID((prev) => [...prev, hostelDetails]);
+  //       } catch (error) {
+  //         console.error(`Error fetching hostel details for ID ${hostelid}:`, error);
+  //       }
+  //     });
+  //   };
+  //   fetchBookmarked();
+
+
+  // }, []);
 
 
 
-  console.log(bookmarkDetails);
+  // console.log(bookmarkDetails);
 
   return <div>BookmarkHostel</div>;
 };
