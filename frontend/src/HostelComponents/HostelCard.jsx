@@ -7,12 +7,15 @@ import userImg from "../../public/user.png";
 import { useRouter } from "next/navigation";
 import { useStateContext } from "@/Contexts/ContextProvider";
 import Image from "next/image";
+import { useGetUser } from "@/store/user";
 
-const HostelCard = ({ image, location, price, hostelid, title }) => {
+const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   const router = useRouter();
   const { savedBookmark, setSavedBookmark } = useStateContext();
   const [bookmark, setBookmark] = useState(false);
  
+  const {user} = useGetUser(agentId)
+  // console.log(user)
   
   // console.log(savedBookmark)
   const handleUserProfile = () => {
@@ -59,7 +62,7 @@ const HostelCard = ({ image, location, price, hostelid, title }) => {
             priority
             onClick={handleUserProfile}
           />
-          <h3 onClick={handleUserProfile} className="capitalize font-medium text-lg">John doe</h3>
+          <h3 onClick={handleUserProfile} className="capitalize font-medium text-lg">{user?.firstName} {user?.lastName}</h3>
         </div>
         <div className="relative w-full h-[300px] my-3">
           <LazyLoadImage

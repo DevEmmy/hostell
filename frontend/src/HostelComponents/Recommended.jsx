@@ -25,7 +25,7 @@ const Recommended = ({ simplified }) => {
         // const hostelResult = await result.payload;
         const hostelResult = await allHostels;
         // console.log(allHostels)
-        console.log(hostelResult)
+        // console.log(hostelResult)
         // const sortedHostelArray = await hostelResult.reverse();
         // console.log(hostelArray)
         setHostelArray(hostelResult);
@@ -126,6 +126,7 @@ const Recommended = ({ simplified }) => {
                     hostelid={hostel._id}
                     location={hostel.location}
                     title={hostel.title}
+                    agentId={hostel.createdBy}
                     image={hostel.images.length > 0 ? hostel.images[0] : ""}
                   />
                 ))
