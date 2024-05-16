@@ -8,7 +8,7 @@ export const ContextProvider =({children}) => {
     const [priceFilter, setPriceFilter] = useState([])
     const [showFilter, setShowFilter] = useState(false);
     const [savedBookmark, setSavedBookmark] = useState([])
-    const [bookmarkDetails, setBookmarkDetails] = useState([])
+    // const [bookmark, setBookmark] = useState(false);
     
 
     return (
@@ -21,9 +21,7 @@ export const ContextProvider =({children}) => {
             showFilter,
             setShowFilter,
             savedBookmark,
-            setSavedBookmark,
-            bookmarkDetails,
-            setBookmarkDetails
+            setSavedBookmark
         }}
         >
             {children}
