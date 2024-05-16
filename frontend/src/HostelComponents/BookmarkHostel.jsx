@@ -10,11 +10,10 @@ const BookmarkHostel = () => {
 
   return <div>
     <h2 className="text-xl font-medium p-3 capitalize">Bookmarked hostel</h2>
-    <div className="flex flex-col md:flex-row gap-4 flex-wrap">
 
+    <div className="flex flex-col md:flex-row gap-4 flex-wrap p-5">
     {
-      
-      savedBookmarkArray.length > 0 ? (
+      savedBookmarkArray?.length > 0 ? (
         savedBookmarkArray.map((hostel, index) => (
           <HostelCard
                       key={index}

@@ -26,11 +26,11 @@ function Sidebar({ showSidebar, setShowSidebar }) {
       route: "/popular",
       icon: <MdFilterAlt />,
     },
-    {
-      name: "messages",
-      route: "/messages",
-      icon: <MdMessage />,
-    },
+    // {
+    //   name: "messages",
+    //   route: "/messages",
+    //   icon: <MdMessage />,
+    // },
     {
       name: "profile",
       route: "/profile",

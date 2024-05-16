@@ -23,7 +23,7 @@ const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   
   // console.log(savedBookmark)
   const handleUserProfile = () => {
-    router.push(`profile/${hostelid}`)
+    router.push(`profile/${agentId}`)
   }
 
 

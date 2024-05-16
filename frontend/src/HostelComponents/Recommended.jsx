@@ -13,10 +13,10 @@ const Recommended = ({ simplified }) => {
   const [hostelArray, setHostelArray] = useState([]);
   const [filteredHostels, setFilteredHostels] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
-  
-  const {allHostels, isLoading} = useGetAllHostels()
+
+  const { allHostels, isLoading } = useGetAllHostels();
   // console.log(allHostels)
-  
+
   useEffect(() => {
     const fetchData = async () => {
       // setIsLoading(true);
@@ -37,39 +37,35 @@ const Recommended = ({ simplified }) => {
     };
 
     fetchData();
-
   }, [allHostels]);
 
   useEffect(() => {
     filterHostels();
   }, [searchInput, hostelArray, priceFilter]);
 
-
   const filterHostels = () => {
-    let filteredHostels = hostelArray;
+    let filterHostels = hostelArray;
     const searchTerm = searchInput.trim().toLowerCase();
-  
-    if (searchTerm === '' || priceFilter == []) {
+
+    if (searchTerm === "" || priceFilter == []) {
       setFilteredHostels(hostelArray);
       return;
     }
-  
-    filteredHostels = filteredHostels.filter((hostel) =>
+
+    filterHostels = filterHostels.filter((hostel) =>
       hostel.location.toLowerCase().includes(searchTerm)
     );
-  
+
     for (const priceRange in priceFilter) {
       if (priceFilter[priceRange]) {
-        filteredHostels = filteredHostels.filter((hostel) =>
+        filterHostels = filterHostels.filter((hostel) =>
           isPriceInRange(hostel.price, priceRange)
         );
       }
     }
-  
-    setFilteredHostels(filteredHostels);
+
+    setFilteredHostels(filterHostels);
   };
-
-
 
   // Function to check if a price is within a given range
   const isPriceInRange = (price, range) => {
