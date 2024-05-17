@@ -8,18 +8,22 @@ import { useRouter } from "next/navigation";
 import { useStateContext } from "@/Contexts/ContextProvider";
 import Image from "next/image";
 import { useGetUser } from "@/store/user";
+import { useGetHostelDetails } from "@/store/hosteldetails";
 
 const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   const router = useRouter();
   const { savedBookmark, setSavedBookmark } = useStateContext();
   const [bookmark, setBookmark] = useState(false);
+
  
+  const {hostelDetails} = useGetHostelDetails(hostelid)
+  
   const {user} = useGetUser(agentId)
   // console.log(user)
   
   // console.log(savedBookmark)
   const handleUserProfile = () => {
-    router.push(`profile/${hostelid}`)
+    router.push(`profile/${agentId}`)
   }
 
 
@@ -27,7 +31,7 @@ const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
     const savedBookmarkString = localStorage.getItem("savedBookmark");
     if (savedBookmarkString) {
       const savedBookmarkArray = JSON.parse(savedBookmarkString);
-      if (savedBookmarkArray.includes(hostelid)) {
+      if (savedBookmarkArray.includes(hostelDetails)) {
         setBookmark(true);
       }
     }
@@ -36,13 +40,14 @@ const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   const handleBookmarkHostel = () => {
     const newBookmarkState = !bookmark;
     setBookmark(newBookmarkState);
+    
 
     if (newBookmarkState) {
-      const updatedBookmark = [...savedBookmark, hostelid];
+      const updatedBookmark = [...savedBookmark, hostelDetails];
       setSavedBookmark(updatedBookmark);
       localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
     } else {
-      const updatedBookmark = savedBookmark.filter(id => id !== hostelid);
+      const updatedBookmark = savedBookmark.filter(details => details !== hostelDetails);
       setSavedBookmark(updatedBookmark);
       localStorage.setItem("savedBookmark", JSON.stringify(updatedBookmark));
     }
@@ -51,7 +56,6 @@ const HostelCard = ({ image, location, price, hostelid, title , agentId}) => {
   return (
     <>
       <div
-        // href={`/${hostelid}`}
         className="w-full md:w-72 mx-auto my-2 border p-2 rounded-2xl"
       >
         <div className="m-2 flex gap-2 items-center">
