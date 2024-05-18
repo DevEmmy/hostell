@@ -10,7 +10,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import hall from "../../public/hall.jpg";
 
 function Signup() {
-  const router = useRouter()
+  const router = useRouter();
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -21,47 +21,52 @@ function Signup() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = async () => {
-      if (!email || !password || !firstName || !lastName) {
-        setErrorMessage("Please fill the empty form.");
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 5000);
-        return;
-      }
+  const handleSubmit = async () => {
+    if (!email || !password || !firstName || !lastName) {
+      setErrorMessage("Please fill the empty form.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+      return;
+    }
 
-      try {
-        setShowLoader(true);
-        const userData = await signup(
-          firstName,
-          lastName,
-          email,
-          password,
-          userType
-        );
-        console.log(userData);
-        if (userData.status === 200 || userData.status === 201) {
-          setTimeout(() => {
-            setShowLoader(false);
-          }, 5000);
-          router.replace('/')
-        } else {
-          setShowLoader(false);
-          setErrorMessage(userData.message);
-        }
-      } catch (error) {
-        setErrorMessage(error.message);
-        setShowLoader(false);
+    try {
+      setShowLoader(true);
+      const userData = await signup(
+        firstName,
+        lastName,
+        email,
+        password,
+        userType
+      );
+      console.log(userData);
+      if (userData.status === 200 || userData.status === 201) {
         setTimeout(() => {
-          setErrorMessage("");
+          setShowLoader(false);
         }, 5000);
+        router.replace("/");
+      } else {
+        setShowLoader(false);
+        setErrorMessage(userData.message);
       }
-    };
+    } catch (error) {
+      setErrorMessage(error.message);
+      setShowLoader(false);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
+  };
 
   return (
     <section className="flex h-screen w-full">
       <div className="w-1/2 h-screen hidden md:block">
-        <Image src={hall} className="object-cover h-screen" alt="hostel" priority={true}  />
+        <Image
+          src={hall}
+          className="object-cover h-screen"
+          alt="hostel"
+          priority={true}
+        />
       </div>
 
       <div className="w-full md:w-1/2 md:p-5">
@@ -156,7 +161,13 @@ function Signup() {
               className="w-full bg-primary2 p-3 rounded-2xl text-white text-center flex items-center justify-center my-2 font-semibold"
               type="submit"
             >
-              {showLoader ? <Loader /> : "Signup"}
+              {showLoader ? (
+                <div>
+                  <Loader />
+                </div>
+              ) : (
+                "Signup"
+              )}
             </button>
           </div>
           <p className="mt-3">
