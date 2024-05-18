@@ -17,9 +17,9 @@ function Signin() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async () => {  
+  const handleSubmit = async () => {
     if (!email || !password) {
       setErrorMessage("Email and password cannot be empty.");
       setTimeout(() => {
@@ -30,19 +30,16 @@ function Signin() {
 
     setShowLoader(true);
     try {
-      const {response, status} = await login(email, password);
-      if(status < 400){
-        router.push("/")
+      const { response, status } = await login(email, password);
+      if (status < 400) {
+        router.push("/");
       }
       // setShowLoader(false);
-
-
     } catch (error) {
-      setErrorMessage(error.message);
-      setShowLoader(false);
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
+      console.log(error)
+    }
+    finally{
+      setShowLoader(false)
     }
   };
 
@@ -95,6 +92,7 @@ function Signin() {
                   placeholder="password"
                   className="focus:outline-none flex-1"
                   value={password}
+                  autoComplete="false"
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -115,12 +113,21 @@ function Signin() {
               className="w-full bg-primary2 p-4 rounded-2xl text-white text-center flex items-center justify-center my-5 font-semibold capitalize"
               type="submit"
             >
-              {showLoader ? <Loader /> : "login"}
+              {showLoader ? (
+                <div>
+                  <Loader />
+                </div>
+              ) : (
+                "login"
+              )}
             </button>
           </div>
           <p className="mt-3">
             Already have an account?{" "}
-            <Link className="text-primary2 capitalize font-medium" href={"/signup"}>
+            <Link
+              className="text-primary2 capitalize font-medium"
+              href={"/signup"}
+            >
               signup
             </Link>
           </p>

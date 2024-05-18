@@ -44,7 +44,7 @@ function Sidebar({ showSidebar, setShowSidebar }) {
   //     setActiveMenu((prev) => !prev);
   //   };
     const handleLogout = () => {
-      localStorage.removeItem('user')
+      localStorage.removeItem('token')
       handleClose()
       router.push('/login')
     }

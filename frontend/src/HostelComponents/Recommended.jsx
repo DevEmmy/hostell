@@ -51,9 +51,11 @@ const Recommended = ({ simplified }) => {
       setFilteredHostels(hostelArray);
       return;
     }
-
-    filterHostels = filterHostels.filter((hostel) =>
-      hostel.location.toLowerCase().includes(searchTerm)
+    // Filter hostels based on location
+    filterHostels = filterHostels.filter(
+      (hostel) =>
+        hostel.location.toLowerCase().includes(searchTerm) ||
+        hostel.title.toLowerCase().includes(searchTerm)
     );
 
     for (const priceRange in priceFilter) {
